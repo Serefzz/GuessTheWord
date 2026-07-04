@@ -1,0 +1,15 @@
+com\mycompany\server\ClientHandler$1.class
+com\mycompany\server\AnalysisTask.class
+com\mycompany\server\DAO.class
+com\mycompany\server\ClientHandler.class
+com\mycompany\server\Utente.class
+com\mycompany\server\Partita.class
+com\mycompany\server\UtenteDAO.class
+com\mycompany\server\DatabaseManager.class
+com\mycompany\server\PartitaDAO.class
+com\mycompany\server\ServerApp.class
+com\mycompany\server\AdminController.class
+com\mycompany\server\RisultatoPartita.class
+com\mycompany\server\AdminLoginController.class
+com\mycompany\server\DocumentAnalyzer.class
+com\mycompany\server\GameServer.class
