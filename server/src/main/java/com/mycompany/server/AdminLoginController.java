@@ -50,6 +50,7 @@ public class AdminLoginController {
             stage.setResizable(true);
             stage.setWidth(820);
             stage.setHeight(580);
+            stage.setResizable(false);
             stage.centerOnScreen();
         } catch (Exception e) {
             erroreLabel.setText("Errore caricamento pannello: " + e.getMessage());

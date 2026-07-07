@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
@@ -15,36 +17,22 @@
     Pannello amministratore. 3 viste navigate dai bottoni in alto.
     Da mettere in: src/main/resources/fxml/admin.fxml
 -->
-<BorderPane xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.mycompany.server.AdminController"
-            prefWidth="820"
-            prefHeight="580">
+
+<BorderPane prefHeight="580" prefWidth="820" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.server.AdminController">
 
     <!-- ── Barra di navigazione in alto ── -->
     <top>
-        <HBox alignment="CENTER_LEFT"
-              spacing="8"
-              style="-fx-background-color: #2c3e50; -fx-padding: 10 14 10 14;">
+        <HBox alignment="CENTER_LEFT" spacing="8" style="-fx-background-color: #2c3e50; -fx-padding: 10 14 10 14;">
 
-            <Label text="GuessTheWord"
-                   style="-fx-font-size: 18; -fx-font-weight: bold; -fx-text-fill: white;"/>
+            <Label style="-fx-font-size: 18; -fx-font-weight: bold; -fx-text-fill: white;" text="GuessTheWord" />
 
-            <Region HBox.hgrow="ALWAYS"/>
+            <Region HBox.hgrow="ALWAYS" />
 
-            <Button fx:id="btnDocumenti"
-                    text="Documenti"
-                    onAction="#mostraDocumenti"
-                    style="-fx-background-color: white; -fx-font-weight: bold;"/>
+            <Button fx:id="btnDocumenti" onAction="#mostraDocumenti" style="-fx-background-color: white; -fx-font-weight: bold;" text="Documenti" />
 
-            <Button fx:id="btnClassifica"
-                    text="Classifica"
-                    onAction="#mostraClassifica"
-                    style="-fx-background-color: transparent; -fx-text-fill: white;"/>
+            <Button fx:id="btnClassifica" onAction="#mostraClassifica" style="-fx-background-color: transparent; -fx-text-fill: white;" text="Classifica" />
 
-            <Button fx:id="btnStorico"
-                    text="Storico"
-                    onAction="#mostraStorico"
-                    style="-fx-background-color: transparent; -fx-text-fill: white;"/>
+            <Button fx:id="btnStorico" onAction="#mostraStorico" style="-fx-background-color: transparent; -fx-text-fill: white;" text="Storico" />
         </HBox>
     </top>
 
@@ -52,129 +40,80 @@
     <center>
         <StackPane>
             <padding>
-                <Insets top="16" right="16" bottom="16" left="16"/>
+                <Insets bottom="16" left="16" right="16" top="16" />
             </padding>
 
             <!-- ────────────────────────────────────
                  PANNELLO 1: DOCUMENTI (default)
                  ──────────────────────────────────── -->
-            <VBox fx:id="panelDocumenti"
-                  spacing="10"
-                  maxWidth="Infinity"
-                  maxHeight="Infinity">
+            <VBox fx:id="panelDocumenti" maxHeight="Infinity" maxWidth="Infinity" spacing="10">
 
                 <!-- area grande: mostra i file selezionati -->
-                <TextArea fx:id="fileArea"
-                          promptText="Nessun documento selezionato. Clicca 'Seleziona Documenti'."
-                          editable="false"
-                          prefHeight="180"
-                          VBox.vgrow="NEVER"
-                          style="-fx-font-size: 12;"/>
+                <TextArea fx:id="fileArea" editable="false" mouseTransparent="true" onDragDropped="#rilasciaFile" onDragOver="#trascinaFile" prefHeight="180" promptText="Nessun documento selezionato. Clicca 'Seleziona Documenti'." style="-fx-font-size: 12;" VBox.vgrow="NEVER" />
 
                 <!-- bottoni azione -->
                 <HBox spacing="10">
-                    <Button text="Seleziona Documenti"
-                            onAction="#selezionaDocumenti"
-                            prefHeight="32"/>
-                    <Button text="Avvia Analisi"
-                            onAction="#avviaAnalisi"
-                            prefHeight="32"/>
-                    <Button text="Salva Analisi"
-                            onAction="#salvaAnalisi"
-                            prefHeight="32"/>
-                    <Button text="Carica Analisi"
-                            onAction="#caricaAnalisi"
-                            prefHeight="32"/>
+                    <Button onAction="#selezionaDocumenti" prefHeight="32" text="Seleziona Documenti" />
+                    <Button onAction="#avviaAnalisi" prefHeight="32" text="Avvia Analisi" />
+                    <Button onAction="#salvaAnalisi" prefHeight="32" text="Salva Analisi" />
+                    <Button onAction="#caricaAnalisi" prefHeight="32" text="Carica Analisi" />
                 </HBox>
 
                 <!-- area risultati analisi -->
-                <Label text="Risultati analisi:"/>
-                <TextArea fx:id="risultatiArea"
-                          editable="false"
-                          VBox.vgrow="ALWAYS"
-                          style="-fx-font-size: 12;"/>
+                <Label text="Risultati analisi:" />
+                <TextArea fx:id="risultatiArea" editable="false" style="-fx-font-size: 12;" VBox.vgrow="ALWAYS" />
 
-                <Label fx:id="statoLabel"
-                       text=""
-                       style="-fx-font-size: 12;"/>
+                <Label fx:id="statoLabel" style="-fx-font-size: 12;" text="" />
             </VBox>
 
             <!-- ────────────────────────────────────
                  PANNELLO 2: CLASSIFICA (nascosto)
                  ──────────────────────────────────── -->
-            <VBox fx:id="panelClassifica"
-                  spacing="10"
-                  visible="false"
-                  managed="false"
-                  maxWidth="Infinity"
-                  maxHeight="Infinity">
+            <VBox fx:id="panelClassifica" managed="false" maxHeight="Infinity" maxWidth="Infinity" spacing="10" visible="false">
 
-                <HBox spacing="10" alignment="CENTER_RIGHT">
-                    <Button text="Aggiorna"
-                            onAction="#aggiornaClassifica"
-                            prefHeight="32"/>
+                <HBox alignment="CENTER_RIGHT" spacing="10">
+               <children>
+                  <TextField fx:id="barCercaClassifica" onKeyReleased="#cercaGiocatoreClassifica" promptText="Cerca giocatore..." />
+               </children>
                 </HBox>
 
-                <TableView fx:id="classificaTable"
-                           VBox.vgrow="ALWAYS">
+                <TableView fx:id="classificaTable" VBox.vgrow="ALWAYS">
                     <columns>
-                        <TableColumn fx:id="colPos"
-                                     text="Pos."
-                                     prefWidth="50"/>
-                        <TableColumn fx:id="colNickname"
-                                     text="Nickname"
-                                     prefWidth="160"/>
-                        <TableColumn fx:id="colVittorie"
-                                     text="Vittorie"
-                                     prefWidth="80"/>
-                        <TableColumn fx:id="colSconfitte"
-                                     text="Sconfitte"
-                                     prefWidth="80"/>
-                        <TableColumn fx:id="colPareggi"
-                                     text="Pareggi"
-                                     prefWidth="80"/>
-                        <TableColumn fx:id="colTempoMedio"
-                                     text="Tempo Medio (ms)"
-                                     prefWidth="150"/>
+                        <TableColumn fx:id="colPos" prefWidth="50" text="Pos." />
+                        <TableColumn fx:id="colNickname" prefWidth="160" text="Nickname" />
+                        <TableColumn fx:id="colVittorie" prefWidth="80" text="Vittorie" />
+                        <TableColumn fx:id="colSconfitte" prefWidth="80" text="Sconfitte" />
+                        <TableColumn fx:id="colPareggi" prefWidth="80" text="Pareggi" />
+                        <TableColumn fx:id="colTempoMedio" prefWidth="150" text="Tempo Medio (ms)" />
                     </columns>
+               <columnResizePolicy>
+                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+               </columnResizePolicy>
                 </TableView>
             </VBox>
 
             <!-- ────────────────────────────────────
                  PANNELLO 3: STORICO (nascosto)
                  ──────────────────────────────────── -->
-            <VBox fx:id="panelStorico"
-                  spacing="10"
-                  visible="false"
-                  managed="false"
-                  maxWidth="Infinity"
-                  maxHeight="Infinity">
+            <VBox fx:id="panelStorico" managed="false" maxHeight="Infinity" maxWidth="Infinity" spacing="10" visible="false">
 
-                <HBox spacing="10" alignment="CENTER_RIGHT">
-                    <Button text="Aggiorna"
-                            onAction="#aggiornaStorico"
-                            prefHeight="32"/>
+                <HBox alignment="CENTER_RIGHT" spacing="10">
+               <children>
+                  <TextField fx:id="barCercaStorico" onKeyReleased="#cercaGiocatoreStorico" promptText="Cerca giocatore..." />
+               </children>
                 </HBox>
 
-                <TableView fx:id="storicoTable"
-                           VBox.vgrow="ALWAYS">
+                <TableView fx:id="storicoTable" VBox.vgrow="ALWAYS">
                     <columns>
-                        <TableColumn fx:id="colData"
-                                     text="Data"
-                                     prefWidth="130"/>
-                        <TableColumn fx:id="colGiocatore1"
-                                     text="Giocatore 1"
-                                     prefWidth="120"/>
-                        <TableColumn fx:id="colGiocatore2"
-                                     text="Giocatore 2"
-                                     prefWidth="120"/>
-                        <TableColumn fx:id="colVincitore"
-                                     text="Vincitore"
-                                     prefWidth="120"/>
-                        <TableColumn fx:id="colDurata"
-                                     text="Durata (ms)"
-                                     prefWidth="100"/>
+                        <TableColumn fx:id="colData" prefWidth="130" text="Data" />
+                        <TableColumn fx:id="colGiocatore1" prefWidth="120" text="Giocatore 1" />
+                        <TableColumn fx:id="colGiocatore2" prefWidth="120" text="Giocatore 2" />
+                        <TableColumn fx:id="colVincitore" prefWidth="120" text="Vincitore" />
+                        <TableColumn fx:id="colDurata" prefWidth="100" text="Durata (ms)" />
                     </columns>
+               <columnResizePolicy>
+                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+               </columnResizePolicy>
                 </TableView>
             </VBox>
 

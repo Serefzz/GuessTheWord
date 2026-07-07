@@ -19,6 +19,13 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
+import javafx.scene.control.TextField;
+import javafx.scene.input.DragEvent;
+import javafx.scene.input.Dragboard;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.input.TransferMode;
 
 /**
  * Controller del pannello amministratore.
@@ -45,6 +52,7 @@ public class AdminController {
     @FXML private Label    statoLabel;
 
     // ── Pannello Classifica ───────────────────────────────────────────────
+    @FXML private TextField barCercaClassifica;
     @FXML private TableView<String[]>       classificaTable;
     @FXML private TableColumn<String[], String> colPos;
     @FXML private TableColumn<String[], String> colNickname;
@@ -54,6 +62,7 @@ public class AdminController {
     @FXML private TableColumn<String[], String> colTempoMedio;
 
     // ── Pannello Storico ──────────────────────────────────────────────────
+    @FXML private TextField barCercaStorico;
     @FXML private TableView<RisultatoPartita>       storicoTable;
     @FXML private TableColumn<RisultatoPartita, String> colData;
     @FXML private TableColumn<RisultatoPartita, String> colGiocatore1;
@@ -71,7 +80,6 @@ public class AdminController {
     //  Inizializzazione
     // ------------------------------------------------------------------
 
-    @FXML
     public void initialize() {
         // ── Classifica: colonne ──
         // getClassifica() → [username, vittorie, sconfitte, pareggi, tempoMedio]
@@ -104,6 +112,9 @@ public class AdminController {
         });
         colDurata.setCellValueFactory(data ->
             new SimpleStringProperty(String.valueOf(data.getValue().getTempoRisposta())));
+        
+        
+        
     }
 
     // ------------------------------------------------------------------
@@ -247,10 +258,62 @@ public class AdminController {
     //  Pannello Classifica
     // ------------------------------------------------------------------
 
-    @FXML
     private void aggiornaClassifica() {
         ObservableList<String[]> items = FXCollections.observableArrayList();
         List<String[]> dati = utenteDAO.getClassifica();
+        for (int i = 0; i < dati.size(); i++) {
+            items.add(dati.get(i));
+        }
+        classificaTable.setItems(items);
+    }
+    
+    @FXML
+    private void rilasciaFile(DragEvent event) {
+        Dragboard db = event.getDragboard();
+        boolean successo = false;
+
+        if (db.hasFiles()) {
+            List<File> files = db.getFiles();
+            
+           //Filtraggio dile .txt
+            List<File> fileTxt = files.stream()
+                                     .filter(f -> f.getName().toLowerCase().endsWith(".txt"))
+                                     .collect(Collectors.toList());
+
+            if (!fileTxt.isEmpty()) {
+                fileSelezionati = fileTxt;
+                
+                StringBuilder sb = new StringBuilder();
+                for (File f : fileTxt) {
+                    sb.append(f.getAbsolutePath()).append("\n");
+                }
+                
+                fileArea.setText(sb.toString());
+                statoLabel.setText(fileTxt.size() + " file inseriti tramite Drag & Drop.");
+                risultatiArea.clear();
+                successo = true;
+            } else {
+                statoLabel.setText("Nessun file .txt valido trovato.");
+            }
+        }
+        
+        // Comunica a JavaFX se il rilascio è andato a buon fine
+        event.setDropCompleted(successo);
+    }
+
+    @FXML
+    private void trascinaFile(DragEvent event) {
+        // Controlliamo se l'oggetto trascinato contiene effettivamente dei file
+        if (event.getDragboard().hasFiles()) {
+            event.acceptTransferModes(TransferMode.COPY);
+        }
+        event.consume();
+    }
+
+    @FXML
+    private void cercaGiocatoreClassifica(KeyEvent event) {
+        ObservableList<String[]> items = FXCollections.observableArrayList();
+        List<String[]> dati = utenteDAO.getClassifica().stream().filter((u) -> u[0].contains(event.getText())).collect(Collectors.toList());
         for (int i = 0; i < dati.size(); i++) {
             items.add(dati.get(i));
         }
@@ -261,10 +324,19 @@ public class AdminController {
     //  Pannello Storico
     // ------------------------------------------------------------------
 
-    @FXML
     private void aggiornaStorico() {
         ObservableList<RisultatoPartita> items = FXCollections.observableArrayList();
         List<RisultatoPartita> dati = partitaDAO.selectAll();
+        for (int i = 0; i < dati.size(); i++) {
+            items.add(dati.get(i));
+        }
+        storicoTable.setItems(items);
+    }
+
+    @FXML
+    private void cercaGiocatoreStorico(KeyEvent event) {
+        ObservableList<RisultatoPartita> items = FXCollections.observableArrayList();
+        List<RisultatoPartita> dati = partitaDAO.selectAll().stream().filter((u) -> u.getVincitore().contains(event.getText())).collect(Collectors.toList());
         for (int i = 0; i < dati.size(); i++) {
             items.add(dati.get(i));
         }
