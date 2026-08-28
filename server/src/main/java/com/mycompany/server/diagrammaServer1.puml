@@ -1,0 +1,50 @@
+@startuml
+title Core del Gioco
+
+class GameServer {
+    - serverSocket: ServerSocket
+    + run(): void
+    + ferma(): void
+}
+
+class ClientHandler {
+    - {static} frasi: List<String>
+    - {static} tfMap: Map<String,Long>
+    - socket: Socket
+    - username: String
+    - avversario: ClientHandler
+    - partitaCorrente: Partita
+    - connesso: boolean
+    + run(): void
+    + invia(msg: Messaggio): void
+    + setAvversario(a: ClientHandler): void
+    + setPartita(p: Partita): void
+    + getUsername(): String
+}
+
+class Partita {
+    - giocatore1: ClientHandler
+    - giocatore2: ClientHandler
+    - parolaOriginale: String
+    - testoSfida: String
+    - shift: int
+    - secondi: int
+    - stato: StatoPartita
+    - tempoInizio: long
+    + avvia(): void
+    + verificaRisposta(g: ClientHandler, risposta: String): void
+    + tempoScaduto(): void
+    + getStato(): StatoPartita
+    + getParolaOriginale(): String
+    + getTestoSfida(): String
+}
+
+GameServer ..|> Runnable
+ClientHandler ..|> Runnable
+
+GameServer --> ClientHandler 
+ClientHandler --> ClientHandler 
+ClientHandler --> Partita 
+Partita --> ClientHandler
+
+@enduml

@@ -1,0 +1,122 @@
+@startuml
+package com.mycompany.server {
+
+    interface DAO<T> {
+        + selectAll(): List<T>
+        + selectById(id: int): Optional<T>
+        + insert(t: T): boolean
+        + update(t: T): boolean
+        + delete(id: int): boolean
+    }
+
+    class RisultatoPartita {
+        - id: int
+        - giocatore1: String
+        - giocatore2: String
+        - vincitore: String
+        - data: String
+        - tempoRisposta: long
+        + getGiocatore1(): String
+        + getGiocatore2(): String
+        + getVincitore(): String
+        + getData(): String
+        + getTempoRisposta(): long
+    }
+
+    class UtenteDAO {
+        + verificaLogin(username: String, password: String): boolean
+        + registra(username: String, password: String): boolean
+        + getClassifica(): List<String[]>
+        + isAdmin(username: String): boolean
+        + {static} hashPassword(pw: String): String
+    }
+
+    class PartitaDAO {
+        + salva(g1: String, g2: String, vincitore: String, tempo: long): boolean
+        + getStorico(username: String): List<String[]>
+        + selectAll(): List<RisultatoPartita>
+    }
+
+    class DatabaseManager {
+        + {static} URL: String
+        + {static} inizializza(): void
+    }
+
+    class DocumentAnalyzer {
+        + analizza(percorso: String): Map<String,Long>
+        + estraiFrasi(percorso: String): List<String>
+    }
+
+    class AnalysisTask {
+        - files: List<File>
+        + AnalysisTask(files: List<File>)
+        # call(): String
+    }
+
+    class ClientHandler {
+        - {static} frasi: List<String>
+        - {static} tfMap: Map<String,Long>
+        - socket: Socket
+        - username: String
+        - avversario: ClientHandler
+        - partitaCorrente: Partita
+        + run(): void
+        + invia(msg: Messaggio): void
+        + setAvversario(a: ClientHandler): void
+        + setPartita(p: Partita): void
+        + {static} setFrasi(f: List<String>): void
+        + {static} setTfMap(m: Map<String,Long>): void
+    }
+
+    class Partita {
+        - giocatore1: ClientHandler
+        - giocatore2: ClientHandler
+        - parolaOriginale: String
+        - testoSfida: String
+        - shift: int
+        - secondi: int
+        - stato: StatoPartita
+        + avvia(): void
+        + verificaRisposta(g: ClientHandler, risposta: String): void
+        + tempoScaduto(): void
+    }
+
+    class GameServer {
+        - serverSocket: ServerSocket
+        + run(): void
+        + ferma(): void
+    }
+
+    class ServerApp {
+        + start(stage: Stage): void
+    }
+
+    class AdminLoginController {
+        + handleLogin(): void
+    }
+
+    class AdminController {
+        + initialize(): void
+        + avviaAnalisi(): void
+        + salvaAnalisi(): void
+        + caricaAnalisi(): void
+    }
+
+    DAO <|.. UtenteDAO
+    DAO <|.. PartitaDAO
+    AnalysisTask --> DocumentAnalyzer
+    AnalysisTask --> ClientHandler
+    ClientHandler --> Partita
+    ClientHandler --> UtenteDAO
+    ClientHandler --> PartitaDAO
+    Partita --> ClientHandler
+    Partita --> PartitaDAO
+    GameServer --> ClientHandler
+    ServerApp --> GameServer
+    ServerApp --> DatabaseManager
+    AdminController --> AnalysisTask
+    AdminController --> UtenteDAO
+    AdminController --> PartitaDAO
+    AdminLoginController --> UtenteDAO
+}
+@enduml

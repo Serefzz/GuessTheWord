@@ -1,0 +1,50 @@
+@startuml
+package com.mycompany.client {
+
+    interface MessageListener {
+        + onMessage(msg: Messaggio): void
+    }
+
+    class ServerConnection {
+        - socket: Socket
+        - out: BufferedWriter
+        - in: BufferedReader
+        - listener: MessageListener
+        + ServerConnection(host: String, port: int)
+        + setListener(l: MessageListener): void
+        + leggiMessaggio(): Messaggio
+        + avviaRicezione(): void
+        + invia(msg: Messaggio): void
+        + chiudi(): void
+    }
+
+    class ClientApp {
+        + start(stage: Stage): void
+        + {static} main(args: String[]): void
+    }
+
+    class LoginController {
+        - usernameField: TextField
+        - passwordField: PasswordField
+        - erroreLabel: Label
+        + handleLogin(): void
+        + handleRegistra(): void
+    }
+
+    class MainController {
+        - connection: ServerConnection
+        - username: String
+        - timerLine: Timeline
+        + inizializza(conn: ServerConnection, username: String): void
+        + onMessage(msg: Messaggio): void
+        + avviaPartita(): void
+        + inviaRisposta(): void
+    }
+
+    MessageListener <|.. MainController
+    LoginController --> ServerConnection
+    LoginController --> MainController
+    MainController --> ServerConnection
+    ServerConnection --> MessageListener
+}
+@enduml

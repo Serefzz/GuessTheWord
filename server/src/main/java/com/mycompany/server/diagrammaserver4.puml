@@ -1,0 +1,58 @@
+@startuml
+title UI Amministratore
+
+class ServerApp {
+    + start(stage: Stage): void
+    + {static} main(args: String[]): void
+}
+
+class AdminLoginController {
+    - usernameField: TextField
+    - passwordField: PasswordField
+    - erroreLabel: Label
+    - utenteDAO: UtenteDAO
+    + handleLogin(): void
+}
+
+class AdminController {
+    - utenteDAO: UtenteDAO
+    - partitaDAO: PartitaDAO
+    - fileSelezionati: List<File>
+    + initialize(): void
+    + selezionaDocumenti(): void
+    + avviaAnalisi(): void
+    + salvaAnalisi(): void
+    + caricaAnalisi(): void
+    + rilasciaFile(event: DragEvent): void
+}
+
+class UtenteDAO {
+    + verificaLogin(username: String, password: String): boolean
+    + isAdmin(username: String): boolean
+    + getClassifica(): List<String[]>
+}
+
+class PartitaDAO {
+    + selectAll(): List<RisultatoPartita>
+}
+
+class AnalysisTask {
+    # call(): String
+}
+
+class DatabaseManager {
+    + {static} inizializza(): void
+}
+
+ServerApp --|> Application
+ServerApp --> DatabaseManager 
+ServerApp --> AdminLoginController 
+
+AdminLoginController --> UtenteDAO 
+AdminLoginController --> AdminController 
+
+AdminController --> UtenteDAO
+AdminController --> PartitaDAO
+AdminController --> AnalysisTask 
+
+@enduml

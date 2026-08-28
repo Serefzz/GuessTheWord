@@ -1,0 +1,28 @@
+@startuml
+title Analisi Documenti
+
+class DocumentAnalyzer {
+    + analizza(percorsoFile: String): Map<String,Long>
+    + estraiFrasi(percorsoFile: String): List<String>
+}
+
+class AnalysisTask {
+    - files: List<File>
+    + AnalysisTask(files: List<File>)
+    # call(): String
+}
+
+class ClientHandler {
+    - {static} frasi: List<String>
+    - {static} tfMap: Map<String,Long>
+    + {static} setFrasi(f: List<String>): void
+    + {static} setTfMap(m: Map<String,Long>): void
+    + {static} getFrasi(): List<String>
+    + {static} getTfMap(): Map<String,Long>
+}
+
+AnalysisTask --|> "Task<String>"
+AnalysisTask --> DocumentAnalyzer 
+AnalysisTask --> ClientHandler 
+
+@enduml

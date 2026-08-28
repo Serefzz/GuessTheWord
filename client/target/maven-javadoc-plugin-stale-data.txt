@@ -1,0 +1,45 @@
+-J-Duser.language=
+-J-Duser.country=
+@options
+@packages
+-classpath
+'C:/Users/chiac/.m2/repository/com/mycompany/common/1.0-SNAPSHOT/common-1.0-SNAPSHOT.jar'
+-encoding
+'UTF-8'
+-protected
+-source
+'1.8'
+-sourcepath
+'C:/Users/chiac/Desktop/GuessTheWorld/client/src/main/java'
+-author
+-bottom
+'Copyright &#169; 2026. All rights reserved.'
+-charset
+'UTF-8'
+-d
+'C:/Users/chiac/Desktop/GuessTheWorld/client/target/reports/apidocs'
+-docencoding
+'UTF-8'
+-doctitle
+'client 1.0-SNAPSHOT API'
+-linkoffline
+'https://docs.oracle.com/javase/8/docs/api' 'C:/Users/chiac/Desktop/GuessTheWorld/client/target/javadoc-bundle-options'
+-use
+-version
+-windowtitle
+'client 1.0-SNAPSHOT API'
+com.mycompany.client
+C:\Users\chiac\.m2\repository\com\mycompany\common\1.0-SNAPSHOT\common-1.0-SNAPSHOT.jar = 1787648976718
+C:\Users\chiac\Desktop\GuessTheWorld\client\src\main\java = 1787388439440
+C:\Users\chiac\Desktop\GuessTheWorld\client\target\reports\apidocs\allclasses-frame.html = 1787649947727
+C:\Users\chiac\Desktop\GuessTheWorld\client\target\reports\apidocs\allclasses-noframe.html = 1787649947729
+C:\Users\chiac\Desktop\GuessTheWorld\client\target\reports\apidocs\constant-values.html = 1787649947681
+C:\Users\chiac\Desktop\GuessTheWorld\client\target\reports\apidocs\deprecated-list.html = 1787649947724
+C:\Users\chiac\Desktop\GuessTheWorld\client\target\reports\apidocs\help-doc.html = 1787649947736
+C:\Users\chiac\Desktop\GuessTheWorld\client\target\reports\apidocs\index-all.html = 1787649947719
+C:\Users\chiac\Desktop\GuessTheWorld\client\target\reports\apidocs\index.html = 1787649947731
+C:\Users\chiac\Desktop\GuessTheWorld\client\target\reports\apidocs\javadoc.bat = 1787649418939
+C:\Users\chiac\Desktop\GuessTheWorld\client\target\reports\apidocs\overview-tree.html = 1787649947705
+C:\Users\chiac\Desktop\GuessTheWorld\client\target\reports\apidocs\package-list = 1787649947661
+C:\Users\chiac\Desktop\GuessTheWorld\client\target\reports\apidocs\script.js = 1787649947738
+C:\Users\chiac\Desktop\GuessTheWorld\client\target\reports\apidocs\stylesheet.css = 1787649418868
