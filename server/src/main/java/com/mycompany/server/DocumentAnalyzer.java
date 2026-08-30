@@ -49,8 +49,14 @@ public class DocumentAnalyzer {
 
         String[] frammenti = testo.split("[.!?]+");
         if (frammenti.length >= 5) {
-            return Arrays.asList(frammenti);
+            return Arrays.stream(frammenti)
+                .map(String::trim)
+                .filter(s -> !s.isEmpty())
+                .collect(Collectors.toList());
         }
-        return Arrays.asList(testo.split("\\n+"));
+        return Arrays.stream(testo.split("\\n+"))
+            .map(String::trim)
+            .filter(s -> !s.isEmpty())
+            .collect(Collectors.toList());
     }
 }

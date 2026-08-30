@@ -100,6 +100,8 @@ public class Partita {
                 giocatore.getUsername(), String.valueOf(tempoRisposta)));
             partitaDAO.salva(giocatore1.getUsername(), giocatore2.getUsername(),
                 giocatore.getUsername(), tempoRisposta);
+            giocatore1.setPartita(null);
+            giocatore2.setPartita(null);
         } else {
             giocatore.invia(new Messaggio(Messaggio.Tipo.RISPOSTA_ERRATA));
         }
@@ -115,6 +117,8 @@ public class Partita {
         giocatore1.invia(new Messaggio(Messaggio.Tipo.PAREGGIO));
         giocatore2.invia(new Messaggio(Messaggio.Tipo.PAREGGIO));
         partitaDAO.salva(giocatore1.getUsername(), giocatore2.getUsername(), null, 0);
+        giocatore1.setPartita(null);
+        giocatore2.setPartita(null);
     }
 
     /**

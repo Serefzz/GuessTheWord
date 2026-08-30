@@ -257,7 +257,7 @@ public class MainController implements MessageListener {
     private void aggiornaStorico(String dati) {
         tuttoStorico.clear();
         if (dati != null && !dati.trim().isEmpty()) {
-            for (String riga : dati.split("\\|"))
+            for (String riga : dati.split("~")) 
                 if (!riga.trim().isEmpty()) tuttoStorico.add(riga.split(";", -1));
         }
         mostraRigheStorico(tuttoStorico);
@@ -289,10 +289,11 @@ public class MainController implements MessageListener {
     private void aggiornaClassifica(String dati) {
         tuttaClassifica.clear();
         if (dati != null && !dati.trim().isEmpty()) {
-            for (String riga : dati.split("\\|"))
+           for (String riga : dati.split("~")) {
                 if (!riga.trim().isEmpty()) tuttaClassifica.add(riga.split(";", -1));
         }
         mostraRigheClassifica(tuttaClassifica);
+    }
     }
 
     /**

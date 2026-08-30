@@ -1,2 +1,51 @@
 @startuml
+package com.mycompany.common {
+
+    enum StatoPartita {
+        IN_CORSO
+        TERMINATA
+    }
+
+    class CifrarioCesare {
+        + {static} cifra(testo: String, shift: int): String
+        + {static} decifra(testo: String, shift: int): String
+    }
+
+    class Messaggio {
+        - tipo: Tipo
+        - params: String[]
+        + Messaggio(tipo: Tipo, params: String...)
+        + getTipo(): Tipo
+        + getParam(i: int): String
+        + toLine(): String
+        + {static} fromLine(linea: String): Messaggio
+    }
+
+    enum Tipo {
+        LOGIN
+        REGISTRAZIONE
+        AVVIA_PARTITA
+        RISPOSTA
+        STORICO_REQUEST
+        CLASSIFICA_REQUEST
+        DISCONNETTI
+        OK
+        ERRORE
+        ATTESA
+        SFIDA
+        RISPOSTA_ERRATA
+        RISULTATO_VINTO
+        RISULTATO_PERSO
+        PAREGGIO
+        STORICO_RESPONSE
+        CLASSIFICA_RESPONSE
+    }
+
+    enum Ruolo {
+         ADMIN
+         GIOCATORE
+}
+
+    Messaggio +-- Tipo
+}
 @enduml

@@ -179,7 +179,7 @@ public class ClientHandler implements Runnable {
         List<String[]> storico = partitaDAO.getStorico(username);
         StringBuilder sb = new StringBuilder();
         for (String[] riga : storico) {
-            if (sb.length() > 0) sb.append("|");
+            if (sb.length() > 0) sb.append("~");
             sb.append(riga[0]).append(";").append(riga[1]).append(";").append(riga[2]);
         }
         invia(new Messaggio(Messaggio.Tipo.STORICO_RESPONSE, sb.toString()));
@@ -192,7 +192,7 @@ public class ClientHandler implements Runnable {
         List<String[]> classifica = utenteDAO.getClassifica();
         StringBuilder sb = new StringBuilder();
         for (String[] riga : classifica) {
-            if (sb.length() > 0) sb.append("|");
+            if (sb.length() > 0) sb.append("~");
             sb.append(riga[0]).append(";").append(riga[1]).append(";")
               .append(riga[2]).append(";").append(riga[3]).append(";").append(riga[4]);
         }
