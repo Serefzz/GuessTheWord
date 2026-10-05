@@ -15,12 +15,12 @@ REQUISITI
 STRUTTURA CARTELLA
 ------------------
 eseguibili/
-  server.jar        -> applicazione server (con pannello admin)
-  client.jar        -> applicazione client (interfaccia giocatore)
-  server.properties -> configurazione porta server (default: 5000)
-  client.properties -> configurazione host/porta client
-  analisi.ser       -> analisi del testo pre-calcolata
-  readme.txt        -> questo file
+  server.jar                -> applicazione server (con pannello admin)
+  client.jar                 -> applicazione client (interfaccia giocatore)
+  server.properties   -> configurazione porta server (default: 5000)
+  client.properties    -> configurazione host/porta client
+  analisi.ser               -> analisi del testo pre-calcolata
+  readme.txt             -> questo file
 
 
 AVVIO SERVER

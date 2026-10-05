@@ -2,7 +2,6 @@ package com.mycompany.common;
 
 /**
  * Enumerazione degli stati possibili di una partita.
- 
  */
 public enum StatoPartita {
     /** La partita è attiva e i giocatori possono inviare risposte. */

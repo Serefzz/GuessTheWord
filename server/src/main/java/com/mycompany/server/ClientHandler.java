@@ -23,7 +23,7 @@ import java.util.Map;
 public class ClientHandler implements Runnable {
 
     // ── Stato statico condiviso ────────────────────────────────────────────
-    private static List<String>      frasi = null;
+    private static List<String> frasi = null;
     private static Map<String, Long> tfMap = null;
 
     /**
@@ -49,10 +49,10 @@ public class ClientHandler implements Runnable {
     private BufferedWriter out;
     private BufferedReader in;
 
-    private String        username;
+    private String username;
     private ClientHandler avversario;
-    private Partita       partitaCorrente;
-    private boolean       connesso = true;
+    private Partita partitaCorrente;
+    private boolean connesso = true;
 
     private final UtenteDAO  utenteDAO  = new UtenteDAO();
     private final PartitaDAO partitaDAO = new PartitaDAO();
@@ -97,15 +97,34 @@ public class ClientHandler implements Runnable {
      */
     private void gestisciMessaggio(Messaggio msg) {
         switch (msg.getTipo()) {
-            case LOGIN:          gestisciLogin(msg.getParam(0), msg.getParam(1)); break;
-            case REGISTRAZIONE:  gestisciRegistrazione(msg.getParam(0), msg.getParam(1)); break;
-            case AVVIA_PARTITA:  gestisciAvviaPartita(msg); break;
-            case RISPOSTA:
+            case LOGIN: {
+                gestisciLogin(msg.getParam(0), msg.getParam(1)); 
+                break;
+            }
+            case REGISTRAZIONE: {
+                gestisciRegistrazione(msg.getParam(0), msg.getParam(1)); 
+                break;
+            }
+            case AVVIA_PARTITA: {
+                gestisciAvviaPartita(msg); 
+                break;
+            }
+            case RISPOSTA: {
                 if (partitaCorrente != null) partitaCorrente.verificaRisposta(this, msg.getParam(0));
                 break;
-            case STORICO_REQUEST:    gestisciStorico(); break;
-            case CLASSIFICA_REQUEST: gestisciClassifica(); break;
-            case DISCONNETTI:        connesso = false; break;
+            }
+            case STORICO_REQUEST: {
+                gestisciStorico();
+                break;
+            }
+            case CLASSIFICA_REQUEST: {
+                gestisciClassifica();
+                break;
+            }
+            case DISCONNETTI: {
+                connesso = false;
+                break;
+            }
             default: break;
         }
     }

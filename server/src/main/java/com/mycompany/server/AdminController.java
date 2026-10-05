@@ -223,8 +223,8 @@ public class AdminController {
 
     @FXML
     private void salvaAnalisi() {
-        Map<String, Long> tf   = ClientHandler.getTfMap();
-        List<String>      frasi = ClientHandler.getFrasi();
+        Map<String, Long> tf = ClientHandler.getTfMap();
+        List<String> frasi = ClientHandler.getFrasi();
         if (tf == null || frasi == null) {
             statoLabel.setText("Nessuna analisi da salvare. Avvia prima l'analisi.");
             return;
@@ -242,8 +242,7 @@ public class AdminController {
     @FXML
     @SuppressWarnings("unchecked")
     private void caricaAnalisi() {
-        try (ObjectInputStream ois = new ObjectInputStream(
-                new FileInputStream("analisi.ser"))) {
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("analisi.ser"))) {
             Map<String, Long> tf   = (Map<String, Long>) ois.readObject();
             List<String>      frasi = (List<String>)      ois.readObject();
             ClientHandler.setTfMap(tf);

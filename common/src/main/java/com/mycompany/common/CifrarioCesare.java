@@ -41,7 +41,7 @@ public class CifrarioCesare {
      * Decifra il testo applicando lo stesso shift usato per cifrarlo.
      *
      * @param testoCifrato testo cifrato da decifrare
-     * @param shift        numero di posizioni usato in fase di cifratura
+     * @param shift numero di posizioni usato in fase di cifratura
      * @return testo in chiaro in lettere maiuscole
      */
     public static String decifra(String testoCifrato, int shift) {

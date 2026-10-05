@@ -64,17 +64,17 @@ public class Messaggio {
         CLASSIFICA_RESPONSE
     }
 
-    private final Tipo     tipo;
+    private final Tipo tipo;
     private final String[] params;
 
     /**
      * Costruisce un messaggio con tipo e parametri opzionali.
      *
-     * @param tipo   tipo del messaggio
+     * @param tipo tipo del messaggio
      * @param params parametri aggiuntivi (variadic, può essere vuoto)
      */
     public Messaggio(Tipo tipo, String... params) {
-        this.tipo   = tipo;
+        this.tipo = tipo;
         this.params = (params != null) ? params : new String[0];
     }
 
@@ -88,7 +88,7 @@ public class Messaggio {
         if (params.length == 0) return tipo.name();
         StringBuilder sb = new StringBuilder(tipo.name());
         for (int i = 0; i < params.length; i++) {
-            sb.append("|").append(params[i]);
+            sb.append(params[i]).append("|");
         }
         return sb.toString();
     }
