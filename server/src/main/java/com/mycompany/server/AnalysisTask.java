@@ -3,7 +3,6 @@ package com.mycompany.server;
 import javafx.concurrent.Task;
 import java.io.File;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -38,67 +37,48 @@ public class AnalysisTask extends Task<String> {
      *
      * Per ogni file:
      * 
-     *   Calcola la Term Frequency tramite {@link DocumentAnalyzer#analizza(String)}
      *   Estrae le frasi tramite {@link DocumentAnalyzer#estraiFrasi(String)}
+     *   Calcola la Term Frequency di ogni frase tramite {@link DocumentAnalyzer#analizza(String)}
      *   Accumula i risultati nelle strutture globali
      * 
-     * Alla fine ordina le parole per frequenza e include le top 10 nel riepilogo.
-     *
      * @return stringa di riepilogo con statistiche per file e top 10 parole più frequenti
      * @throws Exception se la lettura di uno dei file fallisce
      */
     @Override
     protected String call() throws Exception {
+        List<List<AnalisiFrase>> tfFrasiDocumenti = new ArrayList<List<AnalisiFrase>>();
         DocumentAnalyzer analyzer = new DocumentAnalyzer();
-        List<String>      tutteFrasi = new ArrayList<String>();
-        Map<String, Long> tfTotale   = new HashMap<String, Long>();
-        StringBuilder     riepilogo  = new StringBuilder();
+        int numeroTotaleFrasi = 0;
+        StringBuilder riepilogo  = new StringBuilder();
 
         for (int i = 0; i < files.size(); i++) {
+            List<AnalisiFrase> tfFrasi = new ArrayList<AnalisiFrase>();
+            List<String> tutteFrasiDelFile = new ArrayList<String>();
             File file = files.get(i);
             updateMessage("Analisi " + (i + 1) + "/" + files.size() + ": " + file.getName());
             updateProgress(i, files.size());
-
-            Map<String, Long> tf = analyzer.analizza(file.getAbsolutePath());
-            for (Map.Entry<String, Long> entry : tf.entrySet()) {
-                Long attuale = tfTotale.get(entry.getKey());
-                tfTotale.put(entry.getKey(),
-                    attuale == null ? entry.getValue() : attuale + entry.getValue());
-            }
-
+            
             List<String> frasi = analyzer.estraiFrasi(file.getAbsolutePath());
-            tutteFrasi.addAll(frasi);
+            tutteFrasiDelFile.addAll(frasi);
+            numeroTotaleFrasi += tutteFrasiDelFile.size();
 
-            riepilogo.append(file.getName())
-                     .append(": ").append(tf.size()).append(" parole distinte, ")
-                     .append(frasi.size()).append(" frasi\n");
+            int numeroFrase = 1;
+            for(String frase : tutteFrasiDelFile){
+                AnalisiFrase tf = analyzer.analizza(frase);
+                tfFrasi.add(tf);
+                riepilogo.append(file.getName() + " frase n." + numeroFrase).append(": ").append(tf.getTf().size()).append(" parole distinte, ").append(tutteFrasiDelFile.size()).append(" frasi\n");
+                numeroFrase++;
+            }
+            tfFrasiDocumenti.add(tfFrasi);
         }
-
-        ClientHandler.setFrasi(tutteFrasi);
-        ClientHandler.setTfMap(tfTotale);
-
+        
+        ClientHandler.setTfDocumenti(tfFrasiDocumenti);
+        
         updateProgress(files.size(), files.size());
         updateMessage("Analisi completata.");
-
-        riepilogo.append("\nTotale frasi: ").append(tutteFrasi.size());
-        riepilogo.append("\nTotale parole distinte: ").append(tfTotale.size()).append("\n");
-
-        riepilogo.append("\n--- Top 10 parole più frequenti ---\n");
-        List<Map.Entry<String, Long>> entries = new ArrayList<Map.Entry<String, Long>>(tfTotale.entrySet());
-        for (int i = 0; i < entries.size() - 1 && i < 10; i++) {
-            for (int j = i + 1; j < entries.size(); j++) {
-                if (entries.get(j).getValue() > entries.get(i).getValue()) {
-                    Map.Entry<String, Long> tmp = entries.get(i);
-                    entries.set(i, entries.get(j));
-                    entries.set(j, tmp);
-                }
-            }
-        }
-        for (int i = 0; i < Math.min(10, entries.size()); i++) {
-            riepilogo.append(entries.get(i).getKey())
-                     .append(": ").append(entries.get(i).getValue()).append("\n");
-        }
+        riepilogo.append("\nTotale frasi: ").append(numeroTotaleFrasi);
 
         return riepilogo.toString();
     }
+    
 }

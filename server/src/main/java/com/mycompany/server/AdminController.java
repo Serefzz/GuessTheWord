@@ -12,21 +12,23 @@ import javafx.scene.control.TextArea;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import javafx.scene.control.TextField;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
+import javafx.scene.text.Font;
 
 /**
  * Controller del pannello amministratore.
@@ -37,8 +39,10 @@ import javafx.scene.input.TransferMode;
  *  - Storico: mostra lo storico di tutte le partite
  */
 public class AdminController {
+    
+    @FXML private Label titoloLabel;
 
-    // ── Navigazione ──────────────────────────────────────────────────────
+    // Navbar
     @FXML private Button btnDocumenti;
     @FXML private Button btnClassifica;
     @FXML private Button btnStorico;
@@ -47,33 +51,36 @@ public class AdminController {
     @FXML private VBox panelClassifica;
     @FXML private VBox panelStorico;
 
-    // ── Pannello Documenti ────────────────────────────────────────────────
+    // Pannello Documenti 
     @FXML private TextArea fileArea;
     @FXML private TextArea risultatiArea;
-    @FXML private Label    statoLabel;
+    @FXML private Label statoDocumentiLabel;
+    @FXML private Label statoAnalisiLabel;
 
-    // ── Pannello Classifica ───────────────────────────────────────────────
+    // Pannello Classifica
     @FXML private TextField barCercaClassifica;
-    @FXML private TableView<String[]>       classificaTable;
-    @FXML private TableColumn<String[], String> colPos;
+    @FXML private TableView<String[]> classificaTable;
+    @FXML private TableColumn<String[], String> colPunteggio;
     @FXML private TableColumn<String[], String> colNickname;
     @FXML private TableColumn<String[], String> colVittorie;
     @FXML private TableColumn<String[], String> colSconfitte;
     @FXML private TableColumn<String[], String> colPareggi;
     @FXML private TableColumn<String[], String> colTempoMedio;
 
-    // ── Pannello Storico ──────────────────────────────────────────────────
+    // Pannello Storico
     @FXML private TextField barCercaStorico;
-    @FXML private TableView<RisultatoPartita>       storicoTable;
+    @FXML private TableView<RisultatoPartita> storicoTable;
     @FXML private TableColumn<RisultatoPartita, String> colData;
     @FXML private TableColumn<RisultatoPartita, String> colGiocatore1;
     @FXML private TableColumn<RisultatoPartita, String> colGiocatore2;
     @FXML private TableColumn<RisultatoPartita, String> colVincitore;
     @FXML private TableColumn<RisultatoPartita, String> colDurata;
 
-    // ── DAO ──────────────────────────────────────────────────────────────
+    // DAO
     private final UtenteDAO  utenteDAO  = new UtenteDAO();
     private final PartitaDAO partitaDAO = new PartitaDAO();
+    private final FraseDAO fraseDAO = new FraseDAO();
+    private final DocumentoDAO documentoDAO = new DocumentoDAO();
 
     private List<File> fileSelezionati;
 
@@ -82,37 +89,48 @@ public class AdminController {
     // ------------------------------------------------------------------
 
     public void initialize() {
-        // ── Classifica: colonne ──
-        // getClassifica() → [username, vittorie, sconfitte, pareggi, tempoMedio]
-        colPos.setCellValueFactory(data -> {
-            int idx = classificaTable.getItems().indexOf(data.getValue()) + 1;
-            return new SimpleStringProperty(String.valueOf(idx));
-        });
-        colNickname.setCellValueFactory(data ->
+        
+        fileArea.addEventFilter(MouseEvent.MOUSE_PRESSED, MouseEvent::consume);
+        risultatiArea.addEventFilter(MouseEvent.MOUSE_PRESSED, MouseEvent::consume);
+        
+        Font fontPersonalizzato = Font.loadFont(getClass().getResourceAsStream("/fonts/ZagDropsThin.ttf"), 38);
+        if (fontPersonalizzato != null) {
+            titoloLabel.setFont(fontPersonalizzato);
+        }
+        
+        // Classifica: colonne
+        // getClassifica() [username, vittorie, sconfitte, pareggi, tempoMedio]
+        colPunteggio.setCellValueFactory(data -> 
             new SimpleStringProperty(data.getValue()[0]));
-        colVittorie.setCellValueFactory(data ->
+        colNickname.setCellValueFactory(data ->
             new SimpleStringProperty(data.getValue()[1]));
-        colSconfitte.setCellValueFactory(data ->
+        colVittorie.setCellValueFactory(data ->
             new SimpleStringProperty(data.getValue()[2]));
-        colPareggi.setCellValueFactory(data ->
+        colSconfitte.setCellValueFactory(data ->
             new SimpleStringProperty(data.getValue()[3]));
-        colTempoMedio.setCellValueFactory(data ->
+        colPareggi.setCellValueFactory(data ->
             new SimpleStringProperty(data.getValue()[4]));
+        colTempoMedio.setCellValueFactory(data ->
+            new SimpleStringProperty(data.getValue()[5]));
 
-        // ── Storico: colonne ──
-        // selectAll() → RisultatoPartita con getData(), getGiocatore1/2(), getVincitore(), getTempoRisposta()
+        // Storico: colonne
+        // selectAll() RisultatoPartita con getData(), getGiocatore1(), getGiocatore2(), getVincitore(), getTempoRisposta()
         colData.setCellValueFactory(data ->
             new SimpleStringProperty(data.getValue().getData()));
-        colGiocatore1.setCellValueFactory(data ->
+        colGiocatore1.setCellValueFactory(data -> 
             new SimpleStringProperty(data.getValue().getGiocatore1()));
-        colGiocatore2.setCellValueFactory(data ->
+        colGiocatore2.setCellValueFactory(data -> 
             new SimpleStringProperty(data.getValue().getGiocatore2()));
         colVincitore.setCellValueFactory(data -> {
-            String v = data.getValue().getVincitore();
-            return new SimpleStringProperty(v != null ? v : "Pareggio");
+            switch (data.getValue().getVincitore()) {
+                case 0 : return new SimpleStringProperty("Nessuno");
+                case 1 : return new SimpleStringProperty(data.getValue().getGiocatore1());
+                case 2 : return new SimpleStringProperty(data.getValue().getGiocatore2());
+                default : return new SimpleStringProperty("Sconosciuto");
+            }
         });
         colDurata.setCellValueFactory(data ->
-            new SimpleStringProperty(String.valueOf(data.getValue().getTempoRisposta())));
+            new SimpleStringProperty(String.valueOf(data.getValue().getDurata())));
         
         
         
@@ -126,6 +144,7 @@ public class AdminController {
     private void mostraDocumenti() {
         mostra(panelDocumenti);
         aggiornaBtnNaviga(btnDocumenti);
+        
     }
 
     @FXML
@@ -146,7 +165,7 @@ public class AdminController {
     private void mostra(VBox pannelloAttivo) {
         VBox[] pannelli = { panelDocumenti, panelClassifica, panelStorico };
         for (VBox p : pannelli) {
-            boolean attivo = p == pannelloAttivo;
+            boolean attivo = (p == pannelloAttivo);
             p.setVisible(attivo);
             p.setManaged(attivo);
         }
@@ -154,13 +173,12 @@ public class AdminController {
 
     /** Evidenzia il bottone di navigazione attivo. */
     private void aggiornaBtnNaviga(Button attivo) {
-        Button[] btns = { btnDocumenti, btnClassifica, btnStorico };
-        for (Button b : btns) {
-            if (b == attivo) {
-                b.setStyle("-fx-background-color: white; -fx-font-weight: bold;");
-            } else {
-                b.setStyle("-fx-background-color: transparent; -fx-text-fill: white;");
-            }
+        btnDocumenti.getStyleClass().remove("nav-button-active");
+        btnClassifica.getStyleClass().remove("nav-button-active");
+        btnStorico.getStyleClass().remove("nav-button-active");
+    
+        if (!attivo.getStyleClass().contains("nav-button-active")) {
+            attivo.getStyleClass().add("nav-button-active");
         }
     }
 
@@ -185,35 +203,91 @@ public class AdminController {
                 sb.append(f.getAbsolutePath()).append("\n");
             }
             fileArea.setText(sb.toString());
-            statoLabel.setText(files.size() + " file selezionati.");
+            statoDocumentiLabel.setText(files.size() + " file selezionati.");
             risultatiArea.clear();
         }
     }
 
     @FXML
+    private void rilasciaFile(DragEvent event) {
+        Dragboard db = event.getDragboard();
+        boolean successo = false;
+        if (db.hasFiles()) {
+            List<File> fileTxt = db.getFiles().stream()
+                    .filter(f -> f.getName().toLowerCase().endsWith(".txt"))
+                    .collect(Collectors.toList());
+
+            if (!fileTxt.isEmpty()) {
+                if (fileSelezionati == null) {
+                    fileSelezionati = new ArrayList<>();
+                }
+                // Aggiunge solo i file non già presenti
+                for (File f : fileTxt) {
+                    if (!fileSelezionati.contains(f)) {
+                        fileSelezionati.add(f);
+                    }
+                }
+
+                StringBuilder sb = new StringBuilder();
+                for (File f : fileSelezionati) {
+                    sb.append(f.getAbsolutePath()).append("\n");
+                }
+                fileArea.setText(sb.toString());
+                statoDocumentiLabel.setText(fileSelezionati.size() + " file totali.");
+                risultatiArea.clear();
+                successo = true;
+            } else {
+                statoDocumentiLabel.setText("Nessun file .txt valido trovato.");
+            }
+        }
+        event.setDropCompleted(successo);
+    }
+
+    @FXML
+    private void trascinaFile(DragEvent event) {
+        // Controlla se l'oggetto trascinato contiene effettivamente dei file
+        if (event.getDragboard().hasFiles()) {
+            event.acceptTransferModes(TransferMode.COPY);
+        }
+        event.consume();
+    }
+
+    @FXML
+    private void rimuoviDocumenti(){
+        if(fileSelezionati == null || fileSelezionati.isEmpty()){
+            statoDocumentiLabel.setText("Nessun documento da rimuovere");
+            return;
+        }
+        fileSelezionati = null;
+        fileArea.clear();
+        risultatiArea.clear();
+        statoDocumentiLabel.setText("Documenti rimossi. Seleziona altri documenti...");
+    }
+
+    @FXML
     private void avviaAnalisi() {
         if (fileSelezionati == null || fileSelezionati.isEmpty()) {
-            statoLabel.setText("Seleziona prima i documenti.");
+            statoAnalisiLabel.setText("Seleziona prima i documenti.");
             return;
         }
 
         risultatiArea.clear();
-        statoLabel.setText("Analisi in corso...");
+        statoAnalisiLabel.setText("Analisi in corso...");
 
         AnalysisTask task = new AnalysisTask(fileSelezionati);
 
         // Aggiorna lo stato in tempo reale mentre il task gira
-        statoLabel.textProperty().bind(task.messageProperty());
+        statoAnalisiLabel.textProperty().bind(task.messageProperty());
 
         task.setOnSucceeded(event -> {
-            statoLabel.textProperty().unbind();
-            statoLabel.setText("Analisi completata.");
+            statoAnalisiLabel.textProperty().unbind();
+            statoAnalisiLabel.setText("Analisi completata.");
             risultatiArea.setText(task.getValue());
         });
 
         task.setOnFailed(event -> {
-            statoLabel.textProperty().unbind();
-            statoLabel.setText("Errore: " + task.getException().getMessage());
+            statoAnalisiLabel.textProperty().unbind();
+            statoAnalisiLabel.setText("Errore: " + task.getException().getMessage());
         });
 
         Thread t = new Thread(task);
@@ -223,41 +297,80 @@ public class AdminController {
 
     @FXML
     private void salvaAnalisi() {
-        Map<String, Long> tf = ClientHandler.getTfMap();
-        List<String> frasi = ClientHandler.getFrasi();
-        if (tf == null || frasi == null) {
-            statoLabel.setText("Nessuna analisi da salvare. Avvia prima l'analisi.");
+        // Controlla presenza file selezionati
+        if (fileSelezionati == null || fileSelezionati.isEmpty()) {
+            statoAnalisiLabel.setText("Nessun documento selezionato.");
             return;
         }
-        try (ObjectOutputStream oos = new ObjectOutputStream(
-                new FileOutputStream("analisi.ser"))) {
-            oos.writeObject(tf);
-            oos.writeObject(frasi);
-            statoLabel.setText("Analisi salvata in analisi.ser (" + frasi.size() + " frasi).");
-        } catch (IOException e) {
-            statoLabel.setText("Errore salvataggio: " + e.getMessage());
+
+        // Recupera analisi da ClientHandler
+        List<List<AnalisiFrase>> tf = ClientHandler.getTfDocumenti();
+        if (tf == null || tf.isEmpty()) {
+            statoAnalisiLabel.setText("Nessuna analisi da salvare. Avvia prima l'analisi.");
+            return;
+        }
+
+        try {
+            int documentiSalvati = 0;
+            int frasiSalvate = 0;
+            for (int i = 0; i < fileSelezionati.size(); i++) {
+                File file = fileSelezionati.get(i);
+                List<AnalisiFrase> frasiDelDocumento = tf.get(i);
+                // Inserisce il documento nel DB e lo copia in data/documenti/
+                int idDocumento = documentoDAO.inserisciDocumento(file.getAbsolutePath());
+                
+                if (idDocumento >= 0) {
+                    // Inserisce le frasi nel DB e salva i file .ser in data/analisi/
+                    fraseDAO.inserisciFrasi(idDocumento,frasiDelDocumento);
+                    documentiSalvati++;
+                    frasiSalvate += frasiDelDocumento.size();
+                    statoAnalisiLabel.setText("Salvataggio completato: " + documentiSalvati + " documento/i e " + frasiSalvate + " frasi salvate.");
+                } else if (idDocumento == -1) {
+                    statoAnalisiLabel.setText("Documento già salvato: " + file.getName());
+                } else if (idDocumento == -2){
+                    statoAnalisiLabel.setText("Errore durante il salvataggio del documento: " + file.getName());
+                    return;
+                }
+            }
+        } catch (Exception e) {
+            statoAnalisiLabel.setText("Errore durante il salvataggio dell'analisi: " + e.getMessage());
         }
     }
 
+
     @FXML
-    @SuppressWarnings("unchecked")
     private void caricaAnalisi() {
-        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("analisi.ser"))) {
-            Map<String, Long> tf   = (Map<String, Long>) ois.readObject();
-            List<String>      frasi = (List<String>)      ois.readObject();
-            ClientHandler.setTfMap(tf);
-            ClientHandler.setFrasi(frasi);
-            statoLabel.setText("Analisi caricata: " + frasi.size() + " frasi, "
-                    + tf.size() + " parole distinte.");
-        } catch (Exception e) {
-            statoLabel.setText("Nessuna analisi salvata trovata (analisi.ser).");
+        List<AnalisiFrase> lista = new ArrayList<AnalisiFrase>();
+        Path cartellaAnalisi = Paths.get("data", "analisi");
+        try(Stream<Path> stream = Files.list(cartellaAnalisi)){
+            stream.filter(p -> p.toString().endsWith(".ser")).forEach(p -> {
+                try(ObjectInputStream ois = new ObjectInputStream(Files.newInputStream(p))){
+                    lista.add((AnalisiFrase) ois.readObject());
+                } catch (IOException | ClassNotFoundException e) {
+                    e.printStackTrace();
+                }
+            });
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+        ClientHandler.setTfFrasi(lista);
+        statoAnalisiLabel.setText("Analisi in memoria caricate");
     }
 
     // ------------------------------------------------------------------
     //  Pannello Classifica
     // ------------------------------------------------------------------
 
+    @FXML
+    private void cercaGiocatoreClassifica(KeyEvent event) {
+        String utenteCercato = barCercaClassifica.getText();
+        List<String[]> dati = utenteDAO.getClassifica().stream()
+                .filter(u -> u[1].contains(utenteCercato))
+                .collect(Collectors.toList());
+        classificaTable.setItems(FXCollections.observableArrayList(dati));
+    }
+    
+    /** Aggiorna la lista di item legati alla table della classifica. */
     private void aggiornaClassifica() {
         ObservableList<String[]> items = FXCollections.observableArrayList();
         List<String[]> dati = utenteDAO.getClassifica();
@@ -266,64 +379,21 @@ public class AdminController {
         }
         classificaTable.setItems(items);
     }
-    
-   @FXML
-private void rilasciaFile(DragEvent event) {
-    Dragboard db = event.getDragboard();
-    boolean successo = false;
-    if (db.hasFiles()) {
-        List<File> fileTxt = db.getFiles().stream()
-            .filter(f -> f.getName().toLowerCase().endsWith(".txt"))
-            .collect(Collectors.toList());
-
-        if (!fileTxt.isEmpty()) {
-            if (fileSelezionati == null) {
-                fileSelezionati = new ArrayList<>();
-            }
-            // Aggiunge solo i file non già presenti
-            for (File f : fileTxt) {
-                if (!fileSelezionati.contains(f)) {
-                    fileSelezionati.add(f);
-                }
-            }
-
-            StringBuilder sb = new StringBuilder();
-            for (File f : fileSelezionati) {
-                sb.append(f.getAbsolutePath()).append("\n");
-            }
-            fileArea.setText(sb.toString());
-            statoLabel.setText(fileSelezionati.size() + " file totali.");
-            risultatiArea.clear();
-            successo = true;
-        } else {
-            statoLabel.setText("Nessun file .txt valido trovato.");
-        }
-    }
-    event.setDropCompleted(successo);
-}
-
-    @FXML
-    private void trascinaFile(DragEvent event) {
-        // Controlliamo se l'oggetto trascinato contiene effettivamente dei file
-        if (event.getDragboard().hasFiles()) {
-            event.acceptTransferModes(TransferMode.COPY);
-        }
-        event.consume();
-    }
-
-    @FXML
-    private void cercaGiocatoreClassifica(KeyEvent event) {
-       String testo = barCercaClassifica.getText();
-       List<String[]> dati = utenteDAO.getClassifica().stream()
-        .filter(u -> u[0].contains(testo))
-        .collect(Collectors.toList());
-       classificaTable.setItems(FXCollections.observableArrayList(dati));
-}
 
     // ------------------------------------------------------------------
     //  Pannello Storico
     // ------------------------------------------------------------------
 
+    @FXML
+    private void cercaGiocatoreStorico(KeyEvent event) {
+        String utenteCercato = barCercaStorico.getText();
+        List<RisultatoPartita> dati = partitaDAO.selectAll().stream()
+                .filter(p -> (p.getGiocatore1().contains(utenteCercato) || p.getGiocatore2().contains(utenteCercato)))
+                .collect(Collectors.toList());
+        storicoTable.setItems(FXCollections.observableArrayList(dati));
+    }
+    
+    /** Aggiorna la lista di item legati alla table dello storico. */
     private void aggiornaStorico() {
         ObservableList<RisultatoPartita> items = FXCollections.observableArrayList();
         List<RisultatoPartita> dati = partitaDAO.selectAll();
@@ -332,13 +402,5 @@ private void rilasciaFile(DragEvent event) {
         }
         storicoTable.setItems(items);
     }
-
-    @FXML
-    private void cercaGiocatoreStorico(KeyEvent event) {
-       String testo = barCercaStorico.getText();
-       List<RisultatoPartita> dati = partitaDAO.selectAll().stream()
-        .filter(u -> (u.getVincitore() != null && u.getVincitore().contains(testo)))
-        .collect(Collectors.toList());
-    storicoTable.setItems(FXCollections.observableArrayList(dati));
-}
+    
 }

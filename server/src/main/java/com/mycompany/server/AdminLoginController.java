@@ -6,33 +6,50 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 /**
  * Controller della schermata di login dell'amministratore.
  *
- * <p>Verifica le credenziali tramite {@link UtenteDAO} e controlla
+ * Verifica le credenziali tramite {@link UtenteDAO} e controlla
  * che l'utente abbia ruolo {@code ADMIN}. In caso di successo carica
  * il pannello admin ({@code admin.fxml}); altrimenti mostra un messaggio
- * di errore e svuota il campo password.</p>
+ * di errore e svuota il campo password.
  *
- * <p>FXML associato: {@code /login.fxml} (server)</p>
+ * FXML associato: {@code /login.fxml} (server)
  */
 public class AdminLoginController {
 
-    @FXML private TextField     usernameField;
+    @FXML private Label titoloLabel;
+    @FXML private TextField usernameField;
     @FXML private PasswordField passwordField;
-    @FXML private Label         erroreLabel;
+    @FXML private Label erroreLabel;
 
     private final UtenteDAO utenteDAO = new UtenteDAO();
-
-    /**
-     * Gestisce il click sul pulsante Login.
-     * Valida i campi, verifica le credenziali e il ruolo admin,
-     * poi apre il pannello amministratore o mostra un errore.
-     */
+    
     @FXML
-    private void handleLogin() {
+    public void initialize() {
+        Font fontPersonalizzato = Font.loadFont(getClass().getResourceAsStream("/fonts/ZagDropsThin.ttf"), 54);
+        if (fontPersonalizzato != null) {
+            titoloLabel.setFont(fontPersonalizzato);
+        }
+    }
+    
+    @FXML
+    private void vaiSuccessivo(KeyEvent event) {
+        if (usernameField.getText().trim().equals("") && event.getCode() == KeyCode.ENTER) {
+            erroreLabel.setText("Inserisci username e password.");
+        } else if (event.getCode() == KeyCode.ENTER) {
+            passwordField.requestFocus();
+        }
+    }
+    
+    @FXML
+    private void verificaLogin() {
         String username = usernameField.getText().trim();
         String password = passwordField.getText();
 
@@ -59,14 +76,17 @@ public class AdminLoginController {
             Scene scene = new Scene(loader.load());
             Stage stage = (Stage) usernameField.getScene().getWindow();
             stage.setScene(scene);
-            stage.setTitle("GuessTheWord — Pannello Admin");
-            stage.setResizable(true);
-            stage.setWidth(820);
-            stage.setHeight(580);
+            stage.setTitle("GuessTheWord — Admin");
+            stage.getIcons().add(new Image(getClass().getResourceAsStream("/images/logo-GuessTheWord.png")));
+            stage.setWidth(920);
+            stage.setHeight(680);
             stage.setResizable(false);
             stage.centerOnScreen();
         } catch (Exception e) {
-            erroreLabel.setText("Errore caricamento pannello: " + e.getMessage());
+            erroreLabel.setText("Errore caricamento pannello");
+            System.out.println(e.getMessage() + '\n' + e.getClass().toString());
+            e.printStackTrace();
         }
     }
+    
 }

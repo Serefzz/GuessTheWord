@@ -1,5 +1,6 @@
 package com.mycompany.server;
 
+import com.mycompany.common.Ruolo;
 import java.security.MessageDigest;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -11,42 +12,37 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * DAO per la tabella {@code utenti} del database SQLite.
+ * DAO per la tabella {@code Utente} del database SQLite.
  *
- * Implementa {@link DAO}{@code <String[]>} dove ogni array rappresenta
- * una riga della tabella nel formato {@code [id, username, ruolo]}.
+ * Implementa {@link DAOusername}{@code Utente}
  *
  * Le password vengono sempre salvate come hash SHA-256 tramite
  * {@link #hashPassword(String)}. Ogni metodo apre e chiude la propria
- * connessione JDBC con try-with-resources (pattern dalle slide JDBC).
+ * connessione JDBC con try-with-resources (versione con connessione non persistente).
  */
-public class UtenteDAO implements DAO<String[]> {
+public class UtenteDAO implements DAOusername<Utente> {
 
     private static final String URL = DatabaseManager.URL;
 
     // ------------------------------------------------------------------
-    //  Metodi CRUD (interfaccia DAO<String[]>)
+    //  Metodi CRUD (interfaccia DAO<Utente>)
     // ------------------------------------------------------------------
 
     /**
      * Restituisce tutti gli utenti registrati nel sistema.
-     * Ogni elemento dell'array: {@code [id, username, ruolo]}.
      *
      * @return lista di tutti gli utenti; lista vuota se la tabella è vuota
      */
     @Override
-    public List<String[]> selectAll() {
-        List<String[]> lista = new ArrayList<String[]>();
-        String sql = "SELECT id, username, ruolo FROM utenti";
+    public List<Utente> selectAll() {
+        List<Utente> lista = new ArrayList<Utente>();
+        String sql = "SELECT username, ruolo, punteggio_globale FROM Utente";
         try (Connection conn = DriverManager.getConnection(URL);
              PreparedStatement ps = conn.prepareStatement(sql)) {
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                lista.add(new String[]{
-                    String.valueOf(rs.getInt("id")),
-                    rs.getString("username"),
-                    rs.getString("ruolo")
-                });
+                Ruolo ruoloUtente = (rs.getString("ruolo").equals("GIOCATORE")) ? Ruolo.GIOCATORE : Ruolo.ADMIN;
+                lista.add(new Utente(rs.getString("username"), "", ruoloUtente, rs.getInt("punteggio_globale")));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -56,24 +52,20 @@ public class UtenteDAO implements DAO<String[]> {
 
     /**
      * Cerca un utente per identificatore numerico.
-     * L'array restituito ha forma {@code [id, username, ruolo]}.
      *
-     * @param id identificatore univoco dell'utente
+     * @param username identificatore univoco dell'utente
      * @return {@link Optional} con l'utente se trovato, vuoto altrimenti
      */
     @Override
-    public Optional<String[]> selectById(int id) {
-        String sql = "SELECT id, username, ruolo FROM utenti WHERE id = ?";
+    public Optional<Utente> selectByUsername(String username) {
+        String sql = "SELECT username, ruolo, punteggio_globale FROM Utente WHERE username = ? AND ruolo = 'GIOCATORE'";
         try (Connection conn = DriverManager.getConnection(URL);
-             PreparedStatement ps = conn.prepareStatement(sql)) {
-            ps.setInt(1, id);
+               PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, username);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                return Optional.of(new String[]{
-                    String.valueOf(rs.getInt("id")),
-                    rs.getString("username"),
-                    rs.getString("ruolo")
-                });
+                Ruolo ruoloUtente = (rs.getString("ruolo").equals("GIOCATORE")) ? Ruolo.GIOCATORE : Ruolo.ADMIN;
+                return Optional.of(new Utente(rs.getString("username"),"", ruoloUtente, rs.getInt("punteggio_globale")));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -83,41 +75,41 @@ public class UtenteDAO implements DAO<String[]> {
 
     /**
      * Inserisce un nuovo utente nel database.
-     * Il parametro {@code row} deve avere forma {@code [username, passwordHash, ruolo]}.
      *
-     * @param row array con username, hash password e ruolo dell'utente
+     * @param u utente da inserire
      * @return {@code true} se l'inserimento è riuscito; {@code false} se l'username è già in uso
      */
     @Override
-    public boolean insert(String[] row) {
-        String sql = "INSERT INTO utenti (username, password, ruolo) VALUES (?, ?, ?)";
+    public boolean insert(Utente u) {
+        String sql = "INSERT INTO Utente (username, password, ruolo, punteggio_globale) VALUES (?, ?, ?, ?)";
         try (Connection conn = DriverManager.getConnection(URL);
              PreparedStatement ps = conn.prepareStatement(sql)) {
-            ps.setString(1, row[0]);
-            ps.setString(2, row[1]);
-            ps.setString(3, row[2]);
+            ps.setString(1, u.getUsername());
+            ps.setString(2, u.getPassword());
+            ps.setString(3, u.getRuolo().name().toUpperCase());
+            ps.setInt(4, u.getPunteggioGlobale());
             ps.executeUpdate();
             return true;
         } catch (SQLException e) {
+            System.out.println(e);
             return false;
         }
     }
 
     /**
-     * Aggiorna password e ruolo di un utente esistente.
-     * Il parametro {@code row} deve avere forma {@code [id, username, passwordHash, ruolo]}.
+     * Aggiorna password, ruolo e punteggio globale di un utente esistente.
      *
-     * @param row array con id, username, nuova hash password e nuovo ruolo
+     * @param u utente con l'username di un utente gia' presente nel db e con il nuovo stato da aggiornare
      * @return {@code true} se la modifica ha coinvolto almeno una riga; {@code false} altrimenti
      */
     @Override
-    public boolean update(String[] row) {
-        String sql = "UPDATE utenti SET password = ?, ruolo = ? WHERE id = ?";
+    public boolean update(Utente u) {
+        String sql = "UPDATE Utente SET ruolo = ?, punteggio_globale = ? WHERE username = ?";
         try (Connection conn = DriverManager.getConnection(URL);
              PreparedStatement ps = conn.prepareStatement(sql)) {
-            ps.setString(1, row[2]);
-            ps.setString(2, row[3]);
-            ps.setInt(3, Integer.parseInt(row[0]));
+            ps.setString(1, u.getRuolo().name().toUpperCase());
+            ps.setInt(2, u.getPunteggioGlobale());
+            ps.setString(3, u.getUsername());
             return ps.executeUpdate() > 0;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -128,15 +120,15 @@ public class UtenteDAO implements DAO<String[]> {
     /**
      * Elimina l'utente con l'identificatore specificato.
      *
-     * @param id identificatore univoco dell'utente da eliminare
+     * @param username identificatore univoco dell'utente da eliminare
      * @return {@code true} se l'eliminazione ha coinvolto almeno una riga; {@code false} altrimenti
      */
     @Override
-    public boolean delete(int id) {
-        String sql = "DELETE FROM utenti WHERE id = ?";
+    public boolean delete(String username) {
+        String sql = "DELETE FROM Utente WHERE username = ?";
         try (Connection conn = DriverManager.getConnection(URL);
              PreparedStatement ps = conn.prepareStatement(sql)) {
-            ps.setInt(1, id);
+            ps.setString(1, username);
             return ps.executeUpdate() > 0;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -147,19 +139,7 @@ public class UtenteDAO implements DAO<String[]> {
     // ------------------------------------------------------------------
     //  Metodi specifici per autenticazione e classifiche
     // ------------------------------------------------------------------
-
-    /**
-     * Registra un nuovo giocatore con ruolo {@code GIOCATORE}.
-     * La password viene automaticamente hashata con SHA-256.
-     *
-     * @param username nome utente desiderato
-     * @param password password in chiaro scelta dall'utente
-     * @return {@code true} se la registrazione è riuscita; {@code false} se l'username è già in uso
-     */
-    public boolean registra(String username, String password) {
-        return insert(new String[]{ username, hashPassword(password), "GIOCATORE" });
-    }
-
+    
     /**
      * Verifica le credenziali di un utente confrontando la password fornita
      * (hashata) con quella memorizzata nel database.
@@ -169,7 +149,7 @@ public class UtenteDAO implements DAO<String[]> {
      * @return {@code true} se le credenziali sono corrette; {@code false} altrimenti
      */
     public boolean verificaLogin(String username, String password) {
-        String sql = "SELECT password FROM utenti WHERE username = ?";
+        String sql = "SELECT password FROM Utente WHERE username = ?";
         try (Connection conn = DriverManager.getConnection(URL);
              PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setString(1, username);
@@ -184,29 +164,56 @@ public class UtenteDAO implements DAO<String[]> {
     }
 
     /**
+     * Registra un nuovo giocatore con ruolo {@code GIOCATORE}.
+     * La password viene automaticamente hashata con SHA-256.
+     *
+     * @param username nome utente desiderato
+     * @param password password in chiaro scelta dall'utente
+     * @return {@code true} se la registrazione è riuscita; {@code false} se l'username è già in uso
+     */
+    public boolean registra(String username, String password) {
+        return insert(new Utente(username, hashPassword(password), Ruolo.GIOCATORE, 0));
+    }
+    
+    public boolean aggiornaPunteggio(String username, int punti) {
+        Utente uVecchioPunteggio = selectByUsername(username).get();
+        Utente uNuovoPunteggio;
+        if(uVecchioPunteggio != null ) {
+            if(uVecchioPunteggio.getPunteggioGlobale() + punti >= 0) {
+                uNuovoPunteggio = new Utente(uVecchioPunteggio.getUsername(), "", uVecchioPunteggio.getRuolo(), uVecchioPunteggio.getPunteggioGlobale() + punti);
+            } else {
+                uNuovoPunteggio = new Utente(uVecchioPunteggio.getUsername(), "", uVecchioPunteggio.getRuolo(), 0);
+            }
+        } else {
+            return false;
+        }
+         return update(uNuovoPunteggio);
+    }
+
+    /**
      * Restituisce la classifica globale dei giocatori ordinata per vittorie decrescenti.
      * Ogni elemento: {@code [username, vittorie, sconfitte, pareggi, tempoMedioMs]}.
      *
-     * @return lista di righe classifica; lista vuota se non ci sono giocatori
+     * @return lista di righe della classifica; lista vuota se non ci sono giocatori
      */
     public List<String[]> getClassifica() {
         List<String[]> classifica = new ArrayList<String[]>();
         String sql =
-            "SELECT u.username, " +
-            "  SUM(CASE WHEN p.vincitore = u.username THEN 1 ELSE 0 END) AS vittorie, " +
-            "  SUM(CASE WHEN p.vincitore != u.username AND p.vincitore IS NOT NULL THEN 1 ELSE 0 END) AS sconfitte, " +
-            "  SUM(CASE WHEN p.vincitore IS NULL THEN 1 ELSE 0 END) AS pareggi, " +
-            "  COALESCE(AVG(CASE WHEN p.vincitore = u.username THEN p.tempo_risposta END), 0) AS tempo_medio " +
-            "FROM utenti u " +
-            "LEFT JOIN partite p ON p.giocatore1 = u.username OR p.giocatore2 = u.username " +
-            "WHERE u.ruolo = 'GIOCATORE' " +
-            "GROUP BY u.username " +
-            "ORDER BY vittorie DESC";
+            "SELECT U.punteggio_globale AS punteggio_globale, U.username AS username, "
+                + "  COUNT(CASE WHEN (P.giocatore1 = U.username AND P.vincitore = 1) OR (P.giocatore2 = U.username AND P.vincitore = 2) THEN 1 END) AS vittorie, "
+                + "  COUNT(CASE WHEN (P.giocatore1 = U.username AND P.vincitore = 2) OR (P.giocatore2 = U.username AND P.vincitore = 1) THEN 1 END) AS sconfitte, "
+                + "  COUNT(CASE WHEN P.id IS NOT NULL AND P.vincitore IS 0 THEN 1 END) AS pareggi, "
+                + "  COALESCE(AVG(CASE WHEN (P.giocatore1 = U.username AND P.vincitore = 1) OR (P.giocatore2 = U.username AND P.vincitore = 2) THEN P.durata END), 0) AS tempo_medio "
+                + "FROM Utente U LEFT JOIN Partita P ON P.giocatore1 = U.username OR P.giocatore2 = U.username "
+                + "WHERE U.ruolo = 'GIOCATORE' "
+                + "GROUP BY U.username "
+                + "ORDER BY U.punteggio_globale DESC";
         try (Connection conn = DriverManager.getConnection(URL);
              PreparedStatement ps = conn.prepareStatement(sql)) {
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 classifica.add(new String[]{
+                    String.valueOf(rs.getInt("punteggio_globale")),
                     rs.getString("username"),
                     String.valueOf(rs.getInt("vittorie")),
                     String.valueOf(rs.getInt("sconfitte")),
@@ -220,6 +227,10 @@ public class UtenteDAO implements DAO<String[]> {
         return classifica;
     }
 
+    // ------------------------------------------------------------------
+    //  Utility
+    // ------------------------------------------------------------------
+    
     /**
      * Verifica se l'utente specificato ha ruolo {@code ADMIN}.
      *
@@ -227,23 +238,19 @@ public class UtenteDAO implements DAO<String[]> {
      * @return {@code true} se l'utente è amministratore; {@code false} altrimenti
      */
     public boolean isAdmin(String username) {
-        String sql = "SELECT ruolo FROM utenti WHERE username = ?";
+        String sql = "SELECT ruolo FROM Utente WHERE username = ?";
         try (Connection conn = DriverManager.getConnection(URL);
              PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setString(1, username);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                return "ADMIN".equals(rs.getString("ruolo"));
+                return rs.getString("ruolo").equals("ADMIN");
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return false;
     }
-
-    // ------------------------------------------------------------------
-    //  Utility
-    // ------------------------------------------------------------------
 
     /**
      * Calcola l'hash SHA-256 della password fornita in chiaro.
@@ -265,4 +272,5 @@ public class UtenteDAO implements DAO<String[]> {
             throw new RuntimeException("Errore hashing password", e);
         }
     }
+    
 }

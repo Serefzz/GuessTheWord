@@ -47,4 +47,5 @@ public class CifrarioCesare {
     public static String decifra(String testoCifrato, int shift) {
         return cifra(testoCifrato, 26 - (shift % 26));
     }
+    
 }

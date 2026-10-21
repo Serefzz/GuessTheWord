@@ -8,7 +8,6 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.Socket;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Gestisce la comunicazione con un singolo client connesso.
@@ -17,34 +16,18 @@ import java.util.Map;
  * L'avversario viene impostato tramite {@link #setAvversario(ClientHandler)}
  * prima dell'avvio del thread.
  *
- * Le frasi e la mappa TF sono condivise staticamente tra tutti gli handler
+ * Le frasi e le TF sono condivise staticamente tra tutti gli handler
  * e vengono impostate dall'admin tramite {@link AdminController}.
  */
 public class ClientHandler implements Runnable {
 
-    // ── Stato statico condiviso ────────────────────────────────────────────
-    private static List<String> frasi = null;
-    private static Map<String, Long> tfMap = null;
-
-    /**
-     * Imposta le frasi disponibili per le sfide di gioco.
-     * @param f lista di frasi estratte dall'analisi del documento
-     */
-    public static void setFrasi(List<String> f) { frasi = f; }
-
-    /**
-     * Imposta la mappa Term Frequency usata per scegliere la parola da cifrare.
-     * @param m mappa {@code parola -> frequenza}
-     */
-    public static void setTfMap(Map<String, Long> m) { tfMap = m; }
-
-    /** @return mappa TF correntemente caricata, o {@code null} se non disponibile */
-    public static Map<String, Long> getTfMap() { return tfMap; }
-
-    /** @return lista di frasi correntemente caricata, o {@code null} se non disponibile */
-    public static List<String> getFrasi() { return frasi; }
-
-    // ── Stato di istanza ───────────────────────────────────────────────────
+    // Stato statico condiviso
+    
+    private static List<List<AnalisiFrase>> tfDocumenti = null;
+    private static List<AnalisiFrase> tfFrasi = null;
+    
+    // Stato di istanza
+    
     private final Socket socket;
     private BufferedWriter out;
     private BufferedReader in;
@@ -53,14 +36,21 @@ public class ClientHandler implements Runnable {
     private ClientHandler avversario;
     private Partita partitaCorrente;
     private boolean connesso = true;
-
-    private final UtenteDAO  utenteDAO  = new UtenteDAO();
+    
+    private final UtenteDAO utenteDAO  = new UtenteDAO();
     private final PartitaDAO partitaDAO = new PartitaDAO();
+    
+    // Riferimento al server
+    
+    private final GameServer server;
 
     /**
      * @param socket socket TCP del client connesso
      */
-    public ClientHandler(Socket socket) { this.socket = socket; }
+    public ClientHandler(Socket socket, GameServer server) { 
+        this.socket = socket; 
+        this.server = server;
+    }
 
     /**
      * Loop principale di lettura messaggi dal client.
@@ -113,6 +103,10 @@ public class ClientHandler implements Runnable {
                 if (partitaCorrente != null) partitaCorrente.verificaRisposta(this, msg.getParam(0));
                 break;
             }
+            case FORFAIT : {
+                if (partitaCorrente != null) partitaCorrente.resa(this);
+                break;
+            }
             case STORICO_REQUEST: {
                 gestisciStorico();
                 break;
@@ -122,7 +116,7 @@ public class ClientHandler implements Runnable {
                 break;
             }
             case DISCONNETTI: {
-                connesso = false;
+                disconnetti();
                 break;
             }
             default: break;
@@ -135,11 +129,27 @@ public class ClientHandler implements Runnable {
      * @param password password in chiaro
      */
     private void gestisciLogin(String username, String password) {
-        if (utenteDAO.verificaLogin(username, password)) {
+        boolean giaConnesso = false;
+
+        for (ClientHandler ch : server.getClientCollegati()) {
+            if (ch != this && ch.getUsername() != null && ch.getUsername().equals(username)) {
+                giaConnesso = true;
+                break;
+            }
+        }
+
+        if (utenteDAO.verificaLogin(username, password) && !giaConnesso && !utenteDAO.isAdmin(username)) {
             this.username = username;
             invia(new Messaggio(Messaggio.Tipo.OK));
         } else {
-            invia(new Messaggio(Messaggio.Tipo.ERRORE, "Credenziali errate"));
+            if (giaConnesso) {
+                invia(new Messaggio(Messaggio.Tipo.ERRORE, "Giocatore già connesso."));
+            } else if (utenteDAO.isAdmin(username)) {
+                invia(new Messaggio(Messaggio.Tipo.ERRORE, "Admin accede differentemente."));
+            } else {
+                invia(new Messaggio(Messaggio.Tipo.ERRORE, "Credenziali errate."));
+            }
+            disconnetti();
         }
     }
 
@@ -154,6 +164,7 @@ public class ClientHandler implements Runnable {
             invia(new Messaggio(Messaggio.Tipo.OK));
         } else {
             invia(new Messaggio(Messaggio.Tipo.ERRORE, "Username gia in uso"));
+            disconnetti();
         }
     }
 
@@ -163,32 +174,24 @@ public class ClientHandler implements Runnable {
      * @param msg messaggio contenente la difficoltà scelta (parametro 0)
      */
     private void gestisciAvviaPartita(Messaggio msg) {
-        if (frasi == null || frasi.isEmpty()) {
+        if (avversario == null) {
+            invia(new Messaggio(Messaggio.Tipo.ERRORE, "In attesa del secondo giocatore..."));
+            return;
+        }
+        
+        if (tfFrasi == null || tfFrasi.isEmpty()) {
             invia(new Messaggio(Messaggio.Tipo.ERRORE, "Nessun documento caricato"));
             return;
         }
-        int difficolta = parseDifficolta(msg.getParam(0));
+        
+        int difficolta = Integer.parseInt(msg.getParam(0));
         synchronized (ClientHandler.class) {
             if (partitaCorrente != null) return;
-            String frase = frasi.get((int) (Math.random() * frasi.size()));
-            Partita p = new Partita(this, avversario, frase, difficolta);
+            Partita p = new Partita(this, avversario, difficolta);
             this.setPartita(p);
             avversario.setPartita(p);
             p.avvia();
         }
-    }
-
-    /**
-     * Converte il parametro di difficoltà in un intero 1-3.
-     * @param param stringa ricevuta dal client
-     * @return livello di difficoltà (1=facile, 2=medio, 3=difficile); default 1
-     */
-    private int parseDifficolta(String param) {
-        try {
-            int d = Integer.parseInt(param);
-            if (d >= 1 && d <= 3) return d;
-        } catch (NumberFormatException e) {}
-        return 1;
     }
 
     /**
@@ -212,8 +215,7 @@ public class ClientHandler implements Runnable {
         StringBuilder sb = new StringBuilder();
         for (String[] riga : classifica) {
             if (sb.length() > 0) sb.append("~");
-            sb.append(riga[0]).append(";").append(riga[1]).append(";")
-              .append(riga[2]).append(";").append(riga[3]).append(";").append(riga[4]);
+            sb.append(riga[0] + ";").append(riga[1] + ";").append(riga[2] + ";").append(riga[3] + ";").append(riga[4] + ";").append(riga[5]);
         }
         invia(new Messaggio(Messaggio.Tipo.CLASSIFICA_RESPONSE, sb.toString()));
     }
@@ -233,23 +235,59 @@ public class ClientHandler implements Runnable {
     }
 
     /** Chiude il socket e imposta {@code connesso = false}. */
-    private void disconnetti() {
+    public synchronized void disconnetti() {
+        if (!connesso) return;
+        
         connesso = false;
-        try { socket.close(); } catch (IOException e) {}
+
+        try { 
+            if (!socket.isClosed()) socket.close(); 
+        } catch (IOException ignored) {}
+
+        if (server != null) {
+            server.rimuoviClient(this);
+        }
     }
 
     /** @return username dell'utente autenticato */
     public String getUsername() { return username; }
+    
+    /** @return lista delle TF di ogni documento analizzato, o {@code null} se non disponibile */
+    public static List<List<AnalisiFrase>> getTfDocumenti() {return tfDocumenti;}
 
+    /** @return lista delle TF correntemente caricata, o {@code null} se non disponibile */
+    public static List<AnalisiFrase> getTfFrasi() { return tfFrasi; }
+
+    /**
+     * Imposta la lista delle Term Frequency di ogni documento analizzato.
+     * @param n lista delle liste rappresentanti le tf delle frase di ogni documento
+     */
+    public static void setTfDocumenti(List<List<AnalisiFrase>> n) { tfDocumenti = n; }
+    
+    /**
+     * Imposta la lista delle Term Frequency usata per scegliere la parola da cifrare.
+     * @param m lista delle tf caricate per la sfida
+     */
+    public static void setTfFrasi(List<AnalisiFrase> m) { tfFrasi = m; }
+    
     /**
      * Imposta il riferimento all'handler dell'avversario.
      * @param a handler del client avversario
      */
     public void setAvversario(ClientHandler a) { this.avversario = a; }
+    
+    /**
+     * Rimuove il riferimento all'handler dell'avversario.
+     */
+    public void unsetAvversario() {
+        this.avversario = null;
+        invia(new Messaggio(Messaggio.Tipo.ATTESA, "L'avversario si è disconnesso. In attesa di un nuovo giocatore..."));
+    }
 
     /**
      * Imposta la partita corrente dell'utente.
      * @param p partita in corso
      */
     public void setPartita(Partita p) { this.partitaCorrente = p; }
+    
 }

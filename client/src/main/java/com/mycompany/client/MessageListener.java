@@ -14,4 +14,5 @@ public interface MessageListener {
      * @param msg messaggio ricevuto dal server
      */
     void onMessage(Messaggio msg);
+    
 }

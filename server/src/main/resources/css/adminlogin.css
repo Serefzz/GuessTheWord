@@ -1,0 +1,74 @@
+/* ─── Palette Globale & Sfondo ─── */
+.root {
+    -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+    -fx-background-color: #eaf1f0;
+}
+
+/* ─── Card Centrale di Login ─── */
+.login-card {
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 14px;
+    -fx-border-color: #c9d8d6;
+    -fx-border-radius: 14px;
+    -fx-border-width: 1px;
+    -fx-padding: 32 36 32 36;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.09), 10, 0, 0, 2);
+}
+
+/* ─── Titolo App ─── */
+.login-title {
+    -fx-text-fill: #074338;
+}
+
+/* ─── Etichette Input ─── */
+.input-label {
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #163630;
+    -fx-padding: 0 0 2 4;
+}
+
+/* ─── Campi Input & Password arrotondati ─── */
+.login-field {
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 20px;
+    -fx-border-color: #c9d8d6;
+    -fx-border-radius: 20px;
+    -fx-border-width: 1px;
+    -fx-padding: 7 14 7 14;
+    -fx-font-size: 13px;
+}
+
+.login-field:focused {
+    -fx-border-color: #074338;
+}
+
+/* ─── Bottone Pillola Verde + Oro ─── */
+.btn-pill {
+    -fx-background-color: #074338;
+    -fx-text-fill: #f5ab2a;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 22px;
+    -fx-border-radius: 22px;
+    -fx-cursor: hand;
+    -fx-padding: 8 16 8 16;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.22), 5, 0, 0, 2);
+}
+
+.btn-pill:hover {
+    -fx-background-color: #0a584a;
+    -fx-text-fill: #ffd060;
+}
+
+.btn-pill:pressed {
+    -fx-background-color: #05332a;
+    -fx-effect: none;
+}
+
+/* ─── Messaggio di Errore ─── */
+.error-label {
+    -fx-text-fill: #c0392b;
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+}

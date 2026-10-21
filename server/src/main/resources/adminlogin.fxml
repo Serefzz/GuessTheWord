@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox alignment="CENTER" prefHeight="430.0" prefWidth="450.0" stylesheets="@css/adminlogin.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.server.AdminLoginController">
+    <padding>
+        <Insets bottom="30" left="30" right="30" top="30" />
+    </padding>
+
+    <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="350.0" prefHeight="320.0" spacing="16" styleClass="login-card">
+
+        <!-- Logo con ZagDropsThin caricato da controller -->
+        <Label fx:id="titoloLabel" styleClass="login-title" text="GuessTheWord" />
+
+        <!-- Form credenziali -->
+        <VBox maxWidth="Infinity" spacing="6">
+            <Label styleClass="input-label" text="Username" />
+            <TextField fx:id="usernameField" onKeyPressed="#vaiSuccessivo" promptText="Inserisci username..." styleClass="login-field" />
+            <Label styleClass="input-label" text="Password">
+                <VBox.margin>
+                    <Insets />
+                </VBox.margin>
+            </Label>
+            <PasswordField fx:id="passwordField" onAction="#verificaLogin" promptText="Inserisci password..." styleClass="login-field" />
+        </VBox>
+
+        <!-- Bottone di login -->
+        <Button maxWidth="Infinity" onAction="#verificaLogin" prefHeight="36" styleClass="btn-pill" text="Login">
+            <VBox.margin>
+                <Insets top="6" />
+            </VBox.margin>
+        </Button>
+
+        <!-- Etichetta per messaggi di errore -->
+        <Label fx:id="erroreLabel" alignment="CENTER" styleClass="error-label" text="" textAlignment="CENTER" wrapText="true" />
+
+    </VBox>
+</VBox>

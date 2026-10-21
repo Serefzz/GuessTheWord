@@ -14,12 +14,12 @@ public class Messaggio {
     /**
      * Tipi di messaggio del protocollo client-server.
      *
-     * I messaggi {@code Client → Server} vengono inviati dal client:
+     * I messaggi {@code Client -> Server} vengono inviati dal client:
      * {@link #LOGIN}, {@link #REGISTRAZIONE}, {@link #AVVIA_PARTITA},
-     * {@link #RISPOSTA}, {@link #STORICO_REQUEST}, {@link #CLASSIFICA_REQUEST},
+     * {@link #RISPOSTA}, {@link #FORFAIT}, {@link #STORICO_REQUEST}, {@link #CLASSIFICA_REQUEST},
      * {@link #DISCONNETTI}.
      *
-     * I messaggi {@code Server → Client} vengono inviati dal server:
+     * I messaggi {@code Server -> Client} vengono inviati dal server:
      * {@link #OK}, {@link #ERRORE}, {@link #ATTESA}, {@link #SFIDA},
      * {@link #RISPOSTA_ERRATA}, {@link #RISULTATO_VINTO}, {@link #RISULTATO_PERSO},
      * {@link #PAREGGIO}, {@link #STORICO_RESPONSE}, {@link #CLASSIFICA_RESPONSE}.
@@ -34,6 +34,8 @@ public class Messaggio {
         AVVIA_PARTITA,
         /** Risposta del giocatore. Parametri: parola decifrata. */
         RISPOSTA,
+        /** Resa del giocatore.  */
+        FORFAIT,
         /** Richiesta storico partite dell'utente. */
         STORICO_REQUEST,
         /** Richiesta classifica globale. */
@@ -71,7 +73,7 @@ public class Messaggio {
      * Costruisce un messaggio con tipo e parametri opzionali.
      *
      * @param tipo tipo del messaggio
-     * @param params parametri aggiuntivi (variadic, può essere vuoto)
+     * @param params parametri aggiuntivi (può essere vuoto)
      */
     public Messaggio(Tipo tipo, String... params) {
         this.tipo = tipo;
@@ -85,13 +87,15 @@ public class Messaggio {
      * @return stringa serializzata del messaggio
      */
     public String toLine() {
-        if (params.length == 0) return tipo.name();
+        if (params == null || params.length == 0) {
+            return tipo.name();
+        }
         StringBuilder sb = new StringBuilder(tipo.name());
-        for (int i = 0; i < params.length; i++) {
-            sb.append(params[i]).append("|");
+        for (String p : params) {
+            sb.append("|").append(p != null ? p.trim() : "");
         }
         return sb.toString();
-    }
+}
 
     /**
      * Deserializza un messaggio dalla riga letta dal socket.
@@ -140,4 +144,5 @@ public class Messaggio {
     public String toString() { 
         return toLine(); 
     }
+    
 }

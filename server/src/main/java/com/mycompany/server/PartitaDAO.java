@@ -12,19 +12,18 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * DAO per la tabella {@code partite} del database SQLite.
+ * DAO per la tabella {@code Partita} del database SQLite.
  *
- * <p>Implementa {@link DAO}{@code <RisultatoPartita>} e aggiunge metodi
+ * Implementa {@link DAOid}{@code <RisultatoPartita>} e aggiunge metodi
  * specifici per la logica di gioco: salvataggio rapido di un risultato
- * e recupero dello storico partite di un singolo giocatore.</p>
+ * e recupero dello storico partite di un singolo giocatore.
  *
- * <p>Ogni metodo apre e chiude la propria connessione JDBC con
- * try-with-resources (pattern dalle slide JDBC).</p>
+ * Ogni metodo apre e chiude la propria connessione JDBC con
+ * try-with-resources (versione con connessione non persistente).
  */
-public class PartitaDAO implements DAO<RisultatoPartita> {
+public class PartitaDAO implements DAOid<RisultatoPartita> {
 
-    private static final DateTimeFormatter FORMATO_DATA =
-        DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+    private static final DateTimeFormatter FORMATO_DATA = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
 
     /**
      * Restituisce tutte le partite registrate, ordinate dalla più recente.
@@ -34,8 +33,9 @@ public class PartitaDAO implements DAO<RisultatoPartita> {
     @Override
     public List<RisultatoPartita> selectAll() {
         List<RisultatoPartita> lista = new ArrayList<RisultatoPartita>();
-        String sql = "SELECT id, giocatore1, giocatore2, vincitore, data, tempo_risposta " +
-                     "FROM partite ORDER BY id DESC";
+        String sql = "SELECT id, frase, documento, giocatore1, giocatore2, vincitore, data, durata " +
+                           "FROM Partita " + 
+                           "ORDER BY id DESC";
         try (Connection conn = DriverManager.getConnection(DatabaseManager.URL);
              PreparedStatement ps = conn.prepareStatement(sql)) {
             ResultSet rs = ps.executeQuery();
@@ -55,12 +55,13 @@ public class PartitaDAO implements DAO<RisultatoPartita> {
      * @return {@link Optional} contenente la partita se trovata, vuoto altrimenti
      */
     @Override
-    public Optional<RisultatoPartita> selectById(int id) {
-        String sql = "SELECT id, giocatore1, giocatore2, vincitore, data, tempo_risposta " +
-                     "FROM partite WHERE id = ?";
+    public Optional<RisultatoPartita> selectById(int...id) {
+        String sql = "SELECT id, frase, documento, giocatore1, giocatore2, vincitore, data, durata " +
+                           "FROM Partita " + 
+                           "WHERE id = ?";
         try (Connection conn = DriverManager.getConnection(DatabaseManager.URL);
              PreparedStatement ps = conn.prepareStatement(sql)) {
-            ps.setInt(1, id);
+            ps.setInt(1, id[0]);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) return Optional.of(creaRisultato(rs));
         } catch (SQLException e) {
@@ -77,15 +78,17 @@ public class PartitaDAO implements DAO<RisultatoPartita> {
      */
     @Override
     public boolean insert(RisultatoPartita r) {
-        String sql = "INSERT INTO partite (giocatore1, giocatore2, vincitore, data, tempo_risposta) " +
-                     "VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO Partita (frase, documento, giocatore1, giocatore2, vincitore, data, durata) " +
+                           "VALUES (?, ?, ?, ?, ?, ?, ?)";
         try (Connection conn = DriverManager.getConnection(DatabaseManager.URL);
              PreparedStatement ps = conn.prepareStatement(sql)) {
-            ps.setString(1, r.getGiocatore1());
-            ps.setString(2, r.getGiocatore2());
-            ps.setString(3, r.getVincitore());
-            ps.setString(4, r.getData());
-            ps.setLong(5, r.getTempoRisposta());
+            ps.setInt(1, r.getFrase());
+            ps.setInt(2, r.getDocumento());
+            ps.setString(3, r.getGiocatore1());
+            ps.setString(4, r.getGiocatore2());
+            ps.setInt(5, r.getVincitore());
+            ps.setString(6, r.getData());
+            ps.setLong(7, r.getDurata());
             ps.executeUpdate();
             return true;
         } catch (SQLException e) {
@@ -111,7 +114,8 @@ public class PartitaDAO implements DAO<RisultatoPartita> {
      */
     @Override
     public boolean delete(int id) {
-        String sql = "DELETE FROM partite WHERE id = ?";
+        String sql = "DELETE FROM Partita " +
+                           "WHERE id = ?";
         try (Connection conn = DriverManager.getConnection(DatabaseManager.URL);
              PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setInt(1, id);
@@ -126,16 +130,22 @@ public class PartitaDAO implements DAO<RisultatoPartita> {
      * Salva il risultato di una partita appena conclusa impostando automaticamente
      * la data e l'ora corrente.
      *
-     * @param giocatore1    username del primo giocatore
-     * @param giocatore2    username del secondo giocatore
-     * @param vincitore     username del vincitore, o {@code null} se pareggio
-     * @param tempoRisposta millisecondi dalla sfida alla risposta corretta; {@code 0} se pareggio
+     * @param frase id della frase utilizzata nella partita
+     * @param documento id del documento della frase utilizzata nella partita
+     * @param giocatore1 username del giocatore1
+     * @param giocatore2 username del giocatore 2
+     * @param vincitore intero corrispondente al vincitore: 1 se giocatore1, 2 se giocatore 2 e 0 se pareggio
+     * @param durata millisecondi dalla sfida alla risposta corretta; {@code 0} se pareggio
      */
-    public void salva(String giocatore1, String giocatore2, String vincitore, long tempoRisposta) {
+    public void salva(int frase, int documento, String giocatore1, String giocatore2, int vincitore, long durata) {
         String data = LocalDateTime.now().format(FORMATO_DATA);
-        insert(new RisultatoPartita(0, giocatore1, giocatore2, vincitore, data, tempoRisposta));
+        insert(new RisultatoPartita(0, frase, documento, giocatore1, giocatore2, vincitore, data, durata));
     }
-
+    
+    // ------------------------------------------------------------------
+    //  Metodi specifici per storico
+    // ------------------------------------------------------------------
+    
     /**
      * Restituisce lo storico delle partite di un giocatore specifico.
      * Ogni elemento: {@code [data, avversario, risultato]} dove risultato
@@ -146,20 +156,17 @@ public class PartitaDAO implements DAO<RisultatoPartita> {
      */
     public List<String[]> getStorico(String username) {
         List<String[]> storico = new ArrayList<String[]>();
-        String sql =
-            "SELECT giocatore1, giocatore2, vincitore, data FROM partite " +
-            "WHERE giocatore1 = ? OR giocatore2 = ? ORDER BY id DESC";
+        String sql = "SELECT giocatore1, giocatore2, vincitore, data FROM Partita " +
+                          "WHERE giocatore1 = ? OR giocatore2 = ? " +
+                          "ORDER BY id DESC";
         try (Connection conn = DriverManager.getConnection(DatabaseManager.URL);
              PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setString(1, username);
             ps.setString(2, username);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                String avversario = rs.getString("giocatore1").equals(username)
-                    ? rs.getString("giocatore2") : rs.getString("giocatore1");
-                String vincitore = rs.getString("vincitore");
-                String risultato = vincitore == null ? "PAREGGIO"
-                    : vincitore.equals(username) ? "VINTO" : "PERSO";
+                String avversario = (rs.getString("giocatore1").equals(username)) ? rs.getString("giocatore2") : rs.getString("giocatore1");
+                String risultato = (rs.getInt("vincitore") == 0) ? "PAREGGIO" : ((rs.getString("giocatore1").equals(username)  && rs.getInt("vincitore") == 1) || (rs.getString("giocatore2").equals(username)  && rs.getInt("vincitore") == 2)) ? "VINTO" : "PERSO";
                 storico.add(new String[]{ rs.getString("data"), avversario, risultato });
             }
         } catch (SQLException e) {
@@ -167,7 +174,11 @@ public class PartitaDAO implements DAO<RisultatoPartita> {
         }
         return storico;
     }
-
+    
+    // ------------------------------------------------------------------
+    //  Utilità
+    // ------------------------------------------------------------------
+    
     /**
      * Costruisce un oggetto {@link RisultatoPartita} dalla riga corrente del {@link ResultSet}.
      *
@@ -178,11 +189,14 @@ public class PartitaDAO implements DAO<RisultatoPartita> {
     private RisultatoPartita creaRisultato(ResultSet rs) throws SQLException {
         return new RisultatoPartita(
             rs.getInt("id"),
+            rs.getInt("frase"),
+            rs.getInt("documento"),    
             rs.getString("giocatore1"),
             rs.getString("giocatore2"),
-            rs.getString("vincitore"),
+            rs.getInt("vincitore"),
             rs.getString("data"),
-            rs.getLong("tempo_risposta")
+            rs.getLong("durata")
         );
     }
+    
 }
