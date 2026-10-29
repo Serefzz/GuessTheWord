@@ -4,7 +4,7 @@ import com.mycompany.common.Messaggio;
 
 /**
  * Callback chiamata dal thread di ricezione quando arriva un messaggio dal server.
- * L'implementazione (MainController) viene invocata su Platform.runLater().
+ * L'implementazione (GameController) viene invocata su Platform.runLater().
  */
 public interface MessageListener {
 

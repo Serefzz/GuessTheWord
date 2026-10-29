@@ -1,0 +1,72 @@
+\doxysection{com.\+mycompany.\+server.\+Game\+Server Class Reference}
+\hypertarget{classcom_1_1mycompany_1_1server_1_1_game_server}{}\label{classcom_1_1mycompany_1_1server_1_1_game_server}\index{com.mycompany.server.GameServer@{com.mycompany.server.GameServer}}
+Inheritance diagram for com.\+mycompany.\+server.\+Game\+Server\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classcom_1_1mycompany_1_1server_1_1_game_server}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1_game_server_ada8dea239538067970a61588f999dbf3}{run}} ()
+\item 
+void \mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1_game_server_a3456a8177e4e86882dfdd3fed0d10ecd}{ferma}} ()
+\item 
+synchronized void \mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1_game_server_a38bb140fb89d36244fd8fa1db08f6b4c}{rimuovi\+Client}} (\mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1_client_handler}{Client\+Handler}} handler)
+\item 
+List$<$ \mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1_client_handler}{Client\+Handler}} $>$ \mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1_game_server_a5a5bb18a17e8470ade88937365d1fb09}{get\+Client\+Collegati}} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Server di gioco che accetta le connessioni dei client.
+
+Gira in un thread daemon separato avviato da {\ttfamily \doxylink{classcom_1_1mycompany_1_1server_1_1_server_app}{Server\+App}}. Il ciclo principale accetta due socket, crea i rispettivi {\ttfamily \doxylink{classcom_1_1mycompany_1_1server_1_1_client_handler}{Client\+Handler}}, li collega come avversari e li avvia in thread separati. Il ciclo si ripete indefinitamente per supportare sessioni multiple.
+
+La porta viene letta da {\ttfamily server.\+properties} (chiave {\ttfamily server.\+port}); se il file non esiste usa la porta di default {\ttfamily 5000}. 
+
+\label{doc-func-members}
+\Hypertarget{classcom_1_1mycompany_1_1server_1_1_game_server_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classcom_1_1mycompany_1_1server_1_1_game_server_a3456a8177e4e86882dfdd3fed0d10ecd}\index{com.mycompany.server.GameServer@{com.mycompany.server.GameServer}!ferma@{ferma}}
+\index{ferma@{ferma}!com.mycompany.server.GameServer@{com.mycompany.server.GameServer}}
+\doxysubsubsection{\texorpdfstring{ferma()}{ferma()}}
+{\footnotesize\ttfamily \label{classcom_1_1mycompany_1_1server_1_1_game_server_a3456a8177e4e86882dfdd3fed0d10ecd} 
+void com.\+mycompany.\+server.\+Game\+Server.\+ferma (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+Chiude la {\ttfamily \doxylink{}{Server\+Socket}}, interrompendo il ciclo di accettazione. Chiamato quando il server viene fermato dall\textquotesingle{}amministratore. \Hypertarget{classcom_1_1mycompany_1_1server_1_1_game_server_a5a5bb18a17e8470ade88937365d1fb09}\index{com.mycompany.server.GameServer@{com.mycompany.server.GameServer}!getClientCollegati@{getClientCollegati}}
+\index{getClientCollegati@{getClientCollegati}!com.mycompany.server.GameServer@{com.mycompany.server.GameServer}}
+\doxysubsubsection{\texorpdfstring{getClientCollegati()}{getClientCollegati()}}
+{\footnotesize\ttfamily \label{classcom_1_1mycompany_1_1server_1_1_game_server_a5a5bb18a17e8470ade88937365d1fb09} 
+List$<$ \mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1_client_handler}{Client\+Handler}} $>$ com.\+mycompany.\+server.\+Game\+Server.\+get\+Client\+Collegati (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+Restituisce la lista dei client connessi.
+
+\begin{DoxyReturn}{Returns}
+lista di client collegati{\ttfamily client\+Collegati} 
+\end{DoxyReturn}
+\Hypertarget{classcom_1_1mycompany_1_1server_1_1_game_server_a38bb140fb89d36244fd8fa1db08f6b4c}\index{com.mycompany.server.GameServer@{com.mycompany.server.GameServer}!rimuoviClient@{rimuoviClient}}
+\index{rimuoviClient@{rimuoviClient}!com.mycompany.server.GameServer@{com.mycompany.server.GameServer}}
+\doxysubsubsection{\texorpdfstring{rimuoviClient()}{rimuoviClient()}}
+{\footnotesize\ttfamily \label{classcom_1_1mycompany_1_1server_1_1_game_server_a38bb140fb89d36244fd8fa1db08f6b4c} 
+synchronized void com.\+mycompany.\+server.\+Game\+Server.\+rimuovi\+Client (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1_client_handler}{Client\+Handler}}}]{handler}{}\end{DoxyParamCaption})}
+
+Scollega il client che si vuole disconnettere.
+
+
+\begin{DoxyParams}{Parameters}
+{\em handler} & client che si vuole disconnettere \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classcom_1_1mycompany_1_1server_1_1_game_server_ada8dea239538067970a61588f999dbf3}\index{com.mycompany.server.GameServer@{com.mycompany.server.GameServer}!run@{run}}
+\index{run@{run}!com.mycompany.server.GameServer@{com.mycompany.server.GameServer}}
+\doxysubsubsection{\texorpdfstring{run()}{run()}}
+{\footnotesize\ttfamily \label{classcom_1_1mycompany_1_1server_1_1_game_server_ada8dea239538067970a61588f999dbf3} 
+void com.\+mycompany.\+server.\+Game\+Server.\+run (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+Loop principale del server. Apre la {\ttfamily \doxylink{}{Server\+Socket}} sulla porta configurata e accetta due client in ciclo continuo. 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+server/src/main/java/com/mycompany/server/Game\+Server.\+java\end{DoxyCompactItemize}

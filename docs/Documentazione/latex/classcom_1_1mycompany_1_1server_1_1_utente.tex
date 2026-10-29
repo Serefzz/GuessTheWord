@@ -1,0 +1,120 @@
+\doxysection{com.\+mycompany.\+server.\+Utente Class Reference}
+\hypertarget{classcom_1_1mycompany_1_1server_1_1_utente}{}\label{classcom_1_1mycompany_1_1server_1_1_utente}\index{com.mycompany.server.Utente@{com.mycompany.server.Utente}}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1_utente_a4e959510d06e82195df0447c289bad00}{Utente}} (String username, String password, \mbox{\hyperlink{enumcom_1_1mycompany_1_1common_1_1_ruolo}{Ruolo}} ruolo, int punteggio\+Globale)
+\item 
+\mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1_utente_a29980b8056d72c3c36e4ca4011efaa65}{Utente}} (String username, String password, \mbox{\hyperlink{enumcom_1_1mycompany_1_1common_1_1_ruolo}{Ruolo}} ruolo)
+\item 
+String \mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1_utente_a54b66d8d2f4a4e2969a226b061ced67c}{get\+Username}} ()
+\item 
+String \mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1_utente_a1bd9c574046fba4313e894b37e8b31e8}{get\+Password}} ()
+\item 
+\mbox{\hyperlink{enumcom_1_1mycompany_1_1common_1_1_ruolo}{Ruolo}} \mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1_utente_a94b9b9b5ef5a1680431fa21199736c2e}{get\+Ruolo}} ()
+\item 
+int \mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1_utente_a67f62c7a11422646054d26f43ab8a6d4}{get\+Punteggio\+Globale}} ()
+\item 
+String \mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1_utente_a3cbd42425b66898921b921effe7a973d}{to\+String}} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Modello immutabile che rappresenta un utente registrato nel sistema.
+
+Ogni utente ha un ruolo ({\ttfamily \doxylink{enumcom_1_1mycompany_1_1common_1_1_ruolo_a8119799752454fd3d61f530328b4bc38}{Ruolo\#\+GIOCATORE}} o {\ttfamily \doxylink{enumcom_1_1mycompany_1_1common_1_1_ruolo_aacc88d806daf47181f993af5abf32ae5}{Ruolo\#\+ADMIN}}) che determina le funzionalità accessibili nell\textquotesingle{}applicazione. 
+
+\label{doc-constructors}
+\Hypertarget{classcom_1_1mycompany_1_1server_1_1_utente_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classcom_1_1mycompany_1_1server_1_1_utente_a4e959510d06e82195df0447c289bad00}\index{com.mycompany.server.Utente@{com.mycompany.server.Utente}!Utente@{Utente}}
+\index{Utente@{Utente}!com.mycompany.server.Utente@{com.mycompany.server.Utente}}
+\doxysubsubsection{\texorpdfstring{Utente()}{Utente()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classcom_1_1mycompany_1_1server_1_1_utente_a4e959510d06e82195df0447c289bad00} 
+com.\+mycompany.\+server.\+Utente.\+Utente (\begin{DoxyParamCaption}\item[{String}]{username}{, }\item[{String}]{password}{, }\item[{\mbox{\hyperlink{enumcom_1_1mycompany_1_1common_1_1_ruolo}{Ruolo}}}]{ruolo}{, }\item[{int}]{punteggio\+Globale}{}\end{DoxyParamCaption})}
+
+Costruisce un utente con tutti i campi.
+
+
+\begin{DoxyParams}{Parameters}
+{\em username} & nome utente univoco \\
+\hline
+{\em password} & hash SHA-\/256 della password \\
+\hline
+{\em ruolo} & ruolo dell\textquotesingle{}utente ({\ttfamily GIOCATORE} o {\ttfamily ADMIN}) \\
+\hline
+{\em punteggio\+Globale} & punteggio dell\textquotesingle{}utente nella classifica globale \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classcom_1_1mycompany_1_1server_1_1_utente_a29980b8056d72c3c36e4ca4011efaa65}\index{com.mycompany.server.Utente@{com.mycompany.server.Utente}!Utente@{Utente}}
+\index{Utente@{Utente}!com.mycompany.server.Utente@{com.mycompany.server.Utente}}
+\doxysubsubsection{\texorpdfstring{Utente()}{Utente()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classcom_1_1mycompany_1_1server_1_1_utente_a29980b8056d72c3c36e4ca4011efaa65} 
+com.\+mycompany.\+server.\+Utente.\+Utente (\begin{DoxyParamCaption}\item[{String}]{username}{, }\item[{String}]{password}{, }\item[{\mbox{\hyperlink{enumcom_1_1mycompany_1_1common_1_1_ruolo}{Ruolo}}}]{ruolo}{}\end{DoxyParamCaption})}
+
+Costruisce un utente con tutti i campi e il punteggio globale a 0.
+
+
+\begin{DoxyParams}{Parameters}
+{\em username} & nome utente univoco \\
+\hline
+{\em password} & hash SHA-\/256 della password \\
+\hline
+{\em ruolo} & ruolo dell\textquotesingle{}utente ({\ttfamily GIOCATORE} o {\ttfamily ADMIN}) \\
+\hline
+\end{DoxyParams}
+
+
+\label{doc-func-members}
+\Hypertarget{classcom_1_1mycompany_1_1server_1_1_utente_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classcom_1_1mycompany_1_1server_1_1_utente_a1bd9c574046fba4313e894b37e8b31e8}\index{com.mycompany.server.Utente@{com.mycompany.server.Utente}!getPassword@{getPassword}}
+\index{getPassword@{getPassword}!com.mycompany.server.Utente@{com.mycompany.server.Utente}}
+\doxysubsubsection{\texorpdfstring{getPassword()}{getPassword()}}
+{\footnotesize\ttfamily \label{classcom_1_1mycompany_1_1server_1_1_utente_a1bd9c574046fba4313e894b37e8b31e8} 
+String com.\+mycompany.\+server.\+Utente.\+get\+Password (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyReturn}{Returns}
+hash SHA-\/256 della password dell\textquotesingle{}utente 
+\end{DoxyReturn}
+\Hypertarget{classcom_1_1mycompany_1_1server_1_1_utente_a67f62c7a11422646054d26f43ab8a6d4}\index{com.mycompany.server.Utente@{com.mycompany.server.Utente}!getPunteggioGlobale@{getPunteggioGlobale}}
+\index{getPunteggioGlobale@{getPunteggioGlobale}!com.mycompany.server.Utente@{com.mycompany.server.Utente}}
+\doxysubsubsection{\texorpdfstring{getPunteggioGlobale()}{getPunteggioGlobale()}}
+{\footnotesize\ttfamily \label{classcom_1_1mycompany_1_1server_1_1_utente_a67f62c7a11422646054d26f43ab8a6d4} 
+int com.\+mycompany.\+server.\+Utente.\+get\+Punteggio\+Globale (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyReturn}{Returns}
+punteggio globale dell\textquotesingle{}utente nel sistema 
+\end{DoxyReturn}
+\Hypertarget{classcom_1_1mycompany_1_1server_1_1_utente_a94b9b9b5ef5a1680431fa21199736c2e}\index{com.mycompany.server.Utente@{com.mycompany.server.Utente}!getRuolo@{getRuolo}}
+\index{getRuolo@{getRuolo}!com.mycompany.server.Utente@{com.mycompany.server.Utente}}
+\doxysubsubsection{\texorpdfstring{getRuolo()}{getRuolo()}}
+{\footnotesize\ttfamily \label{classcom_1_1mycompany_1_1server_1_1_utente_a94b9b9b5ef5a1680431fa21199736c2e} 
+\mbox{\hyperlink{enumcom_1_1mycompany_1_1common_1_1_ruolo}{Ruolo}} com.\+mycompany.\+server.\+Utente.\+get\+Ruolo (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyReturn}{Returns}
+ruolo dell\textquotesingle{}utente nel sistema ({\ttfamily GIOCATORE} o {\ttfamily ADMIN}) 
+\end{DoxyReturn}
+\Hypertarget{classcom_1_1mycompany_1_1server_1_1_utente_a54b66d8d2f4a4e2969a226b061ced67c}\index{com.mycompany.server.Utente@{com.mycompany.server.Utente}!getUsername@{getUsername}}
+\index{getUsername@{getUsername}!com.mycompany.server.Utente@{com.mycompany.server.Utente}}
+\doxysubsubsection{\texorpdfstring{getUsername()}{getUsername()}}
+{\footnotesize\ttfamily \label{classcom_1_1mycompany_1_1server_1_1_utente_a54b66d8d2f4a4e2969a226b061ced67c} 
+String com.\+mycompany.\+server.\+Utente.\+get\+Username (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyReturn}{Returns}
+nome utente univoco 
+\end{DoxyReturn}
+\Hypertarget{classcom_1_1mycompany_1_1server_1_1_utente_a3cbd42425b66898921b921effe7a973d}\index{com.mycompany.server.Utente@{com.mycompany.server.Utente}!toString@{toString}}
+\index{toString@{toString}!com.mycompany.server.Utente@{com.mycompany.server.Utente}}
+\doxysubsubsection{\texorpdfstring{toString()}{toString()}}
+{\footnotesize\ttfamily \label{classcom_1_1mycompany_1_1server_1_1_utente_a3cbd42425b66898921b921effe7a973d} 
+String com.\+mycompany.\+server.\+Utente.\+to\+String (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyReturn}{Returns}
+rappresentazione testuale dell\textquotesingle{}utente con username e ruolo 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+server/src/main/java/com/mycompany/server/Utente.\+java\end{DoxyCompactItemize}

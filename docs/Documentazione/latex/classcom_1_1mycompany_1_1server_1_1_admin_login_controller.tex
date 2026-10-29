@@ -1,0 +1,20 @@
+\doxysection{com.\+mycompany.\+server.\+Admin\+Login\+Controller Class Reference}
+\hypertarget{classcom_1_1mycompany_1_1server_1_1_admin_login_controller}{}\label{classcom_1_1mycompany_1_1server_1_1_admin_login_controller}\index{com.mycompany.server.AdminLoginController@{com.mycompany.server.AdminLoginController}}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classcom_1_1mycompany_1_1server_1_1_admin_login_controller_a243edd5ca1fb31b5ef2e8e3da7c5c201}\label{classcom_1_1mycompany_1_1server_1_1_admin_login_controller_a243edd5ca1fb31b5ef2e8e3da7c5c201} 
+void {\bfseries initialize} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Controller della schermata di login dell\textquotesingle{}amministratore.
+
+Verifica le credenziali tramite {\ttfamily \doxylink{classcom_1_1mycompany_1_1server_1_1_utente_d_a_o}{Utente\+DAO}} e controlla che l\textquotesingle{}utente abbia ruolo {\ttfamily ADMIN}. In caso di successo carica il pannello admin ({\ttfamily admin.\+fxml}); altrimenti mostra un messaggio di errore e svuota il campo username e password.
+
+FXML associato\+: {\ttfamily /adminlogin.\+fxml} (server) 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+server/src/main/java/com/mycompany/server/Admin\+Login\+Controller.\+java\end{DoxyCompactItemize}

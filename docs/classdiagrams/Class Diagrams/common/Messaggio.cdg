@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ClassDiagram name="Messaggio">
+  <ClassDiagramComponents>
+    <Class name="Messaggio" package="com.mycompany.common" visibility="public" xPosition="20.0" yPosition="20.0">
+      <Fields>
+        <Field name="tipo" type="Tipo" visibility="private" isFinal="true"/>
+        <Field name="params" type="String[]" visibility="private" isFinal="true"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="Tipo" name="tipo"/>
+          <Argument type="String" name="params"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="toLine" returnType="String" visibility="public"/>
+        <Method name="fromLine" returnType="Messaggio" visibility="public" isStatic="true">
+          <Argument type="String" name="linea"/>
+        </Method>
+        <Method name="getTipo" returnType="Tipo" visibility="public"/>
+        <Method name="getParam" returnType="String" visibility="public">
+          <Argument type="int" name="i"/>
+        </Method>
+        <Method name="getParams" returnType="String[]" visibility="public"/>
+        <Method name="toString" returnType="String" visibility="public"/>
+      </Methods>
+    </Class>
+  </ClassDiagramComponents>
+  <ClassDiagramRelations>
+    <UseRelation source="com.mycompany.common.Messaggio" target="com.mycompany.common.Messaggio" sourceCardinality="1..1" targetCardinality="1..1"/>
+  </ClassDiagramRelations>
+</ClassDiagram>

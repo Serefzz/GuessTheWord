@@ -13,6 +13,8 @@ import javafx.scene.text.Font;
 import javafx.util.Duration;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javafx.application.Platform;
 import javafx.scene.paint.Color;
 import javafx.scene.text.FontWeight;
@@ -187,7 +189,7 @@ public class GameController implements MessageListener {
             connection.invia(new Messaggio(Tipo.AVVIA_PARTITA, String.valueOf(diff)));
         }
         attesaIndicator.setVisible(true);
-        statoPartitaLabel.setText("Scelta inviata. In attesa che entrambi i giocatori siano pronti...");
+        statoPartitaLabel.setText("Richiesta partita inviata...");
     }
     
     private void mostraGioco(String testoSfida, String parolaCifrata, int secondi) {
@@ -206,42 +208,55 @@ public class GameController implements MessageListener {
     }
     
      private void visualizzaTestoSfida(String frase, String parolaCifrata) {
-        textFlowSfida.getChildren().clear();
-        if (frase == null || frase.isEmpty()) {
-            return;
-        }
+         textFlowSfida.getChildren().clear();
+         if (frase == null || frase.isEmpty()) {
+             return;
+         }
 
-        int index = (parolaCifrata != null && !parolaCifrata.trim().isEmpty()) ? frase.toUpperCase().indexOf(parolaCifrata.toUpperCase()) : -1;
-        Font fontBase = Font.font("System", FontWeight.NORMAL, 14);
-        Font fontEvidenziato = Font.font("System", FontWeight.BOLD, 14);
-        Color coloreBase = Color.web("#074338");
-        Color coloreEvidenziato = Color.web("#f5ab2a"); 
-        if (index == -1) {
-            Text t = new Text(frase);
-            t.setFont(fontBase);
-            t.setFill(coloreBase);
-            textFlowSfida.getChildren().add(t);
-            return;
-        }
-        // Segmento prima della parola
-        if (index > 0) {
-            Text tPrima = new Text(frase.substring(0, index));
-            tPrima.setFont(fontBase);
-            tPrima.setFill(coloreBase);
-            textFlowSfida.getChildren().add(tPrima);
-        }
-        // Parola colorata
-        Text tParola = new Text(frase.substring(index, index + parolaCifrata.length()));
-        tParola.setFont(fontEvidenziato);
-        tParola.setFill(coloreEvidenziato);
-        textFlowSfida.getChildren().add(tParola);
-        // Segmento dopo la parola
-        if (index + parolaCifrata.length() < frase.length()) {
-            Text tDopo = new Text(frase.substring(index + parolaCifrata.length()));
-            tDopo.setFont(fontBase);
-            tDopo.setFill(coloreBase);
-            textFlowSfida.getChildren().add(tDopo);
-        }
+         int indiceInizioParola = -1;
+         if (parolaCifrata != null && !parolaCifrata.trim().isEmpty()) {
+             // Cerchiamo la parola normalizzata usando i confini \b
+             Pattern pattern = Pattern.compile("\\b" + parolaCifrata + "\\b", Pattern.UNICODE_CHARACTER_CLASS);
+             Matcher matcher = pattern.matcher(frase);
+             if (matcher.find()) {
+                 indiceInizioParola = matcher.start(); // Trova l'indice corretto
+             }
+         }
+
+         Font fontBase = Font.font("System", FontWeight.NORMAL, 14);
+         Font fontEvidenziato = Font.font("System", FontWeight.BOLD, 14);
+         Color coloreBase = Color.web("#074338");
+         Color coloreEvidenziato = Color.web("#f5ab2a");
+
+         if (indiceInizioParola == -1) {
+             Text t = new Text(frase);
+             t.setFont(fontBase);
+             t.setFill(coloreBase);
+             textFlowSfida.getChildren().add(t);
+             return;
+         }
+
+         // Segmento prima della parola (preservando gli accenti originali della frase)
+         if (indiceInizioParola > 0) {
+             Text tPrima = new Text(frase.substring(0, indiceInizioParola));
+             tPrima.setFont(fontBase);
+             tPrima.setFill(coloreBase);
+             textFlowSfida.getChildren().add(tPrima);
+         }
+
+         // Parola colorata
+         Text tParola = new Text(frase.substring(indiceInizioParola, indiceInizioParola + parolaCifrata.length()));
+         tParola.setFont(fontEvidenziato);
+         tParola.setFill(coloreEvidenziato);
+         textFlowSfida.getChildren().add(tParola);
+
+         // Segmento dopo la parola
+         if (indiceInizioParola + parolaCifrata.length() < frase.length()) {
+             Text tDopo = new Text(frase.substring(indiceInizioParola + parolaCifrata.length()));
+             tDopo.setFont(fontBase);
+             tDopo.setFill(coloreBase);
+             textFlowSfida.getChildren().add(tDopo);
+         }
     }
 
     // ------------------------------------------------------------------
@@ -310,7 +325,11 @@ public class GameController implements MessageListener {
     }
 
     private void fermaTimer() {
-        if (timerLine != null) timerLine.stop();
+        if (timerLine != null) {
+            timerLine.stop();
+            secondiRimasti = 0;
+            aggiornaLabelTimer();
+        }
     }
 
     private void aggiornaLabelTimer() {
@@ -387,7 +406,7 @@ public class GameController implements MessageListener {
                     if (attesaIndicator != null) {
                         attesaIndicator.setVisible(true);
                     }
-                    statoPartitaLabel.setText("In attesa del secondo giocatore...");
+                    statoPartitaLabel.setText(msg.getParam(0));
                     break;
                 case SFIDA:
                     int sec = 60;

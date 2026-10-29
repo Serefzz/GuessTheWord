@@ -117,8 +117,8 @@ public class DocumentoDAO implements DAOid<String[]> {
     }
     
     /**
-     * Inserisce un documento nel DB e salva le analisi TF
-     * come file serializzati in data/analisi/.
+     * Inserisce un documento nel DB e copia il file di 
+     * testo sorgente in data/documenti/.
      *
      * @param pathSorgente del documento da salvare
      * 

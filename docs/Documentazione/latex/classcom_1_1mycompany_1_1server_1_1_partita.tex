@@ -1,0 +1,119 @@
+\doxysection{com.\+mycompany.\+server.\+Partita Class Reference}
+\hypertarget{classcom_1_1mycompany_1_1server_1_1_partita}{}\label{classcom_1_1mycompany_1_1server_1_1_partita}\index{com.mycompany.server.Partita@{com.mycompany.server.Partita}}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1_partita_a9b811f57eb60d1d2bccc09309195008c}{Partita}} (\mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1_client_handler}{Client\+Handler}} g1, \mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1_client_handler}{Client\+Handler}} g2, int difficolta)
+\item 
+void \mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1_partita_a7246fef7e53f8d9b8f74d0073891f2e6}{avvia}} ()
+\item 
+synchronized void \mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1_partita_a902cf1f84fd1e6e01595bd950d212563}{verifica\+Risposta}} (\mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1_client_handler}{Client\+Handler}} giocatore, String risposta)
+\item 
+synchronized void \mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1_partita_a21accd1dfe3c9bd9ffa56afba9fe9265}{resa}} (\mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1_client_handler}{Client\+Handler}} giocatore)
+\item 
+\mbox{\hyperlink{enumcom_1_1mycompany_1_1common_1_1_stato_partita}{Stato\+Partita}} \mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1_partita_aca30d408d953c4cf819a8a8134c4d233}{get\+Stato}} ()
+\item 
+String \mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1_partita_a5e54ea89cdc3076b9c856cb6cf143f76}{get\+Parola\+Originale}} ()
+\item 
+String \mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1_partita_a984ac99f6eaccc6e01f0dca0a17c1885}{get\+Frase\+Sfida}} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Rappresenta una partita in corso tra due giocatori.
+
+Flusso di una partita\+:
+
+Costruttore\+: sceglie una frase e una parola in base alla difficoltà, cifra la parola con il {\ttfamily \doxylink{classcom_1_1mycompany_1_1common_1_1_cifrario_cesare}{Cifrario\+Cesare}} {\ttfamily \doxylink{classcom_1_1mycompany_1_1server_1_1_partita_a7246fef7e53f8d9b8f74d0073891f2e6}{avvia()}}\+: invia la sfida a entrambi i giocatori e avvia un timer server-\/side {\ttfamily \doxylink{classcom_1_1mycompany_1_1server_1_1_partita_a902cf1f84fd1e6e01595bd950d212563}{verifica\+Risposta(\+Client\+Handler, String)}}\+: chiamato da {\ttfamily \doxylink{classcom_1_1mycompany_1_1server_1_1_client_handler}{Client\+Handler}} ad ogni risposta; sincronizzato per gestire le risposte concorrenti dei due thread {\ttfamily \doxylink{affe11cf30b64d0e6278e60b0ed0aef0a}{tempo\+Scaduto()}}\+: chiamato dal timer se nessuno ha risposto correttamente entro il tempo limite → pareggio 
+
+\label{doc-constructors}
+\Hypertarget{classcom_1_1mycompany_1_1server_1_1_partita_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classcom_1_1mycompany_1_1server_1_1_partita_a9b811f57eb60d1d2bccc09309195008c}\index{com.mycompany.server.Partita@{com.mycompany.server.Partita}!Partita@{Partita}}
+\index{Partita@{Partita}!com.mycompany.server.Partita@{com.mycompany.server.Partita}}
+\doxysubsubsection{\texorpdfstring{Partita()}{Partita()}}
+{\footnotesize\ttfamily \label{classcom_1_1mycompany_1_1server_1_1_partita_a9b811f57eb60d1d2bccc09309195008c} 
+com.\+mycompany.\+server.\+Partita.\+Partita (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1_client_handler}{Client\+Handler}}}]{g1}{, }\item[{\mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1_client_handler}{Client\+Handler}}}]{g2}{, }\item[{int}]{difficolta}{}\end{DoxyParamCaption})}
+
+Costruisce una nuova partita scegliendo frase, parola e parametri in base alla difficoltà selezionata.
+
+
+\begin{DoxyParams}{Parameters}
+{\em g1} & handler del primo giocatore \\
+\hline
+{\em g2} & handler del secondo giocatore \\
+\hline
+{\em difficolta} & livello di difficoltà\+: 1 = facile, 2 = medio, 3 = difficile \\
+\hline
+\end{DoxyParams}
+
+
+\label{doc-func-members}
+\Hypertarget{classcom_1_1mycompany_1_1server_1_1_partita_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classcom_1_1mycompany_1_1server_1_1_partita_a7246fef7e53f8d9b8f74d0073891f2e6}\index{com.mycompany.server.Partita@{com.mycompany.server.Partita}!avvia@{avvia}}
+\index{avvia@{avvia}!com.mycompany.server.Partita@{com.mycompany.server.Partita}}
+\doxysubsubsection{\texorpdfstring{avvia()}{avvia()}}
+{\footnotesize\ttfamily \label{classcom_1_1mycompany_1_1server_1_1_partita_a7246fef7e53f8d9b8f74d0073891f2e6} 
+void com.\+mycompany.\+server.\+Partita.\+avvia (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+Invia la sfida ad entrambi i giocatori e avvia il timer server-\/side. \Hypertarget{classcom_1_1mycompany_1_1server_1_1_partita_a984ac99f6eaccc6e01f0dca0a17c1885}\index{com.mycompany.server.Partita@{com.mycompany.server.Partita}!getFraseSfida@{getFraseSfida}}
+\index{getFraseSfida@{getFraseSfida}!com.mycompany.server.Partita@{com.mycompany.server.Partita}}
+\doxysubsubsection{\texorpdfstring{getFraseSfida()}{getFraseSfida()}}
+{\footnotesize\ttfamily \label{classcom_1_1mycompany_1_1server_1_1_partita_a984ac99f6eaccc6e01f0dca0a17c1885} 
+String com.\+mycompany.\+server.\+Partita.\+get\+Frase\+Sfida (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyReturn}{Returns}
+testo della sfida con la parola cifrata 
+\end{DoxyReturn}
+\Hypertarget{classcom_1_1mycompany_1_1server_1_1_partita_a5e54ea89cdc3076b9c856cb6cf143f76}\index{com.mycompany.server.Partita@{com.mycompany.server.Partita}!getParolaOriginale@{getParolaOriginale}}
+\index{getParolaOriginale@{getParolaOriginale}!com.mycompany.server.Partita@{com.mycompany.server.Partita}}
+\doxysubsubsection{\texorpdfstring{getParolaOriginale()}{getParolaOriginale()}}
+{\footnotesize\ttfamily \label{classcom_1_1mycompany_1_1server_1_1_partita_a5e54ea89cdc3076b9c856cb6cf143f76} 
+String com.\+mycompany.\+server.\+Partita.\+get\+Parola\+Originale (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyReturn}{Returns}
+parola originale da indovinare (in maiuscolo) 
+\end{DoxyReturn}
+\Hypertarget{classcom_1_1mycompany_1_1server_1_1_partita_aca30d408d953c4cf819a8a8134c4d233}\index{com.mycompany.server.Partita@{com.mycompany.server.Partita}!getStato@{getStato}}
+\index{getStato@{getStato}!com.mycompany.server.Partita@{com.mycompany.server.Partita}}
+\doxysubsubsection{\texorpdfstring{getStato()}{getStato()}}
+{\footnotesize\ttfamily \label{classcom_1_1mycompany_1_1server_1_1_partita_aca30d408d953c4cf819a8a8134c4d233} 
+\mbox{\hyperlink{enumcom_1_1mycompany_1_1common_1_1_stato_partita}{Stato\+Partita}} com.\+mycompany.\+server.\+Partita.\+get\+Stato (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyReturn}{Returns}
+stato corrente della partita 
+\end{DoxyReturn}
+\Hypertarget{classcom_1_1mycompany_1_1server_1_1_partita_a21accd1dfe3c9bd9ffa56afba9fe9265}\index{com.mycompany.server.Partita@{com.mycompany.server.Partita}!resa@{resa}}
+\index{resa@{resa}!com.mycompany.server.Partita@{com.mycompany.server.Partita}}
+\doxysubsubsection{\texorpdfstring{resa()}{resa()}}
+{\footnotesize\ttfamily \label{classcom_1_1mycompany_1_1server_1_1_partita_a21accd1dfe3c9bd9ffa56afba9fe9265} 
+synchronized void com.\+mycompany.\+server.\+Partita.\+resa (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1_client_handler}{Client\+Handler}}}]{giocatore}{}\end{DoxyParamCaption})}
+
+Finalizza la resa di un giocatore. Sincronizzato per gestire le risposte concorrenti dei due thread. La partita viene terminata con la vittoria dell\textquotesingle{}avversario e viene salvato il risultato nel DB
+
+
+\begin{DoxyParams}{Parameters}
+{\em giocatore} & handler del giocatore che vuole arrendersi \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classcom_1_1mycompany_1_1server_1_1_partita_a902cf1f84fd1e6e01595bd950d212563}\index{com.mycompany.server.Partita@{com.mycompany.server.Partita}!verificaRisposta@{verificaRisposta}}
+\index{verificaRisposta@{verificaRisposta}!com.mycompany.server.Partita@{com.mycompany.server.Partita}}
+\doxysubsubsection{\texorpdfstring{verificaRisposta()}{verificaRisposta()}}
+{\footnotesize\ttfamily \label{classcom_1_1mycompany_1_1server_1_1_partita_a902cf1f84fd1e6e01595bd950d212563} 
+synchronized void com.\+mycompany.\+server.\+Partita.\+verifica\+Risposta (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1_client_handler}{Client\+Handler}}}]{giocatore}{, }\item[{String}]{risposta}{}\end{DoxyParamCaption})}
+
+Verifica la risposta di un giocatore. Sincronizzato per gestire le risposte concorrenti dei due thread. Se la risposta è corretta, decreta il vincitore e salva nel DB.
+
+
+\begin{DoxyParams}{Parameters}
+{\em giocatore} & handler del giocatore che ha risposto \\
+\hline
+{\em risposta} & parola inviata dal giocatore (verrà confrontata in maiuscolo) \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+server/src/main/java/com/mycompany/server/Partita.\+java\end{DoxyCompactItemize}

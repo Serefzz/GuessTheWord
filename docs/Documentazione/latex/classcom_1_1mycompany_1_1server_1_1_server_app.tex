@@ -1,0 +1,68 @@
+\doxysection{com.\+mycompany.\+server.\+Server\+App Class Reference}
+\hypertarget{classcom_1_1mycompany_1_1server_1_1_server_app}{}\label{classcom_1_1mycompany_1_1server_1_1_server_app}\index{com.mycompany.server.ServerApp@{com.mycompany.server.ServerApp}}
+Inheritance diagram for com.\+mycompany.\+server.\+Server\+App\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classcom_1_1mycompany_1_1server_1_1_server_app}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1_server_app_af71ada13c8cad42d62bb096847ed5ca7}{start}} (Stage stage)  throws Exception 
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1_server_app_a618cefab152df85636d55b6429fe859c}{main}} (String\mbox{[}$\,$\mbox{]} args)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Punto di ingresso dell\textquotesingle{}applicazione server Java\+FX.
+
+Sequenza di avvio\+:
+
+Inizializza il database SQLite ({\ttfamily \doxylink{classcom_1_1mycompany_1_1server_1_1_database_manager_ae7c64d7ca03ec570c0f8f79b54e537ee}{Database\+Manager\#inizializza()}}) Carica le analisi salvate in locale, se disponibile Avvia {\ttfamily \doxylink{classcom_1_1mycompany_1_1server_1_1_game_server}{Game\+Server}} in un thread daemon Mostra la schermata di login admin ({\ttfamily login.\+fxml})
+
+Credenziali admin di default\+: {\ttfamily admin} / {\ttfamily admin} 
+
+\label{doc-func-members}
+\Hypertarget{classcom_1_1mycompany_1_1server_1_1_server_app_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classcom_1_1mycompany_1_1server_1_1_server_app_a618cefab152df85636d55b6429fe859c}\index{com.mycompany.server.ServerApp@{com.mycompany.server.ServerApp}!main@{main}}
+\index{main@{main}!com.mycompany.server.ServerApp@{com.mycompany.server.ServerApp}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily \label{classcom_1_1mycompany_1_1server_1_1_server_app_a618cefab152df85636d55b6429fe859c} 
+void com.\+mycompany.\+server.\+Server\+App.\+main (\begin{DoxyParamCaption}\item[{String\mbox{[}$\,$\mbox{]}}]{args}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Avvia l\textquotesingle{}applicazione Java\+FX.
+
+
+\begin{DoxyParams}{Parameters}
+{\em args} & argomenti da riga di comando (non utilizzati) \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classcom_1_1mycompany_1_1server_1_1_server_app_af71ada13c8cad42d62bb096847ed5ca7}\index{com.mycompany.server.ServerApp@{com.mycompany.server.ServerApp}!start@{start}}
+\index{start@{start}!com.mycompany.server.ServerApp@{com.mycompany.server.ServerApp}}
+\doxysubsubsection{\texorpdfstring{start()}{start()}}
+{\footnotesize\ttfamily \label{classcom_1_1mycompany_1_1server_1_1_server_app_af71ada13c8cad42d62bb096847ed5ca7} 
+void com.\+mycompany.\+server.\+Server\+App.\+start (\begin{DoxyParamCaption}\item[{Stage}]{stage}{}\end{DoxyParamCaption}) throws Exception}
+
+Punto di ingresso Java\+FX. Inizializza database, analisi, server di gioco e mostra la schermata di login.
+
+
+\begin{DoxyParams}{Parameters}
+{\em stage} & finestra primaria fornita dal framework Java\+FX \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Exception} & se il caricamento dell\textquotesingle{}FXML fallisce \\
+\hline
+\end{DoxyExceptions}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+server/src/main/java/com/mycompany/server/Server\+App.\+java\end{DoxyCompactItemize}

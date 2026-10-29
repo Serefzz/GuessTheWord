@@ -32,7 +32,7 @@ public class Messaggio {
         REGISTRAZIONE,
         /** Richiesta di avvio partita. Parametri: difficolta (1/2/3). */
         AVVIA_PARTITA,
-        /** Risposta del giocatore. Parametri: parola decifrata. */
+        /** Risposta del giocatore. Parametri: parola tentativo. */
         RISPOSTA,
         /** Resa del giocatore.  */
         FORFAIT,
@@ -50,15 +50,15 @@ public class Messaggio {
         ERRORE,
         /** Il server è in attesa del secondo giocatore. */
         ATTESA,
-        /** Sfida inviata al giocatore. Parametri: testo, shift, secondi. */
+        /** Sfida inviata al giocatore. Parametri: frase, parola da decifrare, secondi. */
         SFIDA,
         /** La risposta inviata era errata. */
         RISPOSTA_ERRATA,
-        /** Il giocatore ha vinto. Parametri: usernameAvversario, tempoMs. */
+        /** Il giocatore ha vinto. Parametri: usernameAvversario, tempoMs, parola originale. */
         RISULTATO_VINTO,
-        /** Il giocatore ha perso. Parametri: usernameAvversario, tempoMs. */
+        /** Il giocatore ha perso. Parametri: usernameAvversario, tempoMs, parola originale. */
         RISULTATO_PERSO,
-        /** Pareggio per tempo scaduto. */
+        /** Pareggio per tempo scaduto. Parametri: parola originale. */
         PAREGGIO,
         /** Risposta allo storico. Parametri: dati serializzati. */
         STORICO_RESPONSE,

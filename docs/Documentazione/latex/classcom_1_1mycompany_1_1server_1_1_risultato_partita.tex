@@ -1,0 +1,142 @@
+\doxysection{com.\+mycompany.\+server.\+Risultato\+Partita Class Reference}
+\hypertarget{classcom_1_1mycompany_1_1server_1_1_risultato_partita}{}\label{classcom_1_1mycompany_1_1server_1_1_risultato_partita}\index{com.mycompany.server.RisultatoPartita@{com.mycompany.server.RisultatoPartita}}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1_risultato_partita_a7800d46f52c165553525393d8a33027a}{Risultato\+Partita}} (int id, int frase, int documento, String giocatore1, String giocatore2, int vincitore, String data, long durata)
+\item 
+int \mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1_risultato_partita_a005e6bfe024a7285dde593152ada426a}{get\+Id}} ()
+\item 
+int \mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1_risultato_partita_aef2577667d1ea353a641cc95d929e62f}{get\+Frase}} ()
+\item 
+int \mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1_risultato_partita_a1974ca99c1f70a7625b5f5fa4fc33f6f}{get\+Documento}} ()
+\item 
+String \mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1_risultato_partita_afdb0565ffd75f0652ad0a835a87b9b25}{get\+Giocatore1}} ()
+\item 
+String \mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1_risultato_partita_aa2d818097dd4610231e817d884f2c5d0}{get\+Giocatore2}} ()
+\item 
+int \mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1_risultato_partita_a617feb5117015676783799f57b69dc2b}{get\+Vincitore}} ()
+\item 
+String \mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1_risultato_partita_a664d1725da00e772daac55104cee019f}{get\+Data}} ()
+\item 
+long \mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1_risultato_partita_a9519be3bf9750313d55fbd2ec524bfdc}{get\+Durata}} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Modello immutabile che rappresenta il risultato di una partita conclusa.
+
+Viene popolato da {\ttfamily \doxylink{classcom_1_1mycompany_1_1server_1_1_partita_d_a_o}{Partita\+DAO}} leggendo la tabella {\ttfamily partite} e utilizzato dal pannello Storico del server admin e del client. 
+
+\label{doc-constructors}
+\Hypertarget{classcom_1_1mycompany_1_1server_1_1_risultato_partita_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classcom_1_1mycompany_1_1server_1_1_risultato_partita_a7800d46f52c165553525393d8a33027a}\index{com.mycompany.server.RisultatoPartita@{com.mycompany.server.RisultatoPartita}!RisultatoPartita@{RisultatoPartita}}
+\index{RisultatoPartita@{RisultatoPartita}!com.mycompany.server.RisultatoPartita@{com.mycompany.server.RisultatoPartita}}
+\doxysubsubsection{\texorpdfstring{RisultatoPartita()}{RisultatoPartita()}}
+{\footnotesize\ttfamily \label{classcom_1_1mycompany_1_1server_1_1_risultato_partita_a7800d46f52c165553525393d8a33027a} 
+com.\+mycompany.\+server.\+Risultato\+Partita.\+Risultato\+Partita (\begin{DoxyParamCaption}\item[{int}]{id}{, }\item[{int}]{frase}{, }\item[{int}]{documento}{, }\item[{String}]{giocatore1}{, }\item[{String}]{giocatore2}{, }\item[{int}]{vincitore}{, }\item[{String}]{data}{, }\item[{long}]{durata}{}\end{DoxyParamCaption})}
+
+Millisecondi trascorsi dalla sfida alla risposta corretta; durata massima della partita se pareggio. Costruisce un risultato partita con tutti i campi.
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & identificatore univoco della partita nel DB \\
+\hline
+{\em frase} & identificatore univoco della frase utilizzata nella partita \\
+\hline
+{\em documento} & identificatore univoco del documento della frase utilizzata nella partita \\
+\hline
+{\em giocatore1} & username del giocatore1 \\
+\hline
+{\em giocatore2} & username del giocatore2 \\
+\hline
+{\em vincitore} & numero del vincitore, o {\ttfamily 0} se la partita è terminata in pareggio \\
+\hline
+{\em data} & data e ora della partita (formato {\ttfamily dd/\+MM/yyyy HH\+:mm}) \\
+\hline
+{\em durata} & millisecondi impiegati per rispondere correttamente; durata massima della partita se pareggio \\
+\hline
+\end{DoxyParams}
+
+
+\label{doc-func-members}
+\Hypertarget{classcom_1_1mycompany_1_1server_1_1_risultato_partita_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classcom_1_1mycompany_1_1server_1_1_risultato_partita_a664d1725da00e772daac55104cee019f}\index{com.mycompany.server.RisultatoPartita@{com.mycompany.server.RisultatoPartita}!getData@{getData}}
+\index{getData@{getData}!com.mycompany.server.RisultatoPartita@{com.mycompany.server.RisultatoPartita}}
+\doxysubsubsection{\texorpdfstring{getData()}{getData()}}
+{\footnotesize\ttfamily \label{classcom_1_1mycompany_1_1server_1_1_risultato_partita_a664d1725da00e772daac55104cee019f} 
+String com.\+mycompany.\+server.\+Risultato\+Partita.\+get\+Data (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyReturn}{Returns}
+data e ora della partita nel formato {\ttfamily dd/\+MM/yyyy HH\+:mm} 
+\end{DoxyReturn}
+\Hypertarget{classcom_1_1mycompany_1_1server_1_1_risultato_partita_a1974ca99c1f70a7625b5f5fa4fc33f6f}\index{com.mycompany.server.RisultatoPartita@{com.mycompany.server.RisultatoPartita}!getDocumento@{getDocumento}}
+\index{getDocumento@{getDocumento}!com.mycompany.server.RisultatoPartita@{com.mycompany.server.RisultatoPartita}}
+\doxysubsubsection{\texorpdfstring{getDocumento()}{getDocumento()}}
+{\footnotesize\ttfamily \label{classcom_1_1mycompany_1_1server_1_1_risultato_partita_a1974ca99c1f70a7625b5f5fa4fc33f6f} 
+int com.\+mycompany.\+server.\+Risultato\+Partita.\+get\+Documento (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyReturn}{Returns}
+identificatore univoco del documento della frase della partita nel database 
+\end{DoxyReturn}
+\Hypertarget{classcom_1_1mycompany_1_1server_1_1_risultato_partita_a9519be3bf9750313d55fbd2ec524bfdc}\index{com.mycompany.server.RisultatoPartita@{com.mycompany.server.RisultatoPartita}!getDurata@{getDurata}}
+\index{getDurata@{getDurata}!com.mycompany.server.RisultatoPartita@{com.mycompany.server.RisultatoPartita}}
+\doxysubsubsection{\texorpdfstring{getDurata()}{getDurata()}}
+{\footnotesize\ttfamily \label{classcom_1_1mycompany_1_1server_1_1_risultato_partita_a9519be3bf9750313d55fbd2ec524bfdc} 
+long com.\+mycompany.\+server.\+Risultato\+Partita.\+get\+Durata (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyReturn}{Returns}
+millisecondi trascorsi dalla sfida alla risposta corretta; 0 se pareggio 
+\end{DoxyReturn}
+\Hypertarget{classcom_1_1mycompany_1_1server_1_1_risultato_partita_aef2577667d1ea353a641cc95d929e62f}\index{com.mycompany.server.RisultatoPartita@{com.mycompany.server.RisultatoPartita}!getFrase@{getFrase}}
+\index{getFrase@{getFrase}!com.mycompany.server.RisultatoPartita@{com.mycompany.server.RisultatoPartita}}
+\doxysubsubsection{\texorpdfstring{getFrase()}{getFrase()}}
+{\footnotesize\ttfamily \label{classcom_1_1mycompany_1_1server_1_1_risultato_partita_aef2577667d1ea353a641cc95d929e62f} 
+int com.\+mycompany.\+server.\+Risultato\+Partita.\+get\+Frase (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyReturn}{Returns}
+identificatore univoco della frase della partita nel database 
+\end{DoxyReturn}
+\Hypertarget{classcom_1_1mycompany_1_1server_1_1_risultato_partita_afdb0565ffd75f0652ad0a835a87b9b25}\index{com.mycompany.server.RisultatoPartita@{com.mycompany.server.RisultatoPartita}!getGiocatore1@{getGiocatore1}}
+\index{getGiocatore1@{getGiocatore1}!com.mycompany.server.RisultatoPartita@{com.mycompany.server.RisultatoPartita}}
+\doxysubsubsection{\texorpdfstring{getGiocatore1()}{getGiocatore1()}}
+{\footnotesize\ttfamily \label{classcom_1_1mycompany_1_1server_1_1_risultato_partita_afdb0565ffd75f0652ad0a835a87b9b25} 
+String com.\+mycompany.\+server.\+Risultato\+Partita.\+get\+Giocatore1 (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyReturn}{Returns}
+username del giocatore1 
+\end{DoxyReturn}
+\Hypertarget{classcom_1_1mycompany_1_1server_1_1_risultato_partita_aa2d818097dd4610231e817d884f2c5d0}\index{com.mycompany.server.RisultatoPartita@{com.mycompany.server.RisultatoPartita}!getGiocatore2@{getGiocatore2}}
+\index{getGiocatore2@{getGiocatore2}!com.mycompany.server.RisultatoPartita@{com.mycompany.server.RisultatoPartita}}
+\doxysubsubsection{\texorpdfstring{getGiocatore2()}{getGiocatore2()}}
+{\footnotesize\ttfamily \label{classcom_1_1mycompany_1_1server_1_1_risultato_partita_aa2d818097dd4610231e817d884f2c5d0} 
+String com.\+mycompany.\+server.\+Risultato\+Partita.\+get\+Giocatore2 (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyReturn}{Returns}
+username del giocatore2 
+\end{DoxyReturn}
+\Hypertarget{classcom_1_1mycompany_1_1server_1_1_risultato_partita_a005e6bfe024a7285dde593152ada426a}\index{com.mycompany.server.RisultatoPartita@{com.mycompany.server.RisultatoPartita}!getId@{getId}}
+\index{getId@{getId}!com.mycompany.server.RisultatoPartita@{com.mycompany.server.RisultatoPartita}}
+\doxysubsubsection{\texorpdfstring{getId()}{getId()}}
+{\footnotesize\ttfamily \label{classcom_1_1mycompany_1_1server_1_1_risultato_partita_a005e6bfe024a7285dde593152ada426a} 
+int com.\+mycompany.\+server.\+Risultato\+Partita.\+get\+Id (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyReturn}{Returns}
+identificatore univoco della partita nel database 
+\end{DoxyReturn}
+\Hypertarget{classcom_1_1mycompany_1_1server_1_1_risultato_partita_a617feb5117015676783799f57b69dc2b}\index{com.mycompany.server.RisultatoPartita@{com.mycompany.server.RisultatoPartita}!getVincitore@{getVincitore}}
+\index{getVincitore@{getVincitore}!com.mycompany.server.RisultatoPartita@{com.mycompany.server.RisultatoPartita}}
+\doxysubsubsection{\texorpdfstring{getVincitore()}{getVincitore()}}
+{\footnotesize\ttfamily \label{classcom_1_1mycompany_1_1server_1_1_risultato_partita_a617feb5117015676783799f57b69dc2b} 
+int com.\+mycompany.\+server.\+Risultato\+Partita.\+get\+Vincitore (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyReturn}{Returns}
+numero del vincitore, o {\ttfamily 0} se la partita è terminata in pareggio 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+server/src/main/java/com/mycompany/server/Risultato\+Partita.\+java\end{DoxyCompactItemize}

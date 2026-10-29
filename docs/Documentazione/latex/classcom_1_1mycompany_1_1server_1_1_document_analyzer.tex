@@ -1,0 +1,87 @@
+\doxysection{com.\+mycompany.\+server.\+Document\+Analyzer Class Reference}
+\hypertarget{classcom_1_1mycompany_1_1server_1_1_document_analyzer}{}\label{classcom_1_1mycompany_1_1server_1_1_document_analyzer}\index{com.mycompany.server.DocumentAnalyzer@{com.mycompany.server.DocumentAnalyzer}}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1_analisi_frase}{Analisi\+Frase}} \mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1_document_analyzer_ac1cff2aa0b4f5306dcbc333de209bb07}{analizza}} (String frase)  throws IOException 
+\item 
+List$<$ String $>$ \mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1_document_analyzer_a8f703eea2040bba81b58997b4eecf664}{estrai\+Frasi}} (String percorso\+File)  throws IOException 
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static String \mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1_document_analyzer_abd6109fd7e7ff77a47050e84163870c2}{rimuovi\+Accenti}} (String da\+Togliere)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Analizza documenti di testo per estrarre statistiche di frequenza delle parole e suddividere il testo in frasi utilizzabili come sfide di gioco.
+
+Utilizza Stream API per il calcolo della Term Frequency (TF). 
+
+\label{doc-func-members}
+\Hypertarget{classcom_1_1mycompany_1_1server_1_1_document_analyzer_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classcom_1_1mycompany_1_1server_1_1_document_analyzer_ac1cff2aa0b4f5306dcbc333de209bb07}\index{com.mycompany.server.DocumentAnalyzer@{com.mycompany.server.DocumentAnalyzer}!analizza@{analizza}}
+\index{analizza@{analizza}!com.mycompany.server.DocumentAnalyzer@{com.mycompany.server.DocumentAnalyzer}}
+\doxysubsubsection{\texorpdfstring{analizza()}{analizza()}}
+{\footnotesize\ttfamily \label{classcom_1_1mycompany_1_1server_1_1_document_analyzer_ac1cff2aa0b4f5306dcbc333de209bb07} 
+\mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1_analisi_frase}{Analisi\+Frase}} com.\+mycompany.\+server.\+Document\+Analyzer.\+analizza (\begin{DoxyParamCaption}\item[{String}]{frase}{}\end{DoxyParamCaption}) throws IOException}
+
+Calcola la Term Frequency (TF) di tutte le parole nella frase indicata. Le parole vengono normalizzate in maiuscolo e filtrate\+: solo sequenze di lettere alfabetiche vengono considerate.
+
+
+\begin{DoxyParams}{Parameters}
+{\em frase} & frase da analizzare \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\doxylink{classcom_1_1mycompany_1_1server_1_1_analisi_frase}{Analisi\+Frase} contenente la frase e una mappa con le frequenze di ogni parola al suo interno 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em IOException} & se il file non esiste o non è leggibile \\
+\hline
+\end{DoxyExceptions}
+\Hypertarget{classcom_1_1mycompany_1_1server_1_1_document_analyzer_a8f703eea2040bba81b58997b4eecf664}\index{com.mycompany.server.DocumentAnalyzer@{com.mycompany.server.DocumentAnalyzer}!estraiFrasi@{estraiFrasi}}
+\index{estraiFrasi@{estraiFrasi}!com.mycompany.server.DocumentAnalyzer@{com.mycompany.server.DocumentAnalyzer}}
+\doxysubsubsection{\texorpdfstring{estraiFrasi()}{estraiFrasi()}}
+{\footnotesize\ttfamily \label{classcom_1_1mycompany_1_1server_1_1_document_analyzer_a8f703eea2040bba81b58997b4eecf664} 
+List$<$ String $>$ com.\+mycompany.\+server.\+Document\+Analyzer.\+estrai\+Frasi (\begin{DoxyParamCaption}\item[{String}]{percorso\+File}{}\end{DoxyParamCaption}) throws IOException}
+
+Estrae le frasi dal file indicato (separate da {\ttfamily \mbox{[}.!?\textbackslash{}\textbackslash{}r\textbackslash{}\textbackslash{}n\mbox{]}+}).
+
+
+\begin{DoxyParams}{Parameters}
+{\em percorso\+File} & percorso assoluto del file di testo da analizzare \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+lista di frasi estratte dal documento 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em IOException} & se il file non esiste o non è leggibile \\
+\hline
+\end{DoxyExceptions}
+\Hypertarget{classcom_1_1mycompany_1_1server_1_1_document_analyzer_abd6109fd7e7ff77a47050e84163870c2}\index{com.mycompany.server.DocumentAnalyzer@{com.mycompany.server.DocumentAnalyzer}!rimuoviAccenti@{rimuoviAccenti}}
+\index{rimuoviAccenti@{rimuoviAccenti}!com.mycompany.server.DocumentAnalyzer@{com.mycompany.server.DocumentAnalyzer}}
+\doxysubsubsection{\texorpdfstring{rimuoviAccenti()}{rimuoviAccenti()}}
+{\footnotesize\ttfamily \label{classcom_1_1mycompany_1_1server_1_1_document_analyzer_abd6109fd7e7ff77a47050e84163870c2} 
+String com.\+mycompany.\+server.\+Document\+Analyzer.\+rimuovi\+Accenti (\begin{DoxyParamCaption}\item[{String}]{da\+Togliere}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Sostituisce le lettere accentate in una parola o frase.
+
+
+\begin{DoxyParams}{Parameters}
+{\em da\+Togliere} & Stringa che rappresenta la parola o la frase da cui togliere la/le lettera/e accentata/e \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+La parola o frase normalizzata senza lettere accentate 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+server/src/main/java/com/mycompany/server/Document\+Analyzer.\+java\end{DoxyCompactItemize}

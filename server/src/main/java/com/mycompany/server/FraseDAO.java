@@ -70,7 +70,7 @@ public class FraseDAO implements DAOid<String[]> {
     }
 
     /**
-     * Restituisce le informazioni su la frase con l'id corrispondente.
+     * Restituisce le informazioni su la frase con l'id e il documento corrispondenti.
      * Ogni riga: [id, documento, contenuto, path_analisi]
      */
     @Override
@@ -169,7 +169,6 @@ public class FraseDAO implements DAOid<String[]> {
     
     /**
      * Cancella le informazioni della frase di cui passiamo l'id.
-     * Ogni riga: [id, documento, contenuto, path_analisi]
      */
     @Override
     public boolean delete(int id) {

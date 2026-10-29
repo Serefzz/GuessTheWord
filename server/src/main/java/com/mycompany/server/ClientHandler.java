@@ -14,7 +14,7 @@ import java.util.List;
  *
  * Ogni istanza gira in un thread separato avviato da {@link GameServer}.
  * L'avversario viene impostato tramite {@link #setAvversario(ClientHandler)}
- * prima dell'avvio del thread.
+ * dopo l'avvio del thread.
  *
  * Le frasi e le TF sono condivise staticamente tra tutti gli handler
  * e vengono impostate dall'admin tramite {@link AdminController}.
@@ -174,9 +174,13 @@ public class ClientHandler implements Runnable {
      * @param msg messaggio contenente la difficoltà scelta (parametro 0)
      */
     private void gestisciAvviaPartita(Messaggio msg) {
-        if (avversario == null) {
-            invia(new Messaggio(Messaggio.Tipo.ERRORE, "In attesa del secondo giocatore..."));
-            return;
+        while (avversario == null) {
+            invia(new Messaggio(Messaggio.Tipo.ATTESA, "In attesa del secondo giocatore..."));
+            try{
+                Thread.sleep(1000);
+            } catch(InterruptedException ie){
+              System.out.println("Interruziona anomala.");
+            }
         }
         
         if (tfFrasi == null || tfFrasi.isEmpty()) {

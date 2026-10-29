@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ClassDiagram name="Multi-file class diagram">
+  <ClassDiagramComponents>
+    <Class name="UtenteDAO" package="com.mycompany.server" visibility="public" xPosition="20.0" yPosition="20.0">
+      <Fields>
+        <Field name="URL" type="String" visibility="private" isStatic="true" isFinal="true"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="selectAll" returnType="List&lt;Utente&gt;" visibility="public"/>
+        <Method name="selectByUsername" returnType="Optional&lt;Utente&gt;" visibility="public">
+          <Argument type="String" name="username"/>
+        </Method>
+        <Method name="insert" returnType="boolean" visibility="public">
+          <Argument type="Utente" name="u"/>
+        </Method>
+        <Method name="update" returnType="boolean" visibility="public">
+          <Argument type="Utente" name="u"/>
+        </Method>
+        <Method name="delete" returnType="boolean" visibility="public">
+          <Argument type="String" name="username"/>
+        </Method>
+        <Method name="verificaLogin" returnType="boolean" visibility="public">
+          <Argument type="String" name="username"/>
+          <Argument type="String" name="password"/>
+        </Method>
+        <Method name="registra" returnType="boolean" visibility="public">
+          <Argument type="String" name="username"/>
+          <Argument type="String" name="password"/>
+        </Method>
+        <Method name="aggiornaPunteggio" returnType="boolean" visibility="public">
+          <Argument type="String" name="username"/>
+          <Argument type="int" name="punti"/>
+        </Method>
+        <Method name="getClassifica" returnType="List&lt;String[]&gt;" visibility="public"/>
+        <Method name="isAdmin" returnType="boolean" visibility="public">
+          <Argument type="String" name="username"/>
+        </Method>
+        <Method name="hashPassword" returnType="String" visibility="public" isStatic="true">
+          <Argument type="String" name="password"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Utente" package="com.mycompany.server" visibility="public" xPosition="320.0" yPosition="20.0">
+      <Fields>
+        <Field name="username" type="String" visibility="private" isFinal="true"/>
+        <Field name="password" type="String" visibility="private" isFinal="true"/>
+        <Field name="ruolo" type="Ruolo" visibility="private" isFinal="true"/>
+        <Field name="punteggioGlobale" type="int" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="String" name="username"/>
+          <Argument type="String" name="password"/>
+          <Argument type="Ruolo" name="ruolo"/>
+          <Argument type="int" name="punteggioGlobale"/>
+        </Constructor>
+        <Constructor visibility="public">
+          <Argument type="String" name="username"/>
+          <Argument type="String" name="password"/>
+          <Argument type="Ruolo" name="ruolo"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="getUsername" returnType="String" visibility="public"/>
+        <Method name="getPassword" returnType="String" visibility="public"/>
+        <Method name="getRuolo" returnType="Ruolo" visibility="public"/>
+        <Method name="getPunteggioGlobale" returnType="int" visibility="public"/>
+        <Method name="toString" returnType="String" visibility="public"/>
+      </Methods>
+    </Class>
+    <Interface name="DAOusername" package="com.mycompany.server" visibility="public" xPosition="620.0" yPosition="20.0">
+      <Methods>
+        <Method name="selectAll" returnType="List&lt;T&gt;" visibility="package"/>
+        <Method name="selectByUsername" returnType="Optional&lt;T&gt;" visibility="package">
+          <Argument type="String" name="username"/>
+        </Method>
+        <Method name="insert" returnType="boolean" visibility="package">
+          <Argument type="T" name="t"/>
+        </Method>
+        <Method name="update" returnType="boolean" visibility="package">
+          <Argument type="T" name="t"/>
+        </Method>
+        <Method name="delete" returnType="boolean" visibility="package">
+          <Argument type="String" name="username"/>
+        </Method>
+      </Methods>
+    </Interface>
+  </ClassDiagramComponents>
+  <ClassDiagramRelations>
+    <ImplementsRelation name="&lt;&lt;implements&gt;&gt;" source="com.mycompany.server.UtenteDAO" target="com.mycompany.server.DAOusername"/>
+    <UseRelation source="com.mycompany.server.UtenteDAO" target="com.mycompany.server.Utente" sourceCardinality="1..1" targetCardinality="1..1"/>
+  </ClassDiagramRelations>
+</ClassDiagram>

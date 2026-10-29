@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ClassDiagram name="Multi-file class diagram">
+  <ClassDiagramComponents>
+    <Class name="PartitaDAO" package="com.mycompany.server" visibility="public" xPosition="20.0" yPosition="20.0">
+      <Fields>
+        <Field name="FORMATO_DATA" type="DateTimeFormatter" visibility="private" isStatic="true" isFinal="true"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="selectAll" returnType="List&lt;RisultatoPartita&gt;" visibility="public"/>
+        <Method name="selectById" returnType="Optional&lt;RisultatoPartita&gt;" visibility="public">
+          <Argument type="int" name="id"/>
+        </Method>
+        <Method name="insert" returnType="boolean" visibility="public">
+          <Argument type="RisultatoPartita" name="r"/>
+        </Method>
+        <Method name="update" returnType="boolean" visibility="public">
+          <Argument type="RisultatoPartita" name="r"/>
+        </Method>
+        <Method name="delete" returnType="boolean" visibility="public">
+          <Argument type="int" name="id"/>
+        </Method>
+        <Method name="salva" returnType="void" visibility="public">
+          <Argument type="int" name="frase"/>
+          <Argument type="int" name="documento"/>
+          <Argument type="String" name="giocatore1"/>
+          <Argument type="String" name="giocatore2"/>
+          <Argument type="int" name="vincitore"/>
+          <Argument type="long" name="durata"/>
+        </Method>
+        <Method name="getStorico" returnType="List&lt;String[]&gt;" visibility="public">
+          <Argument type="String" name="username"/>
+        </Method>
+        <Method name="creaRisultato" returnType="RisultatoPartita" visibility="private">
+          <Argument type="ResultSet" name="rs"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="RisultatoPartita" package="com.mycompany.server" visibility="public" xPosition="320.0" yPosition="20.0">
+      <Fields>
+        <Field name="id" type="int" visibility="private" isFinal="true"/>
+        <Field name="frase" type="int" visibility="private" isFinal="true"/>
+        <Field name="documento" type="int" visibility="private" isFinal="true"/>
+        <Field name="giocatore1" type="String" visibility="private" isFinal="true"/>
+        <Field name="giocatore2" type="String" visibility="private" isFinal="true"/>
+        <Field name="vincitore" type="int" visibility="private" isFinal="true"/>
+        <Field name="data" type="String" visibility="private" isFinal="true"/>
+        <Field name="durata" type="long" visibility="private" isFinal="true"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="int" name="id"/>
+          <Argument type="int" name="frase"/>
+          <Argument type="int" name="documento"/>
+          <Argument type="String" name="giocatore1"/>
+          <Argument type="String" name="giocatore2"/>
+          <Argument type="int" name="vincitore"/>
+          <Argument type="String" name="data"/>
+          <Argument type="long" name="durata"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="getId" returnType="int" visibility="public"/>
+        <Method name="getFrase" returnType="int" visibility="public"/>
+        <Method name="getDocumento" returnType="int" visibility="public"/>
+        <Method name="getGiocatore1" returnType="String" visibility="public"/>
+        <Method name="getGiocatore2" returnType="String" visibility="public"/>
+        <Method name="getVincitore" returnType="int" visibility="public"/>
+        <Method name="getData" returnType="String" visibility="public"/>
+        <Method name="getDurata" returnType="long" visibility="public"/>
+      </Methods>
+    </Class>
+    <Interface name="DAOid" package="com.mycompany.server" visibility="public" xPosition="620.0" yPosition="20.0">
+      <Methods>
+        <Method name="selectAll" returnType="List&lt;T&gt;" visibility="package"/>
+        <Method name="selectById" returnType="Optional&lt;T&gt;" visibility="package">
+          <Argument type="int" name="id"/>
+        </Method>
+        <Method name="insert" returnType="boolean" visibility="package">
+          <Argument type="T" name="t"/>
+        </Method>
+        <Method name="update" returnType="boolean" visibility="package">
+          <Argument type="T" name="t"/>
+        </Method>
+        <Method name="delete" returnType="boolean" visibility="package">
+          <Argument type="int" name="id"/>
+        </Method>
+      </Methods>
+    </Interface>
+  </ClassDiagramComponents>
+  <ClassDiagramRelations>
+    <ImplementsRelation name="&lt;&lt;implements&gt;&gt;" source="com.mycompany.server.PartitaDAO" target="com.mycompany.server.DAOid"/>
+    <UseRelation source="com.mycompany.server.PartitaDAO" target="com.mycompany.server.RisultatoPartita" sourceCardinality="1..1" targetCardinality="1..1"/>
+  </ClassDiagramRelations>
+</ClassDiagram>

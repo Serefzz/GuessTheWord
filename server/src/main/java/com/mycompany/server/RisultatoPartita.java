@@ -22,8 +22,11 @@ public class RisultatoPartita {
      * Costruisce un risultato partita con tutti i campi.
      *
      * @param id identificatore univoco della partita nel DB
+     * @param frase identificatore univoco della frase utilizzata nella partita
+     * @param documento identificatore univoco del documento della frase utilizzata nella partita
      * @param giocatore1 username del giocatore1
      * @param giocatore2 username del giocatore2
+     * @param vincitore numero del vincitore, o {@code 0} se la partita è terminata in pareggio
      * @param data data e ora della partita (formato {@code dd/MM/yyyy HH:mm})
      * @param durata millisecondi impiegati per rispondere correttamente; durata massima della partita se pareggio
      */

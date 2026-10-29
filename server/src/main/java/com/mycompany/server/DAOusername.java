@@ -26,7 +26,7 @@ public interface DAOusername<T> {
     List<T> selectAll();
 
     /**
-     * Cerca un record tramite il suo identificatore numerico.
+     * Cerca un record tramite il suo username.
      *
      * @param username identificatore univoco del record
      * @return {@link Optional} contenente il record se trovato, vuoto altrimenti
@@ -44,7 +44,7 @@ public interface DAOusername<T> {
     /**
      * Aggiorna un record esistente nel database.
      *
-     * @param t entità aggiornata (deve contenere l'id del record da modificare)
+     * @param t entità aggiornata (deve contenere l'username del record da modificare)
      * @return {@code true} se la modifica è riuscita, {@code false} altrimenti
      */
     boolean update(T t);

@@ -1,0 +1,62 @@
+\doxysection{com.\+mycompany.\+common.\+Cifrario\+Cesare Class Reference}
+\hypertarget{classcom_1_1mycompany_1_1common_1_1_cifrario_cesare}{}\label{classcom_1_1mycompany_1_1common_1_1_cifrario_cesare}\index{com.mycompany.common.CifrarioCesare@{com.mycompany.common.CifrarioCesare}}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static String \mbox{\hyperlink{classcom_1_1mycompany_1_1common_1_1_cifrario_cesare_a36b3daa9af9fb062f0f18b0a0d40efa5}{cifra}} (String testo, int shift)
+\item 
+static String \mbox{\hyperlink{classcom_1_1mycompany_1_1common_1_1_cifrario_cesare_a2a76d00460644bd466d10ab73f9e71fa}{decifra}} (String testo\+Cifrato, int shift)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Implementazione del Cifrario di Cesare per lettere maiuscole.
+
+Ogni lettera viene spostata in avanti (cifratura) o indietro (decifratura) di un numero fisso di posizioni nell\textquotesingle{}alfabeto. I caratteri non alfabetici rimangono invariati.
+
+Questa classe non è istanziabile (costruttore privato). 
+
+\label{doc-func-members}
+\Hypertarget{classcom_1_1mycompany_1_1common_1_1_cifrario_cesare_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classcom_1_1mycompany_1_1common_1_1_cifrario_cesare_a36b3daa9af9fb062f0f18b0a0d40efa5}\index{com.mycompany.common.CifrarioCesare@{com.mycompany.common.CifrarioCesare}!cifra@{cifra}}
+\index{cifra@{cifra}!com.mycompany.common.CifrarioCesare@{com.mycompany.common.CifrarioCesare}}
+\doxysubsubsection{\texorpdfstring{cifra()}{cifra()}}
+{\footnotesize\ttfamily \label{classcom_1_1mycompany_1_1common_1_1_cifrario_cesare_a36b3daa9af9fb062f0f18b0a0d40efa5} 
+String com.\+mycompany.\+common.\+Cifrario\+Cesare.\+cifra (\begin{DoxyParamCaption}\item[{String}]{testo}{, }\item[{int}]{shift}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Cifra il testo applicando lo shift indicato. Il testo viene prima convertito in maiuscolo.
+
+
+\begin{DoxyParams}{Parameters}
+{\em testo} & testo in chiaro da cifrare \\
+\hline
+{\em shift} & numero di posizioni di spostamento nell\textquotesingle{}alfabeto (modulo 26) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+testo cifrato in lettere maiuscole 
+\end{DoxyReturn}
+\Hypertarget{classcom_1_1mycompany_1_1common_1_1_cifrario_cesare_a2a76d00460644bd466d10ab73f9e71fa}\index{com.mycompany.common.CifrarioCesare@{com.mycompany.common.CifrarioCesare}!decifra@{decifra}}
+\index{decifra@{decifra}!com.mycompany.common.CifrarioCesare@{com.mycompany.common.CifrarioCesare}}
+\doxysubsubsection{\texorpdfstring{decifra()}{decifra()}}
+{\footnotesize\ttfamily \label{classcom_1_1mycompany_1_1common_1_1_cifrario_cesare_a2a76d00460644bd466d10ab73f9e71fa} 
+String com.\+mycompany.\+common.\+Cifrario\+Cesare.\+decifra (\begin{DoxyParamCaption}\item[{String}]{testo\+Cifrato}{, }\item[{int}]{shift}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Decifra il testo applicando lo stesso shift usato per cifrarlo.
+
+
+\begin{DoxyParams}{Parameters}
+{\em testo\+Cifrato} & testo cifrato da decifrare \\
+\hline
+{\em shift} & numero di posizioni usato in fase di cifratura \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+testo in chiaro in lettere maiuscole 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+common/src/main/java/com/mycompany/common/Cifrario\+Cesare.\+java\end{DoxyCompactItemize}

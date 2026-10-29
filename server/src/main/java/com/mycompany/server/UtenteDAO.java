@@ -51,7 +51,7 @@ public class UtenteDAO implements DAOusername<Utente> {
     }
 
     /**
-     * Cerca un utente per identificatore numerico.
+     * Cerca un utente per username.
      *
      * @param username identificatore univoco dell'utente
      * @return {@link Optional} con l'utente se trovato, vuoto altrimenti
@@ -97,7 +97,7 @@ public class UtenteDAO implements DAOusername<Utente> {
     }
 
     /**
-     * Aggiorna password, ruolo e punteggio globale di un utente esistente.
+     * Aggiorna password e punteggio globale di un utente esistente.
      *
      * @param u utente con l'username di un utente gia' presente nel db e con il nuovo stato da aggiornare
      * @return {@code true} se la modifica ha coinvolto almeno una riga; {@code false} altrimenti
@@ -191,8 +191,8 @@ public class UtenteDAO implements DAOusername<Utente> {
     }
 
     /**
-     * Restituisce la classifica globale dei giocatori ordinata per vittorie decrescenti.
-     * Ogni elemento: {@code [username, vittorie, sconfitte, pareggi, tempoMedioMs]}.
+     * Restituisce la classifica globale dei giocatori ordinata per punteggio globale decrescente.
+     * Ogni elemento: {@code [punteggioGlobale, username, vittorie, sconfitte, pareggi, tempoMedioMs]}.
      *
      * @return lista di righe della classifica; lista vuota se non ci sono giocatori
      */

@@ -1,0 +1,43 @@
+\doxysection{com.\+mycompany.\+client.\+Message\+Listener Interface Reference}
+\hypertarget{interfacecom_1_1mycompany_1_1client_1_1_message_listener}{}\label{interfacecom_1_1mycompany_1_1client_1_1_message_listener}\index{com.mycompany.client.MessageListener@{com.mycompany.client.MessageListener}}
+Inheritance diagram for com.\+mycompany.\+client.\+Message\+Listener\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{interfacecom_1_1mycompany_1_1client_1_1_message_listener}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{interfacecom_1_1mycompany_1_1client_1_1_message_listener_a31c50a70314b56f05f6725bba3714423}{on\+Message}} (\mbox{\hyperlink{classcom_1_1mycompany_1_1common_1_1_messaggio}{Messaggio}} msg)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Callback chiamata dal thread di ricezione quando arriva un messaggio dal server. L\textquotesingle{}implementazione (Main\+Controller) viene invocata su Platform.\+run\+Later(). 
+
+\label{doc-func-members}
+\Hypertarget{interfacecom_1_1mycompany_1_1client_1_1_message_listener_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{interfacecom_1_1mycompany_1_1client_1_1_message_listener_a31c50a70314b56f05f6725bba3714423}\index{com.mycompany.client.MessageListener@{com.mycompany.client.MessageListener}!onMessage@{onMessage}}
+\index{onMessage@{onMessage}!com.mycompany.client.MessageListener@{com.mycompany.client.MessageListener}}
+\doxysubsubsection{\texorpdfstring{onMessage()}{onMessage()}}
+{\footnotesize\ttfamily \label{interfacecom_1_1mycompany_1_1client_1_1_message_listener_a31c50a70314b56f05f6725bba3714423} 
+void com.\+mycompany.\+client.\+Message\+Listener.\+on\+Message (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classcom_1_1mycompany_1_1common_1_1_messaggio}{Messaggio}}}]{msg}{}\end{DoxyParamCaption})}
+
+Chiamato quando il server invia un messaggio al client.
+
+
+\begin{DoxyParams}{Parameters}
+{\em msg} & messaggio ricevuto dal server \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in \mbox{\hyperlink{classcom_1_1mycompany_1_1client_1_1_game_controller_a71ac1a04431597bd70bee540278b9b81}{com.\+mycompany.\+client.\+Game\+Controller}}.
+
+
+
+The documentation for this interface was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+client/src/main/java/com/mycompany/client/Message\+Listener.\+java\end{DoxyCompactItemize}

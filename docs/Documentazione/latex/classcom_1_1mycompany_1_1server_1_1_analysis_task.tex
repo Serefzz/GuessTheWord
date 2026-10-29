@@ -1,0 +1,73 @@
+\doxysection{com.\+mycompany.\+server.\+Analysis\+Task Class Reference}
+\hypertarget{classcom_1_1mycompany_1_1server_1_1_analysis_task}{}\label{classcom_1_1mycompany_1_1server_1_1_analysis_task}\index{com.mycompany.server.AnalysisTask@{com.mycompany.server.AnalysisTask}}
+Inheritance diagram for com.\+mycompany.\+server.\+Analysis\+Task\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classcom_1_1mycompany_1_1server_1_1_analysis_task}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1_analysis_task_a221c98890da3ec8ee0d4ba7a286dde4d}{Analysis\+Task}} (List$<$ File $>$ files)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+String \mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1_analysis_task_acbadcf96b7355ffa23ebe4214e1ccec2}{call}} ()  throws Exception 
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Task Java\+FX che analizza in background uno o più documenti di testo.
+
+Estende {\ttfamily \doxylink{}{Task}}{\ttfamily $<$\+String$>$} per eseguire l\textquotesingle{}analisi su un thread separato senza bloccare il thread Java\+FX, aggiornando {\ttfamily message\+Property} e {\ttfamily progress\+Property} in tempo reale.
+
+Al termine dell\textquotesingle{}elaborazione imposta le frasi in {\ttfamily \doxylink{}{Client\+Handler\#set\+Frasi(\+List)}} per le sfide di gioco, imposta la mappa TF in {\ttfamily \doxylink{}{Client\+Handler\#set\+Tf\+Map(\+Map)}} per la scelta della parola, e restituisce una stringa di riepilogo mostrata nel pannello admin. 
+
+\label{doc-constructors}
+\Hypertarget{classcom_1_1mycompany_1_1server_1_1_analysis_task_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classcom_1_1mycompany_1_1server_1_1_analysis_task_a221c98890da3ec8ee0d4ba7a286dde4d}\index{com.mycompany.server.AnalysisTask@{com.mycompany.server.AnalysisTask}!AnalysisTask@{AnalysisTask}}
+\index{AnalysisTask@{AnalysisTask}!com.mycompany.server.AnalysisTask@{com.mycompany.server.AnalysisTask}}
+\doxysubsubsection{\texorpdfstring{AnalysisTask()}{AnalysisTask()}}
+{\footnotesize\ttfamily \label{classcom_1_1mycompany_1_1server_1_1_analysis_task_a221c98890da3ec8ee0d4ba7a286dde4d} 
+com.\+mycompany.\+server.\+Analysis\+Task.\+Analysis\+Task (\begin{DoxyParamCaption}\item[{List$<$ File $>$}]{files}{}\end{DoxyParamCaption})}
+
+Costruisce il task con la lista di file da analizzare.
+
+
+\begin{DoxyParams}{Parameters}
+{\em files} & lista di file {\ttfamily .\+txt} da elaborare \\
+\hline
+\end{DoxyParams}
+
+
+\label{doc-func-members}
+\Hypertarget{classcom_1_1mycompany_1_1server_1_1_analysis_task_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classcom_1_1mycompany_1_1server_1_1_analysis_task_acbadcf96b7355ffa23ebe4214e1ccec2}\index{com.mycompany.server.AnalysisTask@{com.mycompany.server.AnalysisTask}!call@{call}}
+\index{call@{call}!com.mycompany.server.AnalysisTask@{com.mycompany.server.AnalysisTask}}
+\doxysubsubsection{\texorpdfstring{call()}{call()}}
+{\footnotesize\ttfamily \label{classcom_1_1mycompany_1_1server_1_1_analysis_task_acbadcf96b7355ffa23ebe4214e1ccec2} 
+String com.\+mycompany.\+server.\+Analysis\+Task.\+call (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) throws Exception\hspace{0.3cm}{\ttfamily [protected]}}
+
+Esegue l\textquotesingle{}analisi di tutti i file nel thread in background.
+
+Per ogni file\+:
+
+Estrae le frasi tramite {\ttfamily \doxylink{classcom_1_1mycompany_1_1server_1_1_document_analyzer_a8f703eea2040bba81b58997b4eecf664}{Document\+Analyzer\#estrai\+Frasi(\+String)}} Calcola la Term Frequency di ogni frase tramite {\ttfamily \doxylink{classcom_1_1mycompany_1_1server_1_1_document_analyzer_ac1cff2aa0b4f5306dcbc333de209bb07}{Document\+Analyzer\#analizza(\+String)}} Accumula i risultati nelle strutture globali
+
+\begin{DoxyReturn}{Returns}
+stringa di riepilogo con statistiche per file e top 10 parole più frequenti 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Exception} & se la lettura di uno dei file fallisce \\
+\hline
+\end{DoxyExceptions}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+server/src/main/java/com/mycompany/server/Analysis\+Task.\+java\end{DoxyCompactItemize}

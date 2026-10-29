@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ClassDiagram name="client">
+  <ClassDiagramComponents>
+    <Class name="ClientApp" package="com.mycompany.client" visibility="public" xPosition="20.0" yPosition="20.0">
+      <Fields/>
+      <Constructors/>
+      <Methods>
+        <Method name="start" returnType="void" visibility="public">
+          <Argument type="Stage" name="stage"/>
+        </Method>
+        <Method name="main" returnType="void" visibility="public" isStatic="true">
+          <Argument type="String[]" name="args"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="GameController" package="com.mycompany.client" visibility="public" xPosition="320.0" yPosition="20.0">
+      <Fields>
+        <Field name="labelUsername" type="Label" visibility="private"/>
+        <Field name="topTitleLabel" type="Label" visibility="private"/>
+        <Field name="panelMenu" type="VBox" visibility="private"/>
+        <Field name="panelPartita" type="VBox" visibility="private"/>
+        <Field name="panelGioco" type="VBox" visibility="private"/>
+        <Field name="panelStorico" type="VBox" visibility="private"/>
+        <Field name="panelClassifica" type="VBox" visibility="private"/>
+        <Field name="titoloMenuLabel" type="Label" visibility="private"/>
+        <Field name="rbFacile" type="RadioButton" visibility="private"/>
+        <Field name="rbMedio" type="RadioButton" visibility="private"/>
+        <Field name="rbDifficile" type="RadioButton" visibility="private"/>
+        <Field name="statoPartitaLabel" type="Label" visibility="private"/>
+        <Field name="attesaIndicator" type="ProgressIndicator" visibility="private"/>
+        <Field name="textFlowSfida" type="TextFlow" visibility="private"/>
+        <Field name="labelTimer" type="Label" visibility="private"/>
+        <Field name="labelEsito" type="Label" visibility="private"/>
+        <Field name="inputRisposta" type="TextField" visibility="private"/>
+        <Field name="btnOk" type="Button" visibility="private"/>
+        <Field name="btnGiocaAncora" type="Button" visibility="private"/>
+        <Field name="btnForfait" type="Button" visibility="private"/>
+        <Field name="btnTornaMenuFine" type="Button" visibility="private"/>
+        <Field name="storicoTable" type="TableView&lt;String[]&gt;" visibility="private"/>
+        <Field name="colStData" type="TableColumn&lt;String[], String&gt;" visibility="private"/>
+        <Field name="colStAvversario" type="TableColumn&lt;String[], String&gt;" visibility="private"/>
+        <Field name="colStRisultato" type="TableColumn&lt;String[], String&gt;" visibility="private"/>
+        <Field name="cercaStorico" type="TextField" visibility="private"/>
+        <Field name="classificaTable" type="TableView&lt;String[]&gt;" visibility="private"/>
+        <Field name="colClPunteggio" type="TableColumn&lt;String[], String&gt;" visibility="private"/>
+        <Field name="colClUsername" type="TableColumn&lt;String[], String&gt;" visibility="private"/>
+        <Field name="colClVittorie" type="TableColumn&lt;String[], String&gt;" visibility="private"/>
+        <Field name="colClSconfitte" type="TableColumn&lt;String[], String&gt;" visibility="private"/>
+        <Field name="colClPareggi" type="TableColumn&lt;String[], String&gt;" visibility="private"/>
+        <Field name="colClTempo" type="TableColumn&lt;String[], String&gt;" visibility="private"/>
+        <Field name="cercaClassifica" type="TextField" visibility="private"/>
+        <Field name="connection" type="ServerConnection" visibility="private"/>
+        <Field name="username" type="String" visibility="private"/>
+        <Field name="timerLine" type="Timeline" visibility="private"/>
+        <Field name="secondiRimasti" type="int" visibility="private"/>
+        <Field name="tuttoStorico" type="List&lt;String[]&gt;" visibility="private" isFinal="true"/>
+        <Field name="tuttaClassifica" type="List&lt;String[]&gt;" visibility="private" isFinal="true"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="initialize" returnType="void" visibility="public"/>
+        <Method name="inizializza" returnType="void" visibility="public">
+          <Argument type="ServerConnection" name="conn"/>
+          <Argument type="String" name="username"/>
+        </Method>
+        <Method name="mostra" returnType="void" visibility="private">
+          <Argument type="VBox" name="pannelloAttivo"/>
+        </Method>
+        <Method name="tornaAlMenu" returnType="void" visibility="public"/>
+        <Method name="apriSceltaDifficolta" returnType="void" visibility="public"/>
+        <Method name="mostraClassifica" returnType="void" visibility="public"/>
+        <Method name="mostraStorico" returnType="void" visibility="public"/>
+        <Method name="esciDalGioco" returnType="void" visibility="public"/>
+        <Method name="avviaPartita" returnType="void" visibility="private"/>
+        <Method name="mostraGioco" returnType="void" visibility="private">
+          <Argument type="String" name="testoSfida"/>
+          <Argument type="String" name="parolaCifrata"/>
+          <Argument type="int" name="secondi"/>
+        </Method>
+        <Method name="visualizzaTestoSfida" returnType="void" visibility="private">
+          <Argument type="String" name="frase"/>
+          <Argument type="String" name="parolaCifrata"/>
+        </Method>
+        <Method name="inviaRisposta" returnType="void" visibility="private"/>
+        <Method name="abbandonaPartita" returnType="void" visibility="private"/>
+        <Method name="giocaAncora" returnType="void" visibility="private"/>
+        <Method name="finePartita" returnType="void" visibility="private">
+          <Argument type="String" name="messaggio"/>
+        </Method>
+        <Method name="avviaTimer" returnType="void" visibility="private">
+          <Argument type="int" name="secondi"/>
+        </Method>
+        <Method name="fermaTimer" returnType="void" visibility="private"/>
+        <Method name="aggiornaLabelTimer" returnType="void" visibility="private"/>
+        <Method name="aggiornaStorico" returnType="void" visibility="private">
+          <Argument type="String" name="dati"/>
+        </Method>
+        <Method name="filtraStorico" returnType="void" visibility="private">
+          <Argument type="String" name="testo"/>
+        </Method>
+        <Method name="mostraRigheStorico" returnType="void" visibility="private">
+          <Argument type="List&lt;String[]&gt;" name="lista"/>
+        </Method>
+        <Method name="aggiornaClassifica" returnType="void" visibility="private">
+          <Argument type="String" name="dati"/>
+        </Method>
+        <Method name="filtraClassifica" returnType="void" visibility="private">
+          <Argument type="String" name="testo"/>
+        </Method>
+        <Method name="mostraRigheClassifica" returnType="void" visibility="private">
+          <Argument type="List&lt;String[]&gt;" name="lista"/>
+        </Method>
+        <Method name="onMessage" returnType="void" visibility="public">
+          <Argument type="Messaggio" name="msg"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="GameLoginController" package="com.mycompany.client" visibility="public" xPosition="620.0" yPosition="20.0">
+      <Fields>
+        <Field name="titoloLabel" type="Label" visibility="private"/>
+        <Field name="usernameField" type="TextField" visibility="private"/>
+        <Field name="passwordField" type="PasswordField" visibility="private"/>
+        <Field name="erroreLabel" type="Label" visibility="private"/>
+        <Field name="btnLogin" type="Button" visibility="private"/>
+        <Field name="btnRegistra" type="Button" visibility="private"/>
+        <Field name="connessioneOk" type="ServerConnection" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="initialize" returnType="void" visibility="public"/>
+        <Method name="handleLogin" returnType="void" visibility="private"/>
+        <Method name="handleRegistra" returnType="void" visibility="private"/>
+        <Method name="vaiSuccessivo" returnType="void" visibility="private">
+          <Argument type="KeyEvent" name="event"/>
+        </Method>
+        <Method name="autentica" returnType="void" visibility="private">
+          <Argument type="Tipo" name="tipo"/>
+        </Method>
+        <Method name="apriGameWindow" returnType="void" visibility="private">
+          <Argument type="String" name="username"/>
+        </Method>
+        <Method name="leggiHost" returnType="String" visibility="private"/>
+        <Method name="leggiPorta" returnType="int" visibility="private"/>
+        <Method name="leggiProps" returnType="Properties" visibility="private"/>
+      </Methods>
+    </Class>
+    <Interface name="MessageListener" package="com.mycompany.client" visibility="public" xPosition="920.0" yPosition="20.0">
+      <Methods>
+        <Method name="onMessage" returnType="void" visibility="package">
+          <Argument type="Messaggio" name="msg"/>
+        </Method>
+      </Methods>
+    </Interface>
+    <Class name="ServerConnection" package="com.mycompany.client" visibility="public" xPosition="1220.0" yPosition="20.0">
+      <Fields>
+        <Field name="socket" type="Socket" visibility="private" isFinal="true"/>
+        <Field name="out" type="BufferedWriter" visibility="private" isFinal="true"/>
+        <Field name="in" type="BufferedReader" visibility="private" isFinal="true"/>
+        <Field name="listener" type="MessageListener" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="String" name="host"/>
+          <Argument type="int" name="port"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="avviaRicezione" returnType="void" visibility="public"/>
+        <Method name="leggiMessaggio" returnType="Messaggio" visibility="public"/>
+        <Method name="invia" returnType="void" visibility="public">
+          <Argument type="Messaggio" name="msg"/>
+        </Method>
+        <Method name="chiudi" returnType="void" visibility="public"/>
+        <Method name="setListener" returnType="void" visibility="public">
+          <Argument type="MessageListener" name="listener"/>
+        </Method>
+      </Methods>
+    </Class>
+  </ClassDiagramComponents>
+  <ClassDiagramRelations>
+    <HasRelation name="connessioneOk" source="com.mycompany.client.GameLoginController" target="com.mycompany.client.ServerConnection" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="com.mycompany.client.GameController" target="com.mycompany.client.ServerConnection" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="listener" source="com.mycompany.client.ServerConnection" target="com.mycompany.client.MessageListener" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="MessageListener"/>
+    <HasRelation name="connection" source="com.mycompany.client.GameController" target="com.mycompany.client.ServerConnection" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <ImplementsRelation name="&lt;&lt;implements&gt;&gt;" source="com.mycompany.client.GameController" target="com.mycompany.client.MessageListener"/>
+    <UseRelation source="com.mycompany.client.ServerConnection" target="com.mycompany.client.MessageListener" sourceCardinality="1..1" targetCardinality="1..1"/>
+  </ClassDiagramRelations>
+</ClassDiagram>

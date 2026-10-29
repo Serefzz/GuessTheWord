@@ -18,9 +18,9 @@ import javafx.stage.Stage;
  * Verifica le credenziali tramite {@link UtenteDAO} e controlla
  * che l'utente abbia ruolo {@code ADMIN}. In caso di successo carica
  * il pannello admin ({@code admin.fxml}); altrimenti mostra un messaggio
- * di errore e svuota il campo password.
+ * di errore e svuota il campo username e password.
  *
- * FXML associato: {@code /login.fxml} (server)
+ * FXML associato: {@code /adminlogin.fxml} (server)
  */
 public class AdminLoginController {
 
@@ -62,6 +62,7 @@ public class AdminLoginController {
             apriPannelloAdmin();
         } else {
             erroreLabel.setText("Credenziali errate o utente non amministratore.");
+            usernameField.clear();
             passwordField.clear();
         }
     }

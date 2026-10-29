@@ -21,7 +21,7 @@ import javafx.scene.input.KeyEvent;
 
 /**
  * Controller della schermata di login/registrazione del client.
- * FXML associato: {@code /login.fxml}
+ * FXML associato: {@code /gamelogin.fxml}
  */
 public class GameLoginController {
 
@@ -91,6 +91,8 @@ public class GameLoginController {
                 Messaggio risposta = conn.leggiMessaggio();
                 if (risposta.getTipo() == Tipo.OK) {
                     GameLoginController.this.connessioneOk = conn;
+                } else {
+                    conn.chiudi();
                 }
                 return risposta;
             }

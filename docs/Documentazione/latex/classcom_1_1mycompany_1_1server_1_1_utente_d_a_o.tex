@@ -1,0 +1,226 @@
+\doxysection{com.\+mycompany.\+server.\+Utente\+DAO Class Reference}
+\hypertarget{classcom_1_1mycompany_1_1server_1_1_utente_d_a_o}{}\label{classcom_1_1mycompany_1_1server_1_1_utente_d_a_o}\index{com.mycompany.server.UtenteDAO@{com.mycompany.server.UtenteDAO}}
+Inheritance diagram for com.\+mycompany.\+server.\+Utente\+DAO\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classcom_1_1mycompany_1_1server_1_1_utente_d_a_o}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+List$<$ \mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1_utente}{Utente}} $>$ \mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1_utente_d_a_o_a1bbb566eb816fc0b403b283e95334582}{select\+All}} ()
+\item 
+Optional$<$ \mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1_utente}{Utente}} $>$ \mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1_utente_d_a_o_a07053eaf52373e98615926acd0255d21}{select\+By\+Username}} (String username)
+\item 
+boolean \mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1_utente_d_a_o_a65e51c3c89c6faa5f6b13dd6afd46787}{insert}} (\mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1_utente}{Utente}} u)
+\item 
+boolean \mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1_utente_d_a_o_ab37051b1ac4da2467618ad883ac42242}{update}} (\mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1_utente}{Utente}} u)
+\item 
+boolean \mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1_utente_d_a_o_ad8b741cdca126fb276544eb1f3af697d}{delete}} (String username)
+\item 
+boolean \mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1_utente_d_a_o_abc6ff8ab921769e5d1337ca0fb986718}{verifica\+Login}} (String username, String password)
+\item 
+boolean \mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1_utente_d_a_o_a93ac95e0a99ab8414dd87dc7d70129a4}{registra}} (String username, String password)
+\item 
+\Hypertarget{classcom_1_1mycompany_1_1server_1_1_utente_d_a_o_ac21516ab26321eb408226bc0817a15a6}\label{classcom_1_1mycompany_1_1server_1_1_utente_d_a_o_ac21516ab26321eb408226bc0817a15a6} 
+boolean {\bfseries aggiorna\+Punteggio} (String username, int punti)
+\item 
+List$<$ String\mbox{[}$\,$\mbox{]}$>$ \mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1_utente_d_a_o_a0dbce36927fc6a70a29fda9c24842d4f}{get\+Classifica}} ()
+\item 
+boolean \mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1_utente_d_a_o_ad2e308a5dc3ad9275b670b08974b59f8}{is\+Admin}} (String username)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{interfacecom_1_1mycompany_1_1server_1_1_d_a_ousername}{com.\+mycompany.\+server.\+DAOusername$<$ Utente $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+List$<$ T $>$ \mbox{\hyperlink{interfacecom_1_1mycompany_1_1server_1_1_d_a_ousername_a8cb7f341f046bc8fa109fae4c161efd1}{select\+All}} ()
+\item 
+Optional$<$ T $>$ \mbox{\hyperlink{interfacecom_1_1mycompany_1_1server_1_1_d_a_ousername_adaaf8b6bb4618e67a2f5b2291cbe3ed9}{select\+By\+Username}} (String username)
+\item 
+boolean \mbox{\hyperlink{interfacecom_1_1mycompany_1_1server_1_1_d_a_ousername_a036fdb5a207ee122ac941eef214d1550}{insert}} (T t)
+\item 
+boolean \mbox{\hyperlink{interfacecom_1_1mycompany_1_1server_1_1_d_a_ousername_a6c0ca5716cb21d424216c049b0c0e242}{update}} (T t)
+\item 
+boolean \mbox{\hyperlink{interfacecom_1_1mycompany_1_1server_1_1_d_a_ousername_a04af456d9cd26ac426a81bca2e361a47}{delete}} (String username)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static String \mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1_utente_d_a_o_a75a633f4e4f550bc19f1d8fa485bf391}{hash\+Password}} (String password)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+DAO per la tabella {\ttfamily Utente} del database SQLite.
+
+Implementa {\ttfamily \doxylink{interfacecom_1_1mycompany_1_1server_1_1_d_a_ousername}{DAOusername}}{\ttfamily Utente}
+
+Le password vengono sempre salvate come hash SHA-\/256 tramite {\ttfamily \doxylink{classcom_1_1mycompany_1_1server_1_1_utente_d_a_o_a75a633f4e4f550bc19f1d8fa485bf391}{hash\+Password(\+String)}}. Ogni metodo apre e chiude la propria connessione JDBC con try-\/with-\/resources (versione con connessione non persistente). 
+
+\label{doc-func-members}
+\Hypertarget{classcom_1_1mycompany_1_1server_1_1_utente_d_a_o_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classcom_1_1mycompany_1_1server_1_1_utente_d_a_o_ad8b741cdca126fb276544eb1f3af697d}\index{com.mycompany.server.UtenteDAO@{com.mycompany.server.UtenteDAO}!delete@{delete}}
+\index{delete@{delete}!com.mycompany.server.UtenteDAO@{com.mycompany.server.UtenteDAO}}
+\doxysubsubsection{\texorpdfstring{delete()}{delete()}}
+{\footnotesize\ttfamily \label{classcom_1_1mycompany_1_1server_1_1_utente_d_a_o_ad8b741cdca126fb276544eb1f3af697d} 
+boolean com.\+mycompany.\+server.\+Utente\+DAO.\+delete (\begin{DoxyParamCaption}\item[{String}]{username}{}\end{DoxyParamCaption})}
+
+Elimina l\textquotesingle{}utente con l\textquotesingle{}identificatore specificato.
+
+
+\begin{DoxyParams}{Parameters}
+{\em username} & identificatore univoco dell\textquotesingle{}utente da eliminare \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+{\ttfamily true} se l\textquotesingle{}eliminazione ha coinvolto almeno una riga; {\ttfamily false} altrimenti 
+\end{DoxyReturn}
+\Hypertarget{classcom_1_1mycompany_1_1server_1_1_utente_d_a_o_a0dbce36927fc6a70a29fda9c24842d4f}\index{com.mycompany.server.UtenteDAO@{com.mycompany.server.UtenteDAO}!getClassifica@{getClassifica}}
+\index{getClassifica@{getClassifica}!com.mycompany.server.UtenteDAO@{com.mycompany.server.UtenteDAO}}
+\doxysubsubsection{\texorpdfstring{getClassifica()}{getClassifica()}}
+{\footnotesize\ttfamily \label{classcom_1_1mycompany_1_1server_1_1_utente_d_a_o_a0dbce36927fc6a70a29fda9c24842d4f} 
+List$<$ String\mbox{[}$\,$\mbox{]}$>$ com.\+mycompany.\+server.\+Utente\+DAO.\+get\+Classifica (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+Restituisce la classifica globale dei giocatori ordinata per punteggio globale decrescente. Ogni elemento\+: {\ttfamily \mbox{[}punteggio\+Globale, username, vittorie, sconfitte, pareggi, tempo\+Medio\+Ms\mbox{]}}.
+
+\begin{DoxyReturn}{Returns}
+lista di righe della classifica; lista vuota se non ci sono giocatori 
+\end{DoxyReturn}
+\Hypertarget{classcom_1_1mycompany_1_1server_1_1_utente_d_a_o_a75a633f4e4f550bc19f1d8fa485bf391}\index{com.mycompany.server.UtenteDAO@{com.mycompany.server.UtenteDAO}!hashPassword@{hashPassword}}
+\index{hashPassword@{hashPassword}!com.mycompany.server.UtenteDAO@{com.mycompany.server.UtenteDAO}}
+\doxysubsubsection{\texorpdfstring{hashPassword()}{hashPassword()}}
+{\footnotesize\ttfamily \label{classcom_1_1mycompany_1_1server_1_1_utente_d_a_o_a75a633f4e4f550bc19f1d8fa485bf391} 
+String com.\+mycompany.\+server.\+Utente\+DAO.\+hash\+Password (\begin{DoxyParamCaption}\item[{String}]{password}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Calcola l\textquotesingle{}hash SHA-\/256 della password fornita in chiaro.
+
+
+\begin{DoxyParams}{Parameters}
+{\em password} & password in chiaro da hashare \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+stringa esadecimale di 64 caratteri rappresentante l\textquotesingle{}hash SHA-\/256 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Runtime\+Exception} & se l\textquotesingle{}algoritmo SHA-\/256 non è disponibile nella JVM \\
+\hline
+\end{DoxyExceptions}
+\Hypertarget{classcom_1_1mycompany_1_1server_1_1_utente_d_a_o_a65e51c3c89c6faa5f6b13dd6afd46787}\index{com.mycompany.server.UtenteDAO@{com.mycompany.server.UtenteDAO}!insert@{insert}}
+\index{insert@{insert}!com.mycompany.server.UtenteDAO@{com.mycompany.server.UtenteDAO}}
+\doxysubsubsection{\texorpdfstring{insert()}{insert()}}
+{\footnotesize\ttfamily \label{classcom_1_1mycompany_1_1server_1_1_utente_d_a_o_a65e51c3c89c6faa5f6b13dd6afd46787} 
+boolean com.\+mycompany.\+server.\+Utente\+DAO.\+insert (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1_utente}{Utente}}}]{u}{}\end{DoxyParamCaption})}
+
+Inserisce un nuovo utente nel database.
+
+
+\begin{DoxyParams}{Parameters}
+{\em u} & utente da inserire \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+{\ttfamily true} se l\textquotesingle{}inserimento è riuscito; {\ttfamily false} se l\textquotesingle{}username è già in uso 
+\end{DoxyReturn}
+\Hypertarget{classcom_1_1mycompany_1_1server_1_1_utente_d_a_o_ad2e308a5dc3ad9275b670b08974b59f8}\index{com.mycompany.server.UtenteDAO@{com.mycompany.server.UtenteDAO}!isAdmin@{isAdmin}}
+\index{isAdmin@{isAdmin}!com.mycompany.server.UtenteDAO@{com.mycompany.server.UtenteDAO}}
+\doxysubsubsection{\texorpdfstring{isAdmin()}{isAdmin()}}
+{\footnotesize\ttfamily \label{classcom_1_1mycompany_1_1server_1_1_utente_d_a_o_ad2e308a5dc3ad9275b670b08974b59f8} 
+boolean com.\+mycompany.\+server.\+Utente\+DAO.\+is\+Admin (\begin{DoxyParamCaption}\item[{String}]{username}{}\end{DoxyParamCaption})}
+
+Verifica se l\textquotesingle{}utente specificato ha ruolo {\ttfamily ADMIN}.
+
+
+\begin{DoxyParams}{Parameters}
+{\em username} & nome utente da verificare \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+{\ttfamily true} se l\textquotesingle{}utente è amministratore; {\ttfamily false} altrimenti 
+\end{DoxyReturn}
+\Hypertarget{classcom_1_1mycompany_1_1server_1_1_utente_d_a_o_a93ac95e0a99ab8414dd87dc7d70129a4}\index{com.mycompany.server.UtenteDAO@{com.mycompany.server.UtenteDAO}!registra@{registra}}
+\index{registra@{registra}!com.mycompany.server.UtenteDAO@{com.mycompany.server.UtenteDAO}}
+\doxysubsubsection{\texorpdfstring{registra()}{registra()}}
+{\footnotesize\ttfamily \label{classcom_1_1mycompany_1_1server_1_1_utente_d_a_o_a93ac95e0a99ab8414dd87dc7d70129a4} 
+boolean com.\+mycompany.\+server.\+Utente\+DAO.\+registra (\begin{DoxyParamCaption}\item[{String}]{username}{, }\item[{String}]{password}{}\end{DoxyParamCaption})}
+
+Registra un nuovo giocatore con ruolo {\ttfamily GIOCATORE}. La password viene automaticamente hashata con SHA-\/256.
+
+
+\begin{DoxyParams}{Parameters}
+{\em username} & nome utente desiderato \\
+\hline
+{\em password} & password in chiaro scelta dall\textquotesingle{}utente \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+{\ttfamily true} se la registrazione è riuscita; {\ttfamily false} se l\textquotesingle{}username è già in uso 
+\end{DoxyReturn}
+\Hypertarget{classcom_1_1mycompany_1_1server_1_1_utente_d_a_o_a1bbb566eb816fc0b403b283e95334582}\index{com.mycompany.server.UtenteDAO@{com.mycompany.server.UtenteDAO}!selectAll@{selectAll}}
+\index{selectAll@{selectAll}!com.mycompany.server.UtenteDAO@{com.mycompany.server.UtenteDAO}}
+\doxysubsubsection{\texorpdfstring{selectAll()}{selectAll()}}
+{\footnotesize\ttfamily \label{classcom_1_1mycompany_1_1server_1_1_utente_d_a_o_a1bbb566eb816fc0b403b283e95334582} 
+List$<$ \mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1_utente}{Utente}} $>$ com.\+mycompany.\+server.\+Utente\+DAO.\+select\+All (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+Restituisce tutti gli utenti registrati nel sistema.
+
+\begin{DoxyReturn}{Returns}
+lista di tutti gli utenti; lista vuota se la tabella è vuota 
+\end{DoxyReturn}
+\Hypertarget{classcom_1_1mycompany_1_1server_1_1_utente_d_a_o_a07053eaf52373e98615926acd0255d21}\index{com.mycompany.server.UtenteDAO@{com.mycompany.server.UtenteDAO}!selectByUsername@{selectByUsername}}
+\index{selectByUsername@{selectByUsername}!com.mycompany.server.UtenteDAO@{com.mycompany.server.UtenteDAO}}
+\doxysubsubsection{\texorpdfstring{selectByUsername()}{selectByUsername()}}
+{\footnotesize\ttfamily \label{classcom_1_1mycompany_1_1server_1_1_utente_d_a_o_a07053eaf52373e98615926acd0255d21} 
+Optional$<$ \mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1_utente}{Utente}} $>$ com.\+mycompany.\+server.\+Utente\+DAO.\+select\+By\+Username (\begin{DoxyParamCaption}\item[{String}]{username}{}\end{DoxyParamCaption})}
+
+Cerca un utente per username.
+
+
+\begin{DoxyParams}{Parameters}
+{\em username} & identificatore univoco dell\textquotesingle{}utente \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+{\ttfamily \doxylink{}{Optional}} con l\textquotesingle{}utente se trovato, vuoto altrimenti 
+\end{DoxyReturn}
+\Hypertarget{classcom_1_1mycompany_1_1server_1_1_utente_d_a_o_ab37051b1ac4da2467618ad883ac42242}\index{com.mycompany.server.UtenteDAO@{com.mycompany.server.UtenteDAO}!update@{update}}
+\index{update@{update}!com.mycompany.server.UtenteDAO@{com.mycompany.server.UtenteDAO}}
+\doxysubsubsection{\texorpdfstring{update()}{update()}}
+{\footnotesize\ttfamily \label{classcom_1_1mycompany_1_1server_1_1_utente_d_a_o_ab37051b1ac4da2467618ad883ac42242} 
+boolean com.\+mycompany.\+server.\+Utente\+DAO.\+update (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1_utente}{Utente}}}]{u}{}\end{DoxyParamCaption})}
+
+Aggiorna password e punteggio globale di un utente esistente.
+
+
+\begin{DoxyParams}{Parameters}
+{\em u} & utente con l\textquotesingle{}username di un utente gia\textquotesingle{} presente nel db e con il nuovo stato da aggiornare \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+{\ttfamily true} se la modifica ha coinvolto almeno una riga; {\ttfamily false} altrimenti 
+\end{DoxyReturn}
+\Hypertarget{classcom_1_1mycompany_1_1server_1_1_utente_d_a_o_abc6ff8ab921769e5d1337ca0fb986718}\index{com.mycompany.server.UtenteDAO@{com.mycompany.server.UtenteDAO}!verificaLogin@{verificaLogin}}
+\index{verificaLogin@{verificaLogin}!com.mycompany.server.UtenteDAO@{com.mycompany.server.UtenteDAO}}
+\doxysubsubsection{\texorpdfstring{verificaLogin()}{verificaLogin()}}
+{\footnotesize\ttfamily \label{classcom_1_1mycompany_1_1server_1_1_utente_d_a_o_abc6ff8ab921769e5d1337ca0fb986718} 
+boolean com.\+mycompany.\+server.\+Utente\+DAO.\+verifica\+Login (\begin{DoxyParamCaption}\item[{String}]{username}{, }\item[{String}]{password}{}\end{DoxyParamCaption})}
+
+Verifica le credenziali di un utente confrontando la password fornita (hashata) con quella memorizzata nel database.
+
+
+\begin{DoxyParams}{Parameters}
+{\em username} & nome utente da verificare \\
+\hline
+{\em password} & password in chiaro da verificare \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+{\ttfamily true} se le credenziali sono corrette; {\ttfamily false} altrimenti 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+server/src/main/java/com/mycompany/server/Utente\+DAO.\+java\end{DoxyCompactItemize}

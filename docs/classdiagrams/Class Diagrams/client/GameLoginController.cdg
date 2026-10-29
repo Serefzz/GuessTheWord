@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ClassDiagram name="Multi-file class diagram">
+  <ClassDiagramComponents>
+    <Class name="GameLoginController" package="com.mycompany.client" visibility="public" xPosition="20.0" yPosition="20.0">
+      <Fields>
+        <Field name="titoloLabel" type="Label" visibility="private"/>
+        <Field name="usernameField" type="TextField" visibility="private"/>
+        <Field name="passwordField" type="PasswordField" visibility="private"/>
+        <Field name="erroreLabel" type="Label" visibility="private"/>
+        <Field name="btnLogin" type="Button" visibility="private"/>
+        <Field name="btnRegistra" type="Button" visibility="private"/>
+        <Field name="connessioneOk" type="ServerConnection" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="initialize" returnType="void" visibility="public"/>
+        <Method name="handleLogin" returnType="void" visibility="private"/>
+        <Method name="handleRegistra" returnType="void" visibility="private"/>
+        <Method name="vaiSuccessivo" returnType="void" visibility="private">
+          <Argument type="KeyEvent" name="event"/>
+        </Method>
+        <Method name="autentica" returnType="void" visibility="private">
+          <Argument type="Tipo" name="tipo"/>
+        </Method>
+        <Method name="apriGameWindow" returnType="void" visibility="private">
+          <Argument type="String" name="username"/>
+        </Method>
+        <Method name="leggiHost" returnType="String" visibility="private"/>
+        <Method name="leggiPorta" returnType="int" visibility="private"/>
+        <Method name="leggiProps" returnType="Properties" visibility="private"/>
+      </Methods>
+    </Class>
+    <Class name="ServerConnection" package="com.mycompany.client" visibility="public" xPosition="320.0" yPosition="20.0">
+      <Fields>
+        <Field name="socket" type="Socket" visibility="private" isFinal="true"/>
+        <Field name="out" type="BufferedWriter" visibility="private" isFinal="true"/>
+        <Field name="in" type="BufferedReader" visibility="private" isFinal="true"/>
+        <Field name="listener" type="MessageListener" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="String" name="host"/>
+          <Argument type="int" name="port"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="avviaRicezione" returnType="void" visibility="public"/>
+        <Method name="leggiMessaggio" returnType="Messaggio" visibility="public"/>
+        <Method name="invia" returnType="void" visibility="public">
+          <Argument type="Messaggio" name="msg"/>
+        </Method>
+        <Method name="chiudi" returnType="void" visibility="public"/>
+        <Method name="setListener" returnType="void" visibility="public">
+          <Argument type="MessageListener" name="listener"/>
+        </Method>
+      </Methods>
+    </Class>
+  </ClassDiagramComponents>
+  <ClassDiagramRelations>
+    <HasRelation name="connessioneOk" source="com.mycompany.client.GameLoginController" target="com.mycompany.client.ServerConnection" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+  </ClassDiagramRelations>
+</ClassDiagram>

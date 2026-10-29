@@ -1,0 +1,90 @@
+\doxysection{com.\+mycompany.\+server.\+Documento\+DAO Class Reference}
+\hypertarget{classcom_1_1mycompany_1_1server_1_1_documento_d_a_o}{}\label{classcom_1_1mycompany_1_1server_1_1_documento_d_a_o}\index{com.mycompany.server.DocumentoDAO@{com.mycompany.server.DocumentoDAO}}
+Inheritance diagram for com.\+mycompany.\+server.\+Documento\+DAO\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classcom_1_1mycompany_1_1server_1_1_documento_d_a_o}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+List$<$ String\mbox{[}$\,$\mbox{]}$>$ \mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1_documento_d_a_o_a478d9f497e80fc1f4bc448e7ec9dc80d}{select\+All}} ()
+\item 
+Optional$<$ String\mbox{[}$\,$\mbox{]}$>$ \mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1_documento_d_a_o_a04fb9409ed6223d53a9f40e4ff83d321}{select\+By\+Id}} (int...\+id)
+\item 
+boolean \mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1_documento_d_a_o_af8d22ed8dbe5a8c53d2943ddcb670665}{insert}} (String\mbox{[}$\,$\mbox{]} row)
+\item 
+int \mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1_documento_d_a_o_abbef7eb7a62fe6a72d6ddcd954579999}{inserisci\+Documento}} (String path\+Sorgente)
+\item 
+\Hypertarget{classcom_1_1mycompany_1_1server_1_1_documento_d_a_o_a3a3c6dee2ae803258d4e13cdef5d2f8a}\label{classcom_1_1mycompany_1_1server_1_1_documento_d_a_o_a3a3c6dee2ae803258d4e13cdef5d2f8a} 
+boolean {\bfseries update} (String\mbox{[}$\,$\mbox{]} row)
+\item 
+boolean \mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1_documento_d_a_o_aecafa8aaa9bcd6fd1815004916edd6f2}{delete}} (int id)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{interfacecom_1_1mycompany_1_1server_1_1_d_a_oid}{com.\+mycompany.\+server.\+DAOid$<$ String\mbox{[}$\,$\mbox{]}$>$}}}
+\begin{DoxyCompactItemize}
+\item 
+List$<$ T $>$ \mbox{\hyperlink{interfacecom_1_1mycompany_1_1server_1_1_d_a_oid_a0c041940bd85c2bbc7e36fbd761874b5}{select\+All}} ()
+\item 
+Optional$<$ T $>$ \mbox{\hyperlink{interfacecom_1_1mycompany_1_1server_1_1_d_a_oid_ace5ef35a6bf567ea6a5d1a0e76777fc3}{select\+By\+Id}} (int...\+id)
+\item 
+boolean \mbox{\hyperlink{interfacecom_1_1mycompany_1_1server_1_1_d_a_oid_a4cecc6baf91ba7fcc3333026c4467109}{insert}} (T t)
+\item 
+boolean \mbox{\hyperlink{interfacecom_1_1mycompany_1_1server_1_1_d_a_oid_a54aa218a63a66e6b4c4e003c13fb45a2}{update}} (T t)
+\item 
+boolean \mbox{\hyperlink{interfacecom_1_1mycompany_1_1server_1_1_d_a_oid_a1ce020036323d25a9f79e753eaf94b8c}{delete}} (int id)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+DAO per la tabella "{}\+Documento"{}. Gestisce l\textquotesingle{}inserimento dei documenti nel DB e la copia dei file sorgente nella cartella locale data/documenti/. 
+
+\label{doc-func-members}
+\Hypertarget{classcom_1_1mycompany_1_1server_1_1_documento_d_a_o_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classcom_1_1mycompany_1_1server_1_1_documento_d_a_o_aecafa8aaa9bcd6fd1815004916edd6f2}\index{com.mycompany.server.DocumentoDAO@{com.mycompany.server.DocumentoDAO}!delete@{delete}}
+\index{delete@{delete}!com.mycompany.server.DocumentoDAO@{com.mycompany.server.DocumentoDAO}}
+\doxysubsubsection{\texorpdfstring{delete()}{delete()}}
+{\footnotesize\ttfamily \label{classcom_1_1mycompany_1_1server_1_1_documento_d_a_o_aecafa8aaa9bcd6fd1815004916edd6f2} 
+boolean com.\+mycompany.\+server.\+Documento\+DAO.\+delete (\begin{DoxyParamCaption}\item[{int}]{id}{}\end{DoxyParamCaption})}
+
+Elimina il documento relativo all\textquotesingle{}id. \Hypertarget{classcom_1_1mycompany_1_1server_1_1_documento_d_a_o_abbef7eb7a62fe6a72d6ddcd954579999}\index{com.mycompany.server.DocumentoDAO@{com.mycompany.server.DocumentoDAO}!inserisciDocumento@{inserisciDocumento}}
+\index{inserisciDocumento@{inserisciDocumento}!com.mycompany.server.DocumentoDAO@{com.mycompany.server.DocumentoDAO}}
+\doxysubsubsection{\texorpdfstring{inserisciDocumento()}{inserisciDocumento()}}
+{\footnotesize\ttfamily \label{classcom_1_1mycompany_1_1server_1_1_documento_d_a_o_abbef7eb7a62fe6a72d6ddcd954579999} 
+int com.\+mycompany.\+server.\+Documento\+DAO.\+inserisci\+Documento (\begin{DoxyParamCaption}\item[{String}]{path\+Sorgente}{}\end{DoxyParamCaption})}
+
+Inserisce un documento nel DB e salva le analisi TF come file serializzati in data/analisi/.
+
+
+\begin{DoxyParams}{Parameters}
+{\em path\+Sorgente} & del documento da salvare\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+intero corrispondente all\textquotesingle{}esito dell\textquotesingle{}operazione\+: \texorpdfstring{$>$}{>}= 0 se e\textquotesingle{} andata bene, -\/1 se il documento era gia\textquotesingle{} presente nel db o -\/2 se c\textquotesingle{}e\textquotesingle{} stato un altro problema 
+\end{DoxyReturn}
+\Hypertarget{classcom_1_1mycompany_1_1server_1_1_documento_d_a_o_af8d22ed8dbe5a8c53d2943ddcb670665}\index{com.mycompany.server.DocumentoDAO@{com.mycompany.server.DocumentoDAO}!insert@{insert}}
+\index{insert@{insert}!com.mycompany.server.DocumentoDAO@{com.mycompany.server.DocumentoDAO}}
+\doxysubsubsection{\texorpdfstring{insert()}{insert()}}
+{\footnotesize\ttfamily \label{classcom_1_1mycompany_1_1server_1_1_documento_d_a_o_af8d22ed8dbe5a8c53d2943ddcb670665} 
+boolean com.\+mycompany.\+server.\+Documento\+DAO.\+insert (\begin{DoxyParamCaption}\item[{String\mbox{[}$\,$\mbox{]}}]{row}{}\end{DoxyParamCaption})}
+
+Inserisce un documento\+: row\mbox{[}0\mbox{]} = path sorgente originale. Copia il file in data/documenti/ e registra il record nel DB. \Hypertarget{classcom_1_1mycompany_1_1server_1_1_documento_d_a_o_a478d9f497e80fc1f4bc448e7ec9dc80d}\index{com.mycompany.server.DocumentoDAO@{com.mycompany.server.DocumentoDAO}!selectAll@{selectAll}}
+\index{selectAll@{selectAll}!com.mycompany.server.DocumentoDAO@{com.mycompany.server.DocumentoDAO}}
+\doxysubsubsection{\texorpdfstring{selectAll()}{selectAll()}}
+{\footnotesize\ttfamily \label{classcom_1_1mycompany_1_1server_1_1_documento_d_a_o_a478d9f497e80fc1f4bc448e7ec9dc80d} 
+List$<$ String\mbox{[}$\,$\mbox{]}$>$ com.\+mycompany.\+server.\+Documento\+DAO.\+select\+All (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+Restituisce tutte le informazioni su i documenti. Ogni riga\+: \mbox{[}id, path\+\_\+sorgente\mbox{]} \Hypertarget{classcom_1_1mycompany_1_1server_1_1_documento_d_a_o_a04fb9409ed6223d53a9f40e4ff83d321}\index{com.mycompany.server.DocumentoDAO@{com.mycompany.server.DocumentoDAO}!selectById@{selectById}}
+\index{selectById@{selectById}!com.mycompany.server.DocumentoDAO@{com.mycompany.server.DocumentoDAO}}
+\doxysubsubsection{\texorpdfstring{selectById()}{selectById()}}
+{\footnotesize\ttfamily \label{classcom_1_1mycompany_1_1server_1_1_documento_d_a_o_a04fb9409ed6223d53a9f40e4ff83d321} 
+Optional$<$ String\mbox{[}$\,$\mbox{]}$>$ com.\+mycompany.\+server.\+Documento\+DAO.\+select\+By\+Id (\begin{DoxyParamCaption}\item[{int...}]{id}{}\end{DoxyParamCaption})}
+
+Restituisce tutte le informazioni sul documento relativo all\textquotesingle{}id corrispondente o un optional vuoto. Ogni riga\+: \mbox{[}id, path\+\_\+sorgente\mbox{]} 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+server/src/main/java/com/mycompany/server/Documento\+DAO.\+java\end{DoxyCompactItemize}

@@ -1,0 +1,111 @@
+\doxysection{com.\+mycompany.\+client.\+Server\+Connection Class Reference}
+\hypertarget{classcom_1_1mycompany_1_1client_1_1_server_connection}{}\label{classcom_1_1mycompany_1_1client_1_1_server_connection}\index{com.mycompany.client.ServerConnection@{com.mycompany.client.ServerConnection}}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classcom_1_1mycompany_1_1client_1_1_server_connection_a800d71c867feffe2f72e7c7c4467708d}{Server\+Connection}} (String host, int port)  throws IOException 
+\item 
+void \mbox{\hyperlink{classcom_1_1mycompany_1_1client_1_1_server_connection_a6fba98c8b7918c17702af85a876b8e9a}{avvia\+Ricezione}} ()
+\item 
+\mbox{\hyperlink{classcom_1_1mycompany_1_1common_1_1_messaggio}{Messaggio}} \mbox{\hyperlink{classcom_1_1mycompany_1_1client_1_1_server_connection_a075498f8e955468de9ba7e442dc20c92}{leggi\+Messaggio}} ()  throws IOException 
+\item 
+void \mbox{\hyperlink{classcom_1_1mycompany_1_1client_1_1_server_connection_a8d3e72c08fcf965105fe78c050d648db}{invia}} (\mbox{\hyperlink{classcom_1_1mycompany_1_1common_1_1_messaggio}{Messaggio}} msg)
+\item 
+void \mbox{\hyperlink{classcom_1_1mycompany_1_1client_1_1_server_connection_acb6ffeb7786b1dc8a76045dd82a584fe}{chiudi}} ()
+\item 
+void \mbox{\hyperlink{classcom_1_1mycompany_1_1client_1_1_server_connection_ae457b18abd08c8649e24965ea8abbca1}{set\+Listener}} (\mbox{\hyperlink{interfacecom_1_1mycompany_1_1client_1_1_message_listener}{Message\+Listener}} listener)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Gestisce la connessione socket con il server di gioco.
+
+Offre due modalità di lettura\+: {\ttfamily \doxylink{classcom_1_1mycompany_1_1client_1_1_server_connection_a075498f8e955468de9ba7e442dc20c92}{leggi\+Messaggio()}} per la lettura sincrona usata solo durante il login, e {\ttfamily \doxylink{classcom_1_1mycompany_1_1client_1_1_server_connection_a6fba98c8b7918c17702af85a876b8e9a}{avvia\+Ricezione()}} per il thread daemon in background che notifica il {\ttfamily \doxylink{interfacecom_1_1mycompany_1_1client_1_1_message_listener}{Message\+Listener}} tramite {\ttfamily Platform.\+run\+Later()}. 
+
+\label{doc-constructors}
+\Hypertarget{classcom_1_1mycompany_1_1client_1_1_server_connection_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classcom_1_1mycompany_1_1client_1_1_server_connection_a800d71c867feffe2f72e7c7c4467708d}\index{com.mycompany.client.ServerConnection@{com.mycompany.client.ServerConnection}!ServerConnection@{ServerConnection}}
+\index{ServerConnection@{ServerConnection}!com.mycompany.client.ServerConnection@{com.mycompany.client.ServerConnection}}
+\doxysubsubsection{\texorpdfstring{ServerConnection()}{ServerConnection()}}
+{\footnotesize\ttfamily \label{classcom_1_1mycompany_1_1client_1_1_server_connection_a800d71c867feffe2f72e7c7c4467708d} 
+com.\+mycompany.\+client.\+Server\+Connection.\+Server\+Connection (\begin{DoxyParamCaption}\item[{String}]{host}{, }\item[{int}]{port}{}\end{DoxyParamCaption}) throws IOException}
+
+Apre una connessione verso il server e inizializza i flussi UTF-\/8.
+
+
+\begin{DoxyParams}{Parameters}
+{\em host} & indirizzo del server (es. {\ttfamily "{}localhost"{}}) \\
+\hline
+{\em port} & porta del server (es. {\ttfamily 5000}) \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em IOException} & se la connessione non può essere stabilita \\
+\hline
+\end{DoxyExceptions}
+
+
+\label{doc-func-members}
+\Hypertarget{classcom_1_1mycompany_1_1client_1_1_server_connection_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classcom_1_1mycompany_1_1client_1_1_server_connection_a6fba98c8b7918c17702af85a876b8e9a}\index{com.mycompany.client.ServerConnection@{com.mycompany.client.ServerConnection}!avviaRicezione@{avviaRicezione}}
+\index{avviaRicezione@{avviaRicezione}!com.mycompany.client.ServerConnection@{com.mycompany.client.ServerConnection}}
+\doxysubsubsection{\texorpdfstring{avviaRicezione()}{avviaRicezione()}}
+{\footnotesize\ttfamily \label{classcom_1_1mycompany_1_1client_1_1_server_connection_a6fba98c8b7918c17702af85a876b8e9a} 
+void com.\+mycompany.\+client.\+Server\+Connection.\+avvia\+Ricezione (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+Avvia un thread daemon che legge continuamente i messaggi dal server e notifica il {\ttfamily \doxylink{interfacecom_1_1mycompany_1_1client_1_1_message_listener}{Message\+Listener}} su {\ttfamily Platform.\+run\+Later()}. Deve essere chiamato dopo il login avvenuto con successo. \Hypertarget{classcom_1_1mycompany_1_1client_1_1_server_connection_acb6ffeb7786b1dc8a76045dd82a584fe}\index{com.mycompany.client.ServerConnection@{com.mycompany.client.ServerConnection}!chiudi@{chiudi}}
+\index{chiudi@{chiudi}!com.mycompany.client.ServerConnection@{com.mycompany.client.ServerConnection}}
+\doxysubsubsection{\texorpdfstring{chiudi()}{chiudi()}}
+{\footnotesize\ttfamily \label{classcom_1_1mycompany_1_1client_1_1_server_connection_acb6ffeb7786b1dc8a76045dd82a584fe} 
+void com.\+mycompany.\+client.\+Server\+Connection.\+chiudi (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+Chiude il socket e i flussi associati. \Hypertarget{classcom_1_1mycompany_1_1client_1_1_server_connection_a8d3e72c08fcf965105fe78c050d648db}\index{com.mycompany.client.ServerConnection@{com.mycompany.client.ServerConnection}!invia@{invia}}
+\index{invia@{invia}!com.mycompany.client.ServerConnection@{com.mycompany.client.ServerConnection}}
+\doxysubsubsection{\texorpdfstring{invia()}{invia()}}
+{\footnotesize\ttfamily \label{classcom_1_1mycompany_1_1client_1_1_server_connection_a8d3e72c08fcf965105fe78c050d648db} 
+void com.\+mycompany.\+client.\+Server\+Connection.\+invia (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classcom_1_1mycompany_1_1common_1_1_messaggio}{Messaggio}}}]{msg}{}\end{DoxyParamCaption})}
+
+Invia un messaggio al server come riga di testo.
+
+
+\begin{DoxyParams}{Parameters}
+{\em msg} & messaggio da inviare \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classcom_1_1mycompany_1_1client_1_1_server_connection_a075498f8e955468de9ba7e442dc20c92}\index{com.mycompany.client.ServerConnection@{com.mycompany.client.ServerConnection}!leggiMessaggio@{leggiMessaggio}}
+\index{leggiMessaggio@{leggiMessaggio}!com.mycompany.client.ServerConnection@{com.mycompany.client.ServerConnection}}
+\doxysubsubsection{\texorpdfstring{leggiMessaggio()}{leggiMessaggio()}}
+{\footnotesize\ttfamily \label{classcom_1_1mycompany_1_1client_1_1_server_connection_a075498f8e955468de9ba7e442dc20c92} 
+\mbox{\hyperlink{classcom_1_1mycompany_1_1common_1_1_messaggio}{Messaggio}} com.\+mycompany.\+client.\+Server\+Connection.\+leggi\+Messaggio (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) throws IOException}
+
+Legge un singolo messaggio dal server in modo sincrono. Usato solo durante la fase di login/registrazione.
+
+\begin{DoxyReturn}{Returns}
+messaggio ricevuto dal server 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em IOException} & se la connessione viene chiusa o si verifica un errore di rete \\
+\hline
+\end{DoxyExceptions}
+\Hypertarget{classcom_1_1mycompany_1_1client_1_1_server_connection_ae457b18abd08c8649e24965ea8abbca1}\index{com.mycompany.client.ServerConnection@{com.mycompany.client.ServerConnection}!setListener@{setListener}}
+\index{setListener@{setListener}!com.mycompany.client.ServerConnection@{com.mycompany.client.ServerConnection}}
+\doxysubsubsection{\texorpdfstring{setListener()}{setListener()}}
+{\footnotesize\ttfamily \label{classcom_1_1mycompany_1_1client_1_1_server_connection_ae457b18abd08c8649e24965ea8abbca1} 
+void com.\+mycompany.\+client.\+Server\+Connection.\+set\+Listener (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{interfacecom_1_1mycompany_1_1client_1_1_message_listener}{Message\+Listener}}}]{listener}{}\end{DoxyParamCaption})}
+
+Imposta il listener che riceverà i messaggi in modalità asincrona.
+
+
+\begin{DoxyParams}{Parameters}
+{\em listener} & oggetto che implementa {\ttfamily \doxylink{interfacecom_1_1mycompany_1_1client_1_1_message_listener}{Message\+Listener}} \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+client/src/main/java/com/mycompany/client/Server\+Connection.\+java\end{DoxyCompactItemize}

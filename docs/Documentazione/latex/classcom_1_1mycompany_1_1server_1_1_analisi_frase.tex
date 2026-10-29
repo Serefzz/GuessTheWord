@@ -1,0 +1,76 @@
+\doxysection{com.\+mycompany.\+server.\+Analisi\+Frase Class Reference}
+\hypertarget{classcom_1_1mycompany_1_1server_1_1_analisi_frase}{}\label{classcom_1_1mycompany_1_1server_1_1_analisi_frase}\index{com.mycompany.server.AnalisiFrase@{com.mycompany.server.AnalisiFrase}}
+Inheritance diagram for com.\+mycompany.\+server.\+Analisi\+Frase\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classcom_1_1mycompany_1_1server_1_1_analisi_frase}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1_analisi_frase_ab76ef241dd5ddf5dbbff6bedbc09e135}{Analisi\+Frase}} (String frase, Map$<$ String, Long $>$ tf)
+\item 
+String \mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1_analisi_frase_acf591d2e4ad94111bf6336453e91a945}{get\+Frase}} ()
+\item 
+Map$<$ String, Long $>$ \mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1_analisi_frase_a6bd93e60908931219c033db49f5ab057}{get\+Tf}} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Modella l\textquotesingle{}analisi testuale di una singola frase estratta da un documento.
+
+Contiene il testo della frase e la mappa delle relative frequenze delle parole (Term Frequency), generalmente calcolate da {\ttfamily \doxylink{classcom_1_1mycompany_1_1server_1_1_document_analyzer_ac1cff2aa0b4f5306dcbc333de209bb07}{Document\+Analyzer\#analizza(\+String)}}.
+
+Implementa {\ttfamily \doxylink{}{Serializable}} per consentire la serializzazione delle analisi.
+
+\label{doc-constructors}
+\Hypertarget{classcom_1_1mycompany_1_1server_1_1_analisi_frase_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classcom_1_1mycompany_1_1server_1_1_analisi_frase_ab76ef241dd5ddf5dbbff6bedbc09e135}\index{com.mycompany.server.AnalisiFrase@{com.mycompany.server.AnalisiFrase}!AnalisiFrase@{AnalisiFrase}}
+\index{AnalisiFrase@{AnalisiFrase}!com.mycompany.server.AnalisiFrase@{com.mycompany.server.AnalisiFrase}}
+\doxysubsubsection{\texorpdfstring{AnalisiFrase()}{AnalisiFrase()}}
+{\footnotesize\ttfamily \label{classcom_1_1mycompany_1_1server_1_1_analisi_frase_ab76ef241dd5ddf5dbbff6bedbc09e135} 
+com.\+mycompany.\+server.\+Analisi\+Frase.\+Analisi\+Frase (\begin{DoxyParamCaption}\item[{String}]{frase}{, }\item[{Map$<$ String, Long $>$}]{tf}{}\end{DoxyParamCaption})}
+
+Mappa delle frequenze (Term Frequency) per ciascuna parola valida della frase. Costruisce un\textquotesingle{}istanza di {\ttfamily Analisi\+Frase} con la frase indicata e la relativa mappa TF.
+
+
+\begin{DoxyParams}{Parameters}
+{\em frase} & testo della frase estratta dal documento \\
+\hline
+{\em tf} & mappa contenente le parole della frase e la loro frequenza (Term Frequency) \\
+\hline
+\end{DoxyParams}
+
+
+\label{doc-func-members}
+\Hypertarget{classcom_1_1mycompany_1_1server_1_1_analisi_frase_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classcom_1_1mycompany_1_1server_1_1_analisi_frase_acf591d2e4ad94111bf6336453e91a945}\index{com.mycompany.server.AnalisiFrase@{com.mycompany.server.AnalisiFrase}!getFrase@{getFrase}}
+\index{getFrase@{getFrase}!com.mycompany.server.AnalisiFrase@{com.mycompany.server.AnalisiFrase}}
+\doxysubsubsection{\texorpdfstring{getFrase()}{getFrase()}}
+{\footnotesize\ttfamily \label{classcom_1_1mycompany_1_1server_1_1_analisi_frase_acf591d2e4ad94111bf6336453e91a945} 
+String com.\+mycompany.\+server.\+Analisi\+Frase.\+get\+Frase (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+Restituisce il testo della frase analizzata.
+
+\begin{DoxyReturn}{Returns}
+testo della frase 
+\end{DoxyReturn}
+\Hypertarget{classcom_1_1mycompany_1_1server_1_1_analisi_frase_a6bd93e60908931219c033db49f5ab057}\index{com.mycompany.server.AnalisiFrase@{com.mycompany.server.AnalisiFrase}!getTf@{getTf}}
+\index{getTf@{getTf}!com.mycompany.server.AnalisiFrase@{com.mycompany.server.AnalisiFrase}}
+\doxysubsubsection{\texorpdfstring{getTf()}{getTf()}}
+{\footnotesize\ttfamily \label{classcom_1_1mycompany_1_1server_1_1_analisi_frase_a6bd93e60908931219c033db49f5ab057} 
+Map$<$ String, Long $>$ com.\+mycompany.\+server.\+Analisi\+Frase.\+get\+Tf (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+Restituisce la mappa delle frequenze delle parole (Term Frequency) della frase.
+
+\begin{DoxyReturn}{Returns}
+mappa con le parole come chiavi e i relativi valori di frequenza percentuale 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+server/src/main/java/com/mycompany/server/Analisi\+Frase.\+java\end{DoxyCompactItemize}

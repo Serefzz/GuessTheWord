@@ -1,0 +1,171 @@
+\doxysection{com.\+mycompany.\+server.\+Client\+Handler Class Reference}
+\hypertarget{classcom_1_1mycompany_1_1server_1_1_client_handler}{}\label{classcom_1_1mycompany_1_1server_1_1_client_handler}\index{com.mycompany.server.ClientHandler@{com.mycompany.server.ClientHandler}}
+Inheritance diagram for com.\+mycompany.\+server.\+Client\+Handler\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classcom_1_1mycompany_1_1server_1_1_client_handler}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1_client_handler_a72a2678586e63e61a0f80133ca731bda}{Client\+Handler}} (Socket socket, \mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1_game_server}{Game\+Server}} server)
+\item 
+void \mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1_client_handler_a674decdd76780d038c75527125c61f41}{run}} ()
+\item 
+synchronized void \mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1_client_handler_a10a14e2ab4373a7cb8e159cfd4b0a1b9}{invia}} (\mbox{\hyperlink{classcom_1_1mycompany_1_1common_1_1_messaggio}{Messaggio}} msg)
+\item 
+synchronized void \mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1_client_handler_ac8f4a75ca564b6a18d37d9e1fb357abe}{disconnetti}} ()
+\item 
+String \mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1_client_handler_abe7cb34b44c4d14fcad0be35522d28d9}{get\+Username}} ()
+\item 
+void \mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1_client_handler_a45d8a006c93b5c4a67bf69a5ce60637a}{set\+Avversario}} (\mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1_client_handler_a72a2678586e63e61a0f80133ca731bda}{Client\+Handler}} a)
+\item 
+void \mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1_client_handler_aa2d2a59ed12d1e14699586a5270267d3}{unset\+Avversario}} ()
+\item 
+void \mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1_client_handler_af4a86ed0427a9a0a28bd7e907a1c1c27}{set\+Partita}} (\mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1_partita}{Partita}} p)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static List$<$ List$<$ \mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1_analisi_frase}{Analisi\+Frase}} $>$ $>$ \mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1_client_handler_ac996ca1d669b9a4120341e3558b78cfc}{get\+Tf\+Documenti}} ()
+\item 
+static List$<$ \mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1_analisi_frase}{Analisi\+Frase}} $>$ \mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1_client_handler_a3ea1251140352250da28bbf2b5e5f521}{get\+Tf\+Frasi}} ()
+\item 
+static void \mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1_client_handler_a3236cee666ef77dc41c712989894e150}{set\+Tf\+Documenti}} (List$<$ List$<$ \mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1_analisi_frase}{Analisi\+Frase}} $>$ $>$ n)
+\item 
+static void \mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1_client_handler_a9860a11f1e4c7a343df69fbc2b861857}{set\+Tf\+Frasi}} (List$<$ \mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1_analisi_frase}{Analisi\+Frase}} $>$ m)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Gestisce la comunicazione con un singolo client connesso.
+
+Ogni istanza gira in un thread separato avviato da {\ttfamily \doxylink{classcom_1_1mycompany_1_1server_1_1_game_server}{Game\+Server}}. L\textquotesingle{}avversario viene impostato tramite {\ttfamily \doxylink{classcom_1_1mycompany_1_1server_1_1_client_handler_a45d8a006c93b5c4a67bf69a5ce60637a}{set\+Avversario(\+Client\+Handler)}} prima dell\textquotesingle{}avvio del thread.
+
+Le frasi e le TF sono condivise staticamente tra tutti gli handler e vengono impostate dall\textquotesingle{}admin tramite {\ttfamily \doxylink{classcom_1_1mycompany_1_1server_1_1_admin_controller}{Admin\+Controller}}. 
+
+\label{doc-constructors}
+\Hypertarget{classcom_1_1mycompany_1_1server_1_1_client_handler_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classcom_1_1mycompany_1_1server_1_1_client_handler_a72a2678586e63e61a0f80133ca731bda}\index{com.mycompany.server.ClientHandler@{com.mycompany.server.ClientHandler}!ClientHandler@{ClientHandler}}
+\index{ClientHandler@{ClientHandler}!com.mycompany.server.ClientHandler@{com.mycompany.server.ClientHandler}}
+\doxysubsubsection{\texorpdfstring{ClientHandler()}{ClientHandler()}}
+{\footnotesize\ttfamily \label{classcom_1_1mycompany_1_1server_1_1_client_handler_a72a2678586e63e61a0f80133ca731bda} 
+com.\+mycompany.\+server.\+Client\+Handler.\+Client\+Handler (\begin{DoxyParamCaption}\item[{Socket}]{socket}{, }\item[{\mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1_game_server}{Game\+Server}}}]{server}{}\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em socket} & socket TCP del client connesso \\
+\hline
+\end{DoxyParams}
+
+
+\label{doc-func-members}
+\Hypertarget{classcom_1_1mycompany_1_1server_1_1_client_handler_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classcom_1_1mycompany_1_1server_1_1_client_handler_ac8f4a75ca564b6a18d37d9e1fb357abe}\index{com.mycompany.server.ClientHandler@{com.mycompany.server.ClientHandler}!disconnetti@{disconnetti}}
+\index{disconnetti@{disconnetti}!com.mycompany.server.ClientHandler@{com.mycompany.server.ClientHandler}}
+\doxysubsubsection{\texorpdfstring{disconnetti()}{disconnetti()}}
+{\footnotesize\ttfamily \label{classcom_1_1mycompany_1_1server_1_1_client_handler_ac8f4a75ca564b6a18d37d9e1fb357abe} 
+synchronized void com.\+mycompany.\+server.\+Client\+Handler.\+disconnetti (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+Chiude il socket e imposta {\ttfamily connesso = false}. \Hypertarget{classcom_1_1mycompany_1_1server_1_1_client_handler_ac996ca1d669b9a4120341e3558b78cfc}\index{com.mycompany.server.ClientHandler@{com.mycompany.server.ClientHandler}!getTfDocumenti@{getTfDocumenti}}
+\index{getTfDocumenti@{getTfDocumenti}!com.mycompany.server.ClientHandler@{com.mycompany.server.ClientHandler}}
+\doxysubsubsection{\texorpdfstring{getTfDocumenti()}{getTfDocumenti()}}
+{\footnotesize\ttfamily \label{classcom_1_1mycompany_1_1server_1_1_client_handler_ac996ca1d669b9a4120341e3558b78cfc} 
+List$<$ List$<$ \mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1_analisi_frase}{Analisi\+Frase}} $>$ $>$ com.\+mycompany.\+server.\+Client\+Handler.\+get\+Tf\+Documenti (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\begin{DoxyReturn}{Returns}
+lista delle TF di ogni documento analizzato, o {\ttfamily null} se non disponibile 
+\end{DoxyReturn}
+\Hypertarget{classcom_1_1mycompany_1_1server_1_1_client_handler_a3ea1251140352250da28bbf2b5e5f521}\index{com.mycompany.server.ClientHandler@{com.mycompany.server.ClientHandler}!getTfFrasi@{getTfFrasi}}
+\index{getTfFrasi@{getTfFrasi}!com.mycompany.server.ClientHandler@{com.mycompany.server.ClientHandler}}
+\doxysubsubsection{\texorpdfstring{getTfFrasi()}{getTfFrasi()}}
+{\footnotesize\ttfamily \label{classcom_1_1mycompany_1_1server_1_1_client_handler_a3ea1251140352250da28bbf2b5e5f521} 
+List$<$ \mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1_analisi_frase}{Analisi\+Frase}} $>$ com.\+mycompany.\+server.\+Client\+Handler.\+get\+Tf\+Frasi (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\begin{DoxyReturn}{Returns}
+lista delle TF correntemente caricata, o {\ttfamily null} se non disponibile 
+\end{DoxyReturn}
+\Hypertarget{classcom_1_1mycompany_1_1server_1_1_client_handler_abe7cb34b44c4d14fcad0be35522d28d9}\index{com.mycompany.server.ClientHandler@{com.mycompany.server.ClientHandler}!getUsername@{getUsername}}
+\index{getUsername@{getUsername}!com.mycompany.server.ClientHandler@{com.mycompany.server.ClientHandler}}
+\doxysubsubsection{\texorpdfstring{getUsername()}{getUsername()}}
+{\footnotesize\ttfamily \label{classcom_1_1mycompany_1_1server_1_1_client_handler_abe7cb34b44c4d14fcad0be35522d28d9} 
+String com.\+mycompany.\+server.\+Client\+Handler.\+get\+Username (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyReturn}{Returns}
+username dell\textquotesingle{}utente autenticato 
+\end{DoxyReturn}
+\Hypertarget{classcom_1_1mycompany_1_1server_1_1_client_handler_a10a14e2ab4373a7cb8e159cfd4b0a1b9}\index{com.mycompany.server.ClientHandler@{com.mycompany.server.ClientHandler}!invia@{invia}}
+\index{invia@{invia}!com.mycompany.server.ClientHandler@{com.mycompany.server.ClientHandler}}
+\doxysubsubsection{\texorpdfstring{invia()}{invia()}}
+{\footnotesize\ttfamily \label{classcom_1_1mycompany_1_1server_1_1_client_handler_a10a14e2ab4373a7cb8e159cfd4b0a1b9} 
+synchronized void com.\+mycompany.\+server.\+Client\+Handler.\+invia (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classcom_1_1mycompany_1_1common_1_1_messaggio}{Messaggio}}}]{msg}{}\end{DoxyParamCaption})}
+
+Invia un messaggio al client serializzandolo come riga di testo UTF-\/8. 
+\begin{DoxyParams}{Parameters}
+{\em msg} & messaggio da inviare \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classcom_1_1mycompany_1_1server_1_1_client_handler_a674decdd76780d038c75527125c61f41}\index{com.mycompany.server.ClientHandler@{com.mycompany.server.ClientHandler}!run@{run}}
+\index{run@{run}!com.mycompany.server.ClientHandler@{com.mycompany.server.ClientHandler}}
+\doxysubsubsection{\texorpdfstring{run()}{run()}}
+{\footnotesize\ttfamily \label{classcom_1_1mycompany_1_1server_1_1_client_handler_a674decdd76780d038c75527125c61f41} 
+void com.\+mycompany.\+server.\+Client\+Handler.\+run (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+Loop principale di lettura messaggi dal client. Inizializza i flussi UTF-\/8 e legge una riga alla volta finché la connessione è attiva. \Hypertarget{classcom_1_1mycompany_1_1server_1_1_client_handler_a45d8a006c93b5c4a67bf69a5ce60637a}\index{com.mycompany.server.ClientHandler@{com.mycompany.server.ClientHandler}!setAvversario@{setAvversario}}
+\index{setAvversario@{setAvversario}!com.mycompany.server.ClientHandler@{com.mycompany.server.ClientHandler}}
+\doxysubsubsection{\texorpdfstring{setAvversario()}{setAvversario()}}
+{\footnotesize\ttfamily \label{classcom_1_1mycompany_1_1server_1_1_client_handler_a45d8a006c93b5c4a67bf69a5ce60637a} 
+void com.\+mycompany.\+server.\+Client\+Handler.\+set\+Avversario (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1_client_handler_a72a2678586e63e61a0f80133ca731bda}{Client\+Handler}}}]{a}{}\end{DoxyParamCaption})}
+
+Imposta il riferimento all\textquotesingle{}handler dell\textquotesingle{}avversario. 
+\begin{DoxyParams}{Parameters}
+{\em a} & handler del client avversario \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classcom_1_1mycompany_1_1server_1_1_client_handler_af4a86ed0427a9a0a28bd7e907a1c1c27}\index{com.mycompany.server.ClientHandler@{com.mycompany.server.ClientHandler}!setPartita@{setPartita}}
+\index{setPartita@{setPartita}!com.mycompany.server.ClientHandler@{com.mycompany.server.ClientHandler}}
+\doxysubsubsection{\texorpdfstring{setPartita()}{setPartita()}}
+{\footnotesize\ttfamily \label{classcom_1_1mycompany_1_1server_1_1_client_handler_af4a86ed0427a9a0a28bd7e907a1c1c27} 
+void com.\+mycompany.\+server.\+Client\+Handler.\+set\+Partita (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1_partita}{Partita}}}]{p}{}\end{DoxyParamCaption})}
+
+Imposta la partita corrente dell\textquotesingle{}utente. 
+\begin{DoxyParams}{Parameters}
+{\em p} & partita in corso \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classcom_1_1mycompany_1_1server_1_1_client_handler_a3236cee666ef77dc41c712989894e150}\index{com.mycompany.server.ClientHandler@{com.mycompany.server.ClientHandler}!setTfDocumenti@{setTfDocumenti}}
+\index{setTfDocumenti@{setTfDocumenti}!com.mycompany.server.ClientHandler@{com.mycompany.server.ClientHandler}}
+\doxysubsubsection{\texorpdfstring{setTfDocumenti()}{setTfDocumenti()}}
+{\footnotesize\ttfamily \label{classcom_1_1mycompany_1_1server_1_1_client_handler_a3236cee666ef77dc41c712989894e150} 
+void com.\+mycompany.\+server.\+Client\+Handler.\+set\+Tf\+Documenti (\begin{DoxyParamCaption}\item[{List$<$ List$<$ \mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1_analisi_frase}{Analisi\+Frase}} $>$ $>$}]{n}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Imposta la lista delle Term Frequency di ogni documento analizzato. 
+\begin{DoxyParams}{Parameters}
+{\em n} & lista delle liste rappresentanti le tf delle frase di ogni documento \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classcom_1_1mycompany_1_1server_1_1_client_handler_a9860a11f1e4c7a343df69fbc2b861857}\index{com.mycompany.server.ClientHandler@{com.mycompany.server.ClientHandler}!setTfFrasi@{setTfFrasi}}
+\index{setTfFrasi@{setTfFrasi}!com.mycompany.server.ClientHandler@{com.mycompany.server.ClientHandler}}
+\doxysubsubsection{\texorpdfstring{setTfFrasi()}{setTfFrasi()}}
+{\footnotesize\ttfamily \label{classcom_1_1mycompany_1_1server_1_1_client_handler_a9860a11f1e4c7a343df69fbc2b861857} 
+void com.\+mycompany.\+server.\+Client\+Handler.\+set\+Tf\+Frasi (\begin{DoxyParamCaption}\item[{List$<$ \mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1_analisi_frase}{Analisi\+Frase}} $>$}]{m}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Imposta la lista delle Term Frequency usata per scegliere la parola da cifrare. 
+\begin{DoxyParams}{Parameters}
+{\em m} & lista delle tf caricate per la sfida \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classcom_1_1mycompany_1_1server_1_1_client_handler_aa2d2a59ed12d1e14699586a5270267d3}\index{com.mycompany.server.ClientHandler@{com.mycompany.server.ClientHandler}!unsetAvversario@{unsetAvversario}}
+\index{unsetAvversario@{unsetAvversario}!com.mycompany.server.ClientHandler@{com.mycompany.server.ClientHandler}}
+\doxysubsubsection{\texorpdfstring{unsetAvversario()}{unsetAvversario()}}
+{\footnotesize\ttfamily \label{classcom_1_1mycompany_1_1server_1_1_client_handler_aa2d2a59ed12d1e14699586a5270267d3} 
+void com.\+mycompany.\+server.\+Client\+Handler.\+unset\+Avversario (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+Rimuove il riferimento all\textquotesingle{}handler dell\textquotesingle{}avversario. 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+server/src/main/java/com/mycompany/server/Client\+Handler.\+java\end{DoxyCompactItemize}

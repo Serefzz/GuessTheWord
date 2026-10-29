@@ -1,0 +1,45 @@
+\doxysection{com.\+mycompany.\+server.\+Database\+Manager Class Reference}
+\hypertarget{classcom_1_1mycompany_1_1server_1_1_database_manager}{}\label{classcom_1_1mycompany_1_1server_1_1_database_manager}\index{com.mycompany.server.DatabaseManager@{com.mycompany.server.DatabaseManager}}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1_database_manager_ae7c64d7ca03ec570c0f8f79b54e537ee}{inizializza}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classcom_1_1mycompany_1_1server_1_1_database_manager_a9cfaef352525e917133e73a6a1817ae3}\label{classcom_1_1mycompany_1_1server_1_1_database_manager_a9cfaef352525e917133e73a6a1817ae3} 
+static final String {\bfseries URL} = "{}jdbc\+:sqlite\+:database/guesstheword.\+db"{}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Gestore centralizzato del database SQLite dell\textquotesingle{}applicazione.
+
+Fornisce l\textquotesingle{}URL di connessione JDBC usato da tutti i DAO e il metodo {\ttfamily \doxylink{classcom_1_1mycompany_1_1server_1_1_database_manager_ae7c64d7ca03ec570c0f8f79b54e537ee}{inizializza()}} da chiamare una sola volta all\textquotesingle{}avvio del server.
+
+\doxylink{classcom_1_1mycompany_1_1server_1_1_utente}{Utente} admin di default\+: username {\ttfamily admin}, password {\ttfamily admin} (hash SHA-\/256). Viene inserito con {\ttfamily INSERT OR IGNORE}, quindi non sovrascrive un admin già presente. 
+
+\label{doc-func-members}
+\Hypertarget{classcom_1_1mycompany_1_1server_1_1_database_manager_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classcom_1_1mycompany_1_1server_1_1_database_manager_ae7c64d7ca03ec570c0f8f79b54e537ee}\index{com.mycompany.server.DatabaseManager@{com.mycompany.server.DatabaseManager}!inizializza@{inizializza}}
+\index{inizializza@{inizializza}!com.mycompany.server.DatabaseManager@{com.mycompany.server.DatabaseManager}}
+\doxysubsubsection{\texorpdfstring{inizializza()}{inizializza()}}
+{\footnotesize\ttfamily \label{classcom_1_1mycompany_1_1server_1_1_database_manager_ae7c64d7ca03ec570c0f8f79b54e537ee} 
+void com.\+mycompany.\+server.\+Database\+Manager.\+inizializza (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Inizializza il database\+: inserisce l\textquotesingle{}utente admin di default se non presente.
+
+Deve essere chiamato una sola volta all\textquotesingle{}avvio, prima di qualsiasi operazione sui DAO.
+
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Runtime\+Exception} & se la connessione al database fallisce \\
+\hline
+\end{DoxyExceptions}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+server/src/main/java/com/mycompany/server/Database\+Manager.\+java\end{DoxyCompactItemize}

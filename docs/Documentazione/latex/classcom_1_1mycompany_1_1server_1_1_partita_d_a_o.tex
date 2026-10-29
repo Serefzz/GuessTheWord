@@ -1,0 +1,169 @@
+\doxysection{com.\+mycompany.\+server.\+Partita\+DAO Class Reference}
+\hypertarget{classcom_1_1mycompany_1_1server_1_1_partita_d_a_o}{}\label{classcom_1_1mycompany_1_1server_1_1_partita_d_a_o}\index{com.mycompany.server.PartitaDAO@{com.mycompany.server.PartitaDAO}}
+Inheritance diagram for com.\+mycompany.\+server.\+Partita\+DAO\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classcom_1_1mycompany_1_1server_1_1_partita_d_a_o}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+List$<$ \mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1_risultato_partita}{Risultato\+Partita}} $>$ \mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1_partita_d_a_o_af09751673e680cc06950a7f9b1545a3c}{select\+All}} ()
+\item 
+Optional$<$ \mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1_risultato_partita}{Risultato\+Partita}} $>$ \mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1_partita_d_a_o_a521b6f262caa707d3736057766f9c4cc}{select\+By\+Id}} (int...\+id)
+\item 
+boolean \mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1_partita_d_a_o_a30055e50de62466a3e78dfc329b51a6d}{insert}} (\mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1_risultato_partita}{Risultato\+Partita}} r)
+\item 
+boolean \mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1_partita_d_a_o_a0c77ebbd520bb9acb3da3e9bfe460638}{update}} (\mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1_risultato_partita}{Risultato\+Partita}} r)
+\item 
+boolean \mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1_partita_d_a_o_a5fcbb23e76a1f02aef4f170bfbb6e828}{delete}} (int id)
+\item 
+void \mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1_partita_d_a_o_a021be6faf52b835098dfb42d0f448364}{salva}} (int frase, int documento, String giocatore1, String giocatore2, int vincitore, long durata)
+\item 
+List$<$ String\mbox{[}$\,$\mbox{]}$>$ \mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1_partita_d_a_o_afd941d8124959b44e2972ffa090f14f3}{get\+Storico}} (String username)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{interfacecom_1_1mycompany_1_1server_1_1_d_a_oid}{com.\+mycompany.\+server.\+DAOid$<$ Risultato\+Partita $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+List$<$ T $>$ \mbox{\hyperlink{interfacecom_1_1mycompany_1_1server_1_1_d_a_oid_a0c041940bd85c2bbc7e36fbd761874b5}{select\+All}} ()
+\item 
+Optional$<$ T $>$ \mbox{\hyperlink{interfacecom_1_1mycompany_1_1server_1_1_d_a_oid_ace5ef35a6bf567ea6a5d1a0e76777fc3}{select\+By\+Id}} (int...\+id)
+\item 
+boolean \mbox{\hyperlink{interfacecom_1_1mycompany_1_1server_1_1_d_a_oid_a4cecc6baf91ba7fcc3333026c4467109}{insert}} (T t)
+\item 
+boolean \mbox{\hyperlink{interfacecom_1_1mycompany_1_1server_1_1_d_a_oid_a54aa218a63a66e6b4c4e003c13fb45a2}{update}} (T t)
+\item 
+boolean \mbox{\hyperlink{interfacecom_1_1mycompany_1_1server_1_1_d_a_oid_a1ce020036323d25a9f79e753eaf94b8c}{delete}} (int id)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+DAO per la tabella {\ttfamily Partita} del database SQLite.
+
+Implementa {\ttfamily \doxylink{interfacecom_1_1mycompany_1_1server_1_1_d_a_oid}{DAOid}}{\ttfamily $<$\+Risultato\+Partita$>$} e aggiunge metodi specifici per la logica di gioco\+: salvataggio rapido di un risultato e recupero dello storico partite di un singolo giocatore.
+
+Ogni metodo apre e chiude la propria connessione JDBC con try-\/with-\/resources (versione con connessione non persistente). 
+
+\label{doc-func-members}
+\Hypertarget{classcom_1_1mycompany_1_1server_1_1_partita_d_a_o_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classcom_1_1mycompany_1_1server_1_1_partita_d_a_o_a5fcbb23e76a1f02aef4f170bfbb6e828}\index{com.mycompany.server.PartitaDAO@{com.mycompany.server.PartitaDAO}!delete@{delete}}
+\index{delete@{delete}!com.mycompany.server.PartitaDAO@{com.mycompany.server.PartitaDAO}}
+\doxysubsubsection{\texorpdfstring{delete()}{delete()}}
+{\footnotesize\ttfamily \label{classcom_1_1mycompany_1_1server_1_1_partita_d_a_o_a5fcbb23e76a1f02aef4f170bfbb6e828} 
+boolean com.\+mycompany.\+server.\+Partita\+DAO.\+delete (\begin{DoxyParamCaption}\item[{int}]{id}{}\end{DoxyParamCaption})}
+
+Elimina la partita con l\textquotesingle{}identificatore specificato.
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & identificatore univoco della partita da eliminare \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+{\ttfamily true} se l\textquotesingle{}eliminazione ha coinvolto almeno una riga; {\ttfamily false} altrimenti 
+\end{DoxyReturn}
+\Hypertarget{classcom_1_1mycompany_1_1server_1_1_partita_d_a_o_afd941d8124959b44e2972ffa090f14f3}\index{com.mycompany.server.PartitaDAO@{com.mycompany.server.PartitaDAO}!getStorico@{getStorico}}
+\index{getStorico@{getStorico}!com.mycompany.server.PartitaDAO@{com.mycompany.server.PartitaDAO}}
+\doxysubsubsection{\texorpdfstring{getStorico()}{getStorico()}}
+{\footnotesize\ttfamily \label{classcom_1_1mycompany_1_1server_1_1_partita_d_a_o_afd941d8124959b44e2972ffa090f14f3} 
+List$<$ String\mbox{[}$\,$\mbox{]}$>$ com.\+mycompany.\+server.\+Partita\+DAO.\+get\+Storico (\begin{DoxyParamCaption}\item[{String}]{username}{}\end{DoxyParamCaption})}
+
+Restituisce lo storico delle partite di un giocatore specifico. Ogni elemento\+: {\ttfamily \mbox{[}data, avversario, risultato\mbox{]}} dove risultato è {\ttfamily "{}\+VINTO"{}}, {\ttfamily "{}\+PERSO"{}} o {\ttfamily "{}\+PAREGGIO"{}}.
+
+
+\begin{DoxyParams}{Parameters}
+{\em username} & nome utente di cui recuperare lo storico \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+lista di righe storico ordinate dalla partita più recente 
+\end{DoxyReturn}
+\Hypertarget{classcom_1_1mycompany_1_1server_1_1_partita_d_a_o_a30055e50de62466a3e78dfc329b51a6d}\index{com.mycompany.server.PartitaDAO@{com.mycompany.server.PartitaDAO}!insert@{insert}}
+\index{insert@{insert}!com.mycompany.server.PartitaDAO@{com.mycompany.server.PartitaDAO}}
+\doxysubsubsection{\texorpdfstring{insert()}{insert()}}
+{\footnotesize\ttfamily \label{classcom_1_1mycompany_1_1server_1_1_partita_d_a_o_a30055e50de62466a3e78dfc329b51a6d} 
+boolean com.\+mycompany.\+server.\+Partita\+DAO.\+insert (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1_risultato_partita}{Risultato\+Partita}}}]{r}{}\end{DoxyParamCaption})}
+
+Inserisce un nuovo risultato di partita nel database.
+
+
+\begin{DoxyParams}{Parameters}
+{\em r} & risultato della partita da inserire \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+{\ttfamily true} se l\textquotesingle{}inserimento è riuscito; {\ttfamily false} altrimenti 
+\end{DoxyReturn}
+\Hypertarget{classcom_1_1mycompany_1_1server_1_1_partita_d_a_o_a021be6faf52b835098dfb42d0f448364}\index{com.mycompany.server.PartitaDAO@{com.mycompany.server.PartitaDAO}!salva@{salva}}
+\index{salva@{salva}!com.mycompany.server.PartitaDAO@{com.mycompany.server.PartitaDAO}}
+\doxysubsubsection{\texorpdfstring{salva()}{salva()}}
+{\footnotesize\ttfamily \label{classcom_1_1mycompany_1_1server_1_1_partita_d_a_o_a021be6faf52b835098dfb42d0f448364} 
+void com.\+mycompany.\+server.\+Partita\+DAO.\+salva (\begin{DoxyParamCaption}\item[{int}]{frase}{, }\item[{int}]{documento}{, }\item[{String}]{giocatore1}{, }\item[{String}]{giocatore2}{, }\item[{int}]{vincitore}{, }\item[{long}]{durata}{}\end{DoxyParamCaption})}
+
+Salva il risultato di una partita appena conclusa impostando automaticamente la data e l\textquotesingle{}ora corrente.
+
+
+\begin{DoxyParams}{Parameters}
+{\em frase} & id della frase utilizzata nella partita \\
+\hline
+{\em documento} & id del documento della frase utilizzata nella partita \\
+\hline
+{\em giocatore1} & username del giocatore1 \\
+\hline
+{\em giocatore2} & username del giocatore 2 \\
+\hline
+{\em vincitore} & intero corrispondente al vincitore\+: 1 se giocatore1, 2 se giocatore 2 e 0 se pareggio \\
+\hline
+{\em durata} & millisecondi dalla sfida alla risposta corretta; {\ttfamily 0} se pareggio \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classcom_1_1mycompany_1_1server_1_1_partita_d_a_o_af09751673e680cc06950a7f9b1545a3c}\index{com.mycompany.server.PartitaDAO@{com.mycompany.server.PartitaDAO}!selectAll@{selectAll}}
+\index{selectAll@{selectAll}!com.mycompany.server.PartitaDAO@{com.mycompany.server.PartitaDAO}}
+\doxysubsubsection{\texorpdfstring{selectAll()}{selectAll()}}
+{\footnotesize\ttfamily \label{classcom_1_1mycompany_1_1server_1_1_partita_d_a_o_af09751673e680cc06950a7f9b1545a3c} 
+List$<$ \mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1_risultato_partita}{Risultato\+Partita}} $>$ com.\+mycompany.\+server.\+Partita\+DAO.\+select\+All (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+Restituisce tutte le partite registrate, ordinate dalla più recente.
+
+\begin{DoxyReturn}{Returns}
+lista di {\ttfamily \doxylink{classcom_1_1mycompany_1_1server_1_1_risultato_partita}{Risultato\+Partita}}; lista vuota se non ci sono partite 
+\end{DoxyReturn}
+\Hypertarget{classcom_1_1mycompany_1_1server_1_1_partita_d_a_o_a521b6f262caa707d3736057766f9c4cc}\index{com.mycompany.server.PartitaDAO@{com.mycompany.server.PartitaDAO}!selectById@{selectById}}
+\index{selectById@{selectById}!com.mycompany.server.PartitaDAO@{com.mycompany.server.PartitaDAO}}
+\doxysubsubsection{\texorpdfstring{selectById()}{selectById()}}
+{\footnotesize\ttfamily \label{classcom_1_1mycompany_1_1server_1_1_partita_d_a_o_a521b6f262caa707d3736057766f9c4cc} 
+Optional$<$ \mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1_risultato_partita}{Risultato\+Partita}} $>$ com.\+mycompany.\+server.\+Partita\+DAO.\+select\+By\+Id (\begin{DoxyParamCaption}\item[{int...}]{id}{}\end{DoxyParamCaption})}
+
+Cerca una partita tramite il suo identificatore numerico.
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & identificatore univoco della partita \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+{\ttfamily \doxylink{}{Optional}} contenente la partita se trovata, vuoto altrimenti 
+\end{DoxyReturn}
+\Hypertarget{classcom_1_1mycompany_1_1server_1_1_partita_d_a_o_a0c77ebbd520bb9acb3da3e9bfe460638}\index{com.mycompany.server.PartitaDAO@{com.mycompany.server.PartitaDAO}!update@{update}}
+\index{update@{update}!com.mycompany.server.PartitaDAO@{com.mycompany.server.PartitaDAO}}
+\doxysubsubsection{\texorpdfstring{update()}{update()}}
+{\footnotesize\ttfamily \label{classcom_1_1mycompany_1_1server_1_1_partita_d_a_o_a0c77ebbd520bb9acb3da3e9bfe460638} 
+boolean com.\+mycompany.\+server.\+Partita\+DAO.\+update (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1_risultato_partita}{Risultato\+Partita}}}]{r}{}\end{DoxyParamCaption})}
+
+Non implementato\+: le partite non vengono modificate dopo la registrazione.
+
+
+\begin{DoxyParams}{Parameters}
+{\em r} & parametro ignorato \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+sempre {\ttfamily false} 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+server/src/main/java/com/mycompany/server/Partita\+DAO.\+java\end{DoxyCompactItemize}

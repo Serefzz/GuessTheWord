@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ClassDiagram name="AnalisiFrase">
+  <ClassDiagramComponents>
+    <Class name="AnalisiFrase" package="com.mycompany.server" visibility="public" xPosition="20.0" yPosition="20.0">
+      <Fields>
+        <Field name="frase" type="String" visibility="private" isFinal="true"/>
+        <Field name="tf" type="Map&lt;String, Long&gt;" visibility="private" isFinal="true"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="String" name="frase"/>
+          <Argument type="Map&lt;String, Long&gt;" name="tf"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="getFrase" returnType="String" visibility="public"/>
+        <Method name="getTf" returnType="Map&lt;String, Long&gt;" visibility="public"/>
+      </Methods>
+    </Class>
+  </ClassDiagramComponents>
+  <ClassDiagramRelations/>
+</ClassDiagram>

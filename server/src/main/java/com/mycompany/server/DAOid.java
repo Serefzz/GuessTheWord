@@ -12,8 +12,9 @@ import java.util.Optional;
  *
  * Implementazioni presenti:
  * 
- *   {@link UtenteDAO} — gestisce la tabella {@code utenti}
- *   {@link PartitaDAO} — gestisce la tabella {@code partite}
+ *   {@link PartitaDAO} — gestisce la tabella {@code Partita}
+ *   {@link FraseDAO} — gestisce la tabella {@code Frase}
+ *   {@link DocumentoDAO} — gestisce la tabella {@code Documento}
  * 
  * @param <T> il tipo di entità gestita dal DAO
  */

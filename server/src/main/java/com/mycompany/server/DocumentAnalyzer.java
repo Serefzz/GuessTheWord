@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+import java.text.Normalizer;
 
 /**
  * Analizza documenti di testo per estrarre statistiche di frequenza delle parole
@@ -25,7 +26,6 @@ public class DocumentAnalyzer {
      *
      * @param frase frase da analizzare
      * @return AnalisiFrase contenente la frase e una mappa con le frequenze di ogni parola al suo interno
-     * @throws IOException se il file non esiste o non è leggibile
     */
     public AnalisiFrase analizza(String frase) throws IOException {
     String fraseNormalizzata = rimuoviAccenti(frase.toUpperCase());
@@ -87,8 +87,7 @@ public class DocumentAnalyzer {
 
         String risultato = daTogliere.replaceAll("['’]", " ");
 
-        risultato = java.text.Normalizer.normalize(risultato, java.text.Normalizer.Form.NFD)
-                .replaceAll("\\p{M}", "");
+        risultato = Normalizer.normalize(risultato, Normalizer.Form.NFD).replaceAll("\\p{M}", "");
 
         return risultato;
     }

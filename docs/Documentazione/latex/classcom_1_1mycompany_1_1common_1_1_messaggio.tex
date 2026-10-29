@@ -1,0 +1,139 @@
+\doxysection{com.\+mycompany.\+common.\+Messaggio Class Reference}
+\hypertarget{classcom_1_1mycompany_1_1common_1_1_messaggio}{}\label{classcom_1_1mycompany_1_1common_1_1_messaggio}\index{com.mycompany.common.Messaggio@{com.mycompany.common.Messaggio}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{enumcom_1_1mycompany_1_1common_1_1_messaggio_1_1_tipo}{Tipo}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classcom_1_1mycompany_1_1common_1_1_messaggio_a5afd2eb94546f859ceabddb5b95e6a4d}{Messaggio}} (\mbox{\hyperlink{enumcom_1_1mycompany_1_1common_1_1_messaggio_1_1_tipo}{Tipo}} tipo, String... params)
+\item 
+String \mbox{\hyperlink{classcom_1_1mycompany_1_1common_1_1_messaggio_a471e662f05ce78ea873d99330d732a60}{to\+Line}} ()
+\item 
+\mbox{\hyperlink{enumcom_1_1mycompany_1_1common_1_1_messaggio_1_1_tipo}{Tipo}} \mbox{\hyperlink{classcom_1_1mycompany_1_1common_1_1_messaggio_aa0a0fb62bdfb3269e57b0d3cd3ecefc1}{get\+Tipo}} ()
+\item 
+String \mbox{\hyperlink{classcom_1_1mycompany_1_1common_1_1_messaggio_abd688c80f954d2e650e49af4d63348b5}{get\+Param}} (int i)
+\item 
+String\mbox{[}$\,$\mbox{]} \mbox{\hyperlink{classcom_1_1mycompany_1_1common_1_1_messaggio_a171906f4a4ce46a00ccb493e41da78e5}{get\+Params}} ()
+\item 
+String \mbox{\hyperlink{classcom_1_1mycompany_1_1common_1_1_messaggio_ab09dbd58bd10c4444b4be12185c49cbf}{to\+String}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{classcom_1_1mycompany_1_1common_1_1_messaggio_a5afd2eb94546f859ceabddb5b95e6a4d}{Messaggio}} \mbox{\hyperlink{classcom_1_1mycompany_1_1common_1_1_messaggio_adce784c15f26b1ceaef838520500a7ea}{from\+Line}} (String linea)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\doxylink{classcom_1_1mycompany_1_1common_1_1_messaggio}{Messaggio} scambiato tra client e server via socket.
+
+Formato stringa\+: {\ttfamily TIPO\texorpdfstring{$\vert$}{|}param0\texorpdfstring{$\vert$}{|}param1\texorpdfstring{$\vert$}{|}...} Compatibile con {\ttfamily \doxylink{}{java.\+io.\+Buffered\+Writer}} / {\ttfamily \doxylink{}{java.\+io.\+Buffered\+Reader}}.
+
+Ogni messaggio è immutabile\+: tipo e parametri vengono impostati nel costruttore e non possono essere modificati. 
+
+\label{doc-constructors}
+\Hypertarget{classcom_1_1mycompany_1_1common_1_1_messaggio_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classcom_1_1mycompany_1_1common_1_1_messaggio_a5afd2eb94546f859ceabddb5b95e6a4d}\index{com.mycompany.common.Messaggio@{com.mycompany.common.Messaggio}!Messaggio@{Messaggio}}
+\index{Messaggio@{Messaggio}!com.mycompany.common.Messaggio@{com.mycompany.common.Messaggio}}
+\doxysubsubsection{\texorpdfstring{Messaggio()}{Messaggio()}}
+{\footnotesize\ttfamily \label{classcom_1_1mycompany_1_1common_1_1_messaggio_a5afd2eb94546f859ceabddb5b95e6a4d} 
+com.\+mycompany.\+common.\+Messaggio.\+Messaggio (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{enumcom_1_1mycompany_1_1common_1_1_messaggio_1_1_tipo}{Tipo}}}]{tipo}{, }\item[{String...}]{params}{}\end{DoxyParamCaption})}
+
+Costruisce un messaggio con tipo e parametri opzionali.
+
+
+\begin{DoxyParams}{Parameters}
+{\em tipo} & tipo del messaggio \\
+\hline
+{\em params} & parametri aggiuntivi (può essere vuoto) \\
+\hline
+\end{DoxyParams}
+
+
+\label{doc-func-members}
+\Hypertarget{classcom_1_1mycompany_1_1common_1_1_messaggio_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classcom_1_1mycompany_1_1common_1_1_messaggio_adce784c15f26b1ceaef838520500a7ea}\index{com.mycompany.common.Messaggio@{com.mycompany.common.Messaggio}!fromLine@{fromLine}}
+\index{fromLine@{fromLine}!com.mycompany.common.Messaggio@{com.mycompany.common.Messaggio}}
+\doxysubsubsection{\texorpdfstring{fromLine()}{fromLine()}}
+{\footnotesize\ttfamily \label{classcom_1_1mycompany_1_1common_1_1_messaggio_adce784c15f26b1ceaef838520500a7ea} 
+\mbox{\hyperlink{classcom_1_1mycompany_1_1common_1_1_messaggio_a5afd2eb94546f859ceabddb5b95e6a4d}{Messaggio}} com.\+mycompany.\+common.\+Messaggio.\+from\+Line (\begin{DoxyParamCaption}\item[{String}]{linea}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Deserializza un messaggio dalla riga letta dal socket.
+
+
+\begin{DoxyParams}{Parameters}
+{\em linea} & stringa nel formato {\ttfamily TIPO\texorpdfstring{$\vert$}{|}param0\texorpdfstring{$\vert$}{|}param1\texorpdfstring{$\vert$}{|}...} \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+istanza di {\ttfamily \doxylink{classcom_1_1mycompany_1_1common_1_1_messaggio}{Messaggio}} ricostruita dalla stringa 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Illegal\+Argument\+Exception} & se il tipo non è riconosciuto \\
+\hline
+\end{DoxyExceptions}
+\Hypertarget{classcom_1_1mycompany_1_1common_1_1_messaggio_abd688c80f954d2e650e49af4d63348b5}\index{com.mycompany.common.Messaggio@{com.mycompany.common.Messaggio}!getParam@{getParam}}
+\index{getParam@{getParam}!com.mycompany.common.Messaggio@{com.mycompany.common.Messaggio}}
+\doxysubsubsection{\texorpdfstring{getParam()}{getParam()}}
+{\footnotesize\ttfamily \label{classcom_1_1mycompany_1_1common_1_1_messaggio_abd688c80f954d2e650e49af4d63348b5} 
+String com.\+mycompany.\+common.\+Messaggio.\+get\+Param (\begin{DoxyParamCaption}\item[{int}]{i}{}\end{DoxyParamCaption})}
+
+Restituisce il parametro all\textquotesingle{}indice specificato.
+
+
+\begin{DoxyParams}{Parameters}
+{\em i} & indice del parametro (base 0) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+valore del parametro, o stringa vuota se l\textquotesingle{}indice è fuori range 
+\end{DoxyReturn}
+\Hypertarget{classcom_1_1mycompany_1_1common_1_1_messaggio_a171906f4a4ce46a00ccb493e41da78e5}\index{com.mycompany.common.Messaggio@{com.mycompany.common.Messaggio}!getParams@{getParams}}
+\index{getParams@{getParams}!com.mycompany.common.Messaggio@{com.mycompany.common.Messaggio}}
+\doxysubsubsection{\texorpdfstring{getParams()}{getParams()}}
+{\footnotesize\ttfamily \label{classcom_1_1mycompany_1_1common_1_1_messaggio_a171906f4a4ce46a00ccb493e41da78e5} 
+String\mbox{[}$\,$\mbox{]} com.\+mycompany.\+common.\+Messaggio.\+get\+Params (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyReturn}{Returns}
+array di tutti i parametri del messaggio 
+\end{DoxyReturn}
+\Hypertarget{classcom_1_1mycompany_1_1common_1_1_messaggio_aa0a0fb62bdfb3269e57b0d3cd3ecefc1}\index{com.mycompany.common.Messaggio@{com.mycompany.common.Messaggio}!getTipo@{getTipo}}
+\index{getTipo@{getTipo}!com.mycompany.common.Messaggio@{com.mycompany.common.Messaggio}}
+\doxysubsubsection{\texorpdfstring{getTipo()}{getTipo()}}
+{\footnotesize\ttfamily \label{classcom_1_1mycompany_1_1common_1_1_messaggio_aa0a0fb62bdfb3269e57b0d3cd3ecefc1} 
+\mbox{\hyperlink{enumcom_1_1mycompany_1_1common_1_1_messaggio_1_1_tipo}{Tipo}} com.\+mycompany.\+common.\+Messaggio.\+get\+Tipo (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyReturn}{Returns}
+tipo del messaggio 
+\end{DoxyReturn}
+\Hypertarget{classcom_1_1mycompany_1_1common_1_1_messaggio_a471e662f05ce78ea873d99330d732a60}\index{com.mycompany.common.Messaggio@{com.mycompany.common.Messaggio}!toLine@{toLine}}
+\index{toLine@{toLine}!com.mycompany.common.Messaggio@{com.mycompany.common.Messaggio}}
+\doxysubsubsection{\texorpdfstring{toLine()}{toLine()}}
+{\footnotesize\ttfamily \label{classcom_1_1mycompany_1_1common_1_1_messaggio_a471e662f05ce78ea873d99330d732a60} 
+String com.\+mycompany.\+common.\+Messaggio.\+to\+Line (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+Serializza il messaggio in una riga da inviare via socket. Formato\+: {\ttfamily TIPO} oppure {\ttfamily TIPO\texorpdfstring{$\vert$}{|}param0\texorpdfstring{$\vert$}{|}param1\texorpdfstring{$\vert$}{|}...}
+
+\begin{DoxyReturn}{Returns}
+stringa serializzata del messaggio 
+\end{DoxyReturn}
+\Hypertarget{classcom_1_1mycompany_1_1common_1_1_messaggio_ab09dbd58bd10c4444b4be12185c49cbf}\index{com.mycompany.common.Messaggio@{com.mycompany.common.Messaggio}!toString@{toString}}
+\index{toString@{toString}!com.mycompany.common.Messaggio@{com.mycompany.common.Messaggio}}
+\doxysubsubsection{\texorpdfstring{toString()}{toString()}}
+{\footnotesize\ttfamily \label{classcom_1_1mycompany_1_1common_1_1_messaggio_ab09dbd58bd10c4444b4be12185c49cbf} 
+String com.\+mycompany.\+common.\+Messaggio.\+to\+String (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyReturn}{Returns}
+rappresentazione testuale del messaggio (equivalente a {\ttfamily \doxylink{classcom_1_1mycompany_1_1common_1_1_messaggio_a471e662f05ce78ea873d99330d732a60}{to\+Line()}}) 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+common/src/main/java/com/mycompany/common/Messaggio.\+java\end{DoxyCompactItemize}

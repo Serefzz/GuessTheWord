@@ -11,7 +11,7 @@ import javafx.stage.Stage;
  *
  * Mostra la schermata di login. 
  * Il passaggio alla schermata principale avviene tramite
- * {@link LoginController} al termine dell'autenticazione.
+ * {@link GameLoginController} al termine dell'autenticazione.
  */
 public class ClientApp extends Application {
 

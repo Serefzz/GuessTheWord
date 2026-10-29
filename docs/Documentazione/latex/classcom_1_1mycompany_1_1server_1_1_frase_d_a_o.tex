@@ -1,0 +1,131 @@
+\doxysection{com.\+mycompany.\+server.\+Frase\+DAO Class Reference}
+\hypertarget{classcom_1_1mycompany_1_1server_1_1_frase_d_a_o}{}\label{classcom_1_1mycompany_1_1server_1_1_frase_d_a_o}\index{com.mycompany.server.FraseDAO@{com.mycompany.server.FraseDAO}}
+Inheritance diagram for com.\+mycompany.\+server.\+Frase\+DAO\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classcom_1_1mycompany_1_1server_1_1_frase_d_a_o}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+List$<$ String\mbox{[}$\,$\mbox{]}$>$ \mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1_frase_d_a_o_ab97ae4a44fbcdeb38f30954a62e72817}{select\+All}} ()
+\item 
+Optional$<$ String\mbox{[}$\,$\mbox{]}$>$ \mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1_frase_d_a_o_a3086e4684c72cfeddb1a6ee8d053f86d}{select\+By\+Id}} (int...\+id)
+\item 
+List$<$ String\mbox{[}$\,$\mbox{]}$>$ \mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1_frase_d_a_o_a5bb13f40ed9652bd058d9424559aeac4}{select\+By\+Documento}} (int doc\+Id)
+\item 
+\Hypertarget{classcom_1_1mycompany_1_1server_1_1_frase_d_a_o_a92f44daee5f26af3a180fcd0b95bee1e}\label{classcom_1_1mycompany_1_1server_1_1_frase_d_a_o_a92f44daee5f26af3a180fcd0b95bee1e} 
+boolean {\bfseries insert} (String\mbox{[}$\,$\mbox{]} row)
+\item 
+void \mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1_frase_d_a_o_afeae2f3621ce9b699e45a7d23b879dce}{inserisci\+Frasi}} (int documento, List$<$ \mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1_analisi_frase}{Analisi\+Frase}} $>$ analisi\+Frasi)
+\item 
+\Hypertarget{classcom_1_1mycompany_1_1server_1_1_frase_d_a_o_aa1cbb2c9094cfc448bf9a974b2606930}\label{classcom_1_1mycompany_1_1server_1_1_frase_d_a_o_aa1cbb2c9094cfc448bf9a974b2606930} 
+boolean {\bfseries update} (String\mbox{[}$\,$\mbox{]} row)
+\item 
+boolean \mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1_frase_d_a_o_a87838ca98aa53a9278ddba607f02c336}{delete}} (int id)
+\item 
+String\mbox{[}$\,$\mbox{]} \mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1_frase_d_a_o_a0da3477e7c1727c80f1d3a4ffda3afcf}{get\+Frase\+Random}} ()
+\item 
+List$<$ String $>$ \mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1_frase_d_a_o_aa8c80fddb43d3d9bd52f6421bd1bc8f0}{get\+Contenuti\+Frasi}} ()
+\item 
+\mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1_analisi_frase}{Analisi\+Frase}} \mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1_frase_d_a_o_ae6402cdc7836fcc92ddcd3d30010562e}{leggi\+Analisi}} (String path\+Analisi)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{interfacecom_1_1mycompany_1_1server_1_1_d_a_oid}{com.\+mycompany.\+server.\+DAOid$<$ String\mbox{[}$\,$\mbox{]}$>$}}}
+\begin{DoxyCompactItemize}
+\item 
+List$<$ T $>$ \mbox{\hyperlink{interfacecom_1_1mycompany_1_1server_1_1_d_a_oid_a0c041940bd85c2bbc7e36fbd761874b5}{select\+All}} ()
+\item 
+Optional$<$ T $>$ \mbox{\hyperlink{interfacecom_1_1mycompany_1_1server_1_1_d_a_oid_ace5ef35a6bf567ea6a5d1a0e76777fc3}{select\+By\+Id}} (int...\+id)
+\item 
+boolean \mbox{\hyperlink{interfacecom_1_1mycompany_1_1server_1_1_d_a_oid_a4cecc6baf91ba7fcc3333026c4467109}{insert}} (T t)
+\item 
+boolean \mbox{\hyperlink{interfacecom_1_1mycompany_1_1server_1_1_d_a_oid_a54aa218a63a66e6b4c4e003c13fb45a2}{update}} (T t)
+\item 
+boolean \mbox{\hyperlink{interfacecom_1_1mycompany_1_1server_1_1_d_a_oid_a1ce020036323d25a9f79e753eaf94b8c}{delete}} (int id)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+DAO per la tabella "{}\+Frase"{}. Gestisce le frasi nel DB (colonna contenuto) e salva le analisi TF come file serializzati (.ser) nella cartella locale data/analisi/. 
+
+\label{doc-func-members}
+\Hypertarget{classcom_1_1mycompany_1_1server_1_1_frase_d_a_o_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classcom_1_1mycompany_1_1server_1_1_frase_d_a_o_a87838ca98aa53a9278ddba607f02c336}\index{com.mycompany.server.FraseDAO@{com.mycompany.server.FraseDAO}!delete@{delete}}
+\index{delete@{delete}!com.mycompany.server.FraseDAO@{com.mycompany.server.FraseDAO}}
+\doxysubsubsection{\texorpdfstring{delete()}{delete()}}
+{\footnotesize\ttfamily \label{classcom_1_1mycompany_1_1server_1_1_frase_d_a_o_a87838ca98aa53a9278ddba607f02c336} 
+boolean com.\+mycompany.\+server.\+Frase\+DAO.\+delete (\begin{DoxyParamCaption}\item[{int}]{id}{}\end{DoxyParamCaption})}
+
+Cancella le informazioni della frase di cui passiamo l\textquotesingle{}id. Ogni riga\+: \mbox{[}id, documento, contenuto, path\+\_\+analisi\mbox{]} \Hypertarget{classcom_1_1mycompany_1_1server_1_1_frase_d_a_o_aa8c80fddb43d3d9bd52f6421bd1bc8f0}\index{com.mycompany.server.FraseDAO@{com.mycompany.server.FraseDAO}!getContenutiFrasi@{getContenutiFrasi}}
+\index{getContenutiFrasi@{getContenutiFrasi}!com.mycompany.server.FraseDAO@{com.mycompany.server.FraseDAO}}
+\doxysubsubsection{\texorpdfstring{getContenutiFrasi()}{getContenutiFrasi()}}
+{\footnotesize\ttfamily \label{classcom_1_1mycompany_1_1server_1_1_frase_d_a_o_aa8c80fddb43d3d9bd52f6421bd1bc8f0} 
+List$<$ String $>$ com.\+mycompany.\+server.\+Frase\+DAO.\+get\+Contenuti\+Frasi (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+Restituisce solo i contenuti di tutte le frasi. \Hypertarget{classcom_1_1mycompany_1_1server_1_1_frase_d_a_o_a0da3477e7c1727c80f1d3a4ffda3afcf}\index{com.mycompany.server.FraseDAO@{com.mycompany.server.FraseDAO}!getFraseRandom@{getFraseRandom}}
+\index{getFraseRandom@{getFraseRandom}!com.mycompany.server.FraseDAO@{com.mycompany.server.FraseDAO}}
+\doxysubsubsection{\texorpdfstring{getFraseRandom()}{getFraseRandom()}}
+{\footnotesize\ttfamily \label{classcom_1_1mycompany_1_1server_1_1_frase_d_a_o_a0da3477e7c1727c80f1d3a4ffda3afcf} 
+String\mbox{[}$\,$\mbox{]} com.\+mycompany.\+server.\+Frase\+DAO.\+get\+Frase\+Random (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+Restituisce le informazioni di una frase casuale dal DB. Risultato\+: \mbox{[}id, documento, contenuto, path\+\_\+analisi\mbox{]}
+
+\begin{DoxyReturn}{Returns}
+la frase casuale, o null se non ci sono frasi 
+\end{DoxyReturn}
+\Hypertarget{classcom_1_1mycompany_1_1server_1_1_frase_d_a_o_afeae2f3621ce9b699e45a7d23b879dce}\index{com.mycompany.server.FraseDAO@{com.mycompany.server.FraseDAO}!inserisciFrasi@{inserisciFrasi}}
+\index{inserisciFrasi@{inserisciFrasi}!com.mycompany.server.FraseDAO@{com.mycompany.server.FraseDAO}}
+\doxysubsubsection{\texorpdfstring{inserisciFrasi()}{inserisciFrasi()}}
+{\footnotesize\ttfamily \label{classcom_1_1mycompany_1_1server_1_1_frase_d_a_o_afeae2f3621ce9b699e45a7d23b879dce} 
+void com.\+mycompany.\+server.\+Frase\+DAO.\+inserisci\+Frasi (\begin{DoxyParamCaption}\item[{int}]{documento}{, }\item[{List$<$ \mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1_analisi_frase}{Analisi\+Frase}} $>$}]{analisi\+Frasi}{}\end{DoxyParamCaption})}
+
+Inserisce tutte le frasi di un documento nel DB e salva le analisi TF come file serializzati in data/analisi/.
+
+
+\begin{DoxyParams}{Parameters}
+{\em documento} & id del documento a cui appartengono le frasi \\
+\hline
+{\em analisi\+Frasi} & lista delle mappe TF corrispondenti a ciascuna frase \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classcom_1_1mycompany_1_1server_1_1_frase_d_a_o_ae6402cdc7836fcc92ddcd3d30010562e}\index{com.mycompany.server.FraseDAO@{com.mycompany.server.FraseDAO}!leggiAnalisi@{leggiAnalisi}}
+\index{leggiAnalisi@{leggiAnalisi}!com.mycompany.server.FraseDAO@{com.mycompany.server.FraseDAO}}
+\doxysubsubsection{\texorpdfstring{leggiAnalisi()}{leggiAnalisi()}}
+{\footnotesize\ttfamily \label{classcom_1_1mycompany_1_1server_1_1_frase_d_a_o_ae6402cdc7836fcc92ddcd3d30010562e} 
+\mbox{\hyperlink{classcom_1_1mycompany_1_1server_1_1_analisi_frase}{Analisi\+Frase}} com.\+mycompany.\+server.\+Frase\+DAO.\+leggi\+Analisi (\begin{DoxyParamCaption}\item[{String}]{path\+Analisi}{}\end{DoxyParamCaption})}
+
+Deserializza un file .ser e restituisce l\textquotesingle{}oggetto analisi.
+
+
+\begin{DoxyParams}{Parameters}
+{\em path\+Analisi} & percorso del file .ser \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+l\textquotesingle{}analisi contenente la frase e la mappa parola → frequenza, o un\textquotesingle{}analisi vuota 
+\end{DoxyReturn}
+\Hypertarget{classcom_1_1mycompany_1_1server_1_1_frase_d_a_o_ab97ae4a44fbcdeb38f30954a62e72817}\index{com.mycompany.server.FraseDAO@{com.mycompany.server.FraseDAO}!selectAll@{selectAll}}
+\index{selectAll@{selectAll}!com.mycompany.server.FraseDAO@{com.mycompany.server.FraseDAO}}
+\doxysubsubsection{\texorpdfstring{selectAll()}{selectAll()}}
+{\footnotesize\ttfamily \label{classcom_1_1mycompany_1_1server_1_1_frase_d_a_o_ab97ae4a44fbcdeb38f30954a62e72817} 
+List$<$ String\mbox{[}$\,$\mbox{]}$>$ com.\+mycompany.\+server.\+Frase\+DAO.\+select\+All (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+Restituisce tutte le informazioni su le frasi. Ogni riga\+: \mbox{[}id, documento, contenuto, path\+\_\+analisi\mbox{]} \Hypertarget{classcom_1_1mycompany_1_1server_1_1_frase_d_a_o_a5bb13f40ed9652bd058d9424559aeac4}\index{com.mycompany.server.FraseDAO@{com.mycompany.server.FraseDAO}!selectByDocumento@{selectByDocumento}}
+\index{selectByDocumento@{selectByDocumento}!com.mycompany.server.FraseDAO@{com.mycompany.server.FraseDAO}}
+\doxysubsubsection{\texorpdfstring{selectByDocumento()}{selectByDocumento()}}
+{\footnotesize\ttfamily \label{classcom_1_1mycompany_1_1server_1_1_frase_d_a_o_a5bb13f40ed9652bd058d9424559aeac4} 
+List$<$ String\mbox{[}$\,$\mbox{]}$>$ com.\+mycompany.\+server.\+Frase\+DAO.\+select\+By\+Documento (\begin{DoxyParamCaption}\item[{int}]{doc\+Id}{}\end{DoxyParamCaption})}
+
+Restituisce tutte le informazioni sulle frasi di un documento. Ogni riga\+: \mbox{[}id, documento, contenuto, path\+\_\+analisi\mbox{]} \Hypertarget{classcom_1_1mycompany_1_1server_1_1_frase_d_a_o_a3086e4684c72cfeddb1a6ee8d053f86d}\index{com.mycompany.server.FraseDAO@{com.mycompany.server.FraseDAO}!selectById@{selectById}}
+\index{selectById@{selectById}!com.mycompany.server.FraseDAO@{com.mycompany.server.FraseDAO}}
+\doxysubsubsection{\texorpdfstring{selectById()}{selectById()}}
+{\footnotesize\ttfamily \label{classcom_1_1mycompany_1_1server_1_1_frase_d_a_o_a3086e4684c72cfeddb1a6ee8d053f86d} 
+Optional$<$ String\mbox{[}$\,$\mbox{]}$>$ com.\+mycompany.\+server.\+Frase\+DAO.\+select\+By\+Id (\begin{DoxyParamCaption}\item[{int...}]{id}{}\end{DoxyParamCaption})}
+
+Restituisce le informazioni su la frase con l\textquotesingle{}id corrispondente. Ogni riga\+: \mbox{[}id, documento, contenuto, path\+\_\+analisi\mbox{]} 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+server/src/main/java/com/mycompany/server/Frase\+DAO.\+java\end{DoxyCompactItemize}

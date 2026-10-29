@@ -1,0 +1,116 @@
+\doxysection{com.\+mycompany.\+server.\+DAOusername\texorpdfstring{$<$}{<} T \texorpdfstring{$>$}{>} Interface Template Reference}
+\hypertarget{interfacecom_1_1mycompany_1_1server_1_1_d_a_ousername}{}\label{interfacecom_1_1mycompany_1_1server_1_1_d_a_ousername}\index{com.mycompany.server.DAOusername$<$ T $>$@{com.mycompany.server.DAOusername$<$ T $>$}}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+List$<$ T $>$ \mbox{\hyperlink{interfacecom_1_1mycompany_1_1server_1_1_d_a_ousername_a8cb7f341f046bc8fa109fae4c161efd1}{select\+All}} ()
+\item 
+Optional$<$ T $>$ \mbox{\hyperlink{interfacecom_1_1mycompany_1_1server_1_1_d_a_ousername_adaaf8b6bb4618e67a2f5b2291cbe3ed9}{select\+By\+Username}} (String username)
+\item 
+boolean \mbox{\hyperlink{interfacecom_1_1mycompany_1_1server_1_1_d_a_ousername_a036fdb5a207ee122ac941eef214d1550}{insert}} (T t)
+\item 
+boolean \mbox{\hyperlink{interfacecom_1_1mycompany_1_1server_1_1_d_a_ousername_a6c0ca5716cb21d424216c049b0c0e242}{update}} (T t)
+\item 
+boolean \mbox{\hyperlink{interfacecom_1_1mycompany_1_1server_1_1_d_a_ousername_a04af456d9cd26ac426a81bca2e361a47}{delete}} (String username)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Interfaccia generica DAO (Data Access Object) versione con identificatore testuale.
+
+Definisce le operazioni CRUD standard che ogni DAO del sistema deve implementare. Il tipo generico {\ttfamily T} rappresenta il modello gestito dalla specifica implementazione.
+
+Implementazioni presenti\+:
+
+{\ttfamily \doxylink{classcom_1_1mycompany_1_1server_1_1_utente_d_a_o}{Utente\+DAO}} — gestisce la tabella {\ttfamily Utente}
+
+
+\begin{DoxyParams}{Parameters}
+{\em $<$\+T$>$} & il tipo di entità gestita dal DAO \\
+\hline
+\end{DoxyParams}
+
+
+\label{doc-func-members}
+\Hypertarget{interfacecom_1_1mycompany_1_1server_1_1_d_a_ousername_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{interfacecom_1_1mycompany_1_1server_1_1_d_a_ousername_a04af456d9cd26ac426a81bca2e361a47}\index{com.mycompany.server.DAOusername$<$ T $>$@{com.mycompany.server.DAOusername$<$ T $>$}!delete@{delete}}
+\index{delete@{delete}!com.mycompany.server.DAOusername$<$ T $>$@{com.mycompany.server.DAOusername$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{delete()}{delete()}}
+{\footnotesize\ttfamily \label{interfacecom_1_1mycompany_1_1server_1_1_d_a_ousername_a04af456d9cd26ac426a81bca2e361a47} 
+boolean \mbox{\hyperlink{interfacecom_1_1mycompany_1_1server_1_1_d_a_ousername}{com.\+mycompany.\+server.\+DAOusername}}$<$ T $>$.delete (\begin{DoxyParamCaption}\item[{String}]{username}{}\end{DoxyParamCaption})}
+
+Elimina il record con l\textquotesingle{}identificatore specificato.
+
+
+\begin{DoxyParams}{Parameters}
+{\em username} & identificatore univoco del record da eliminare \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+{\ttfamily true} se la cancellazione è riuscita, {\ttfamily false} altrimenti 
+\end{DoxyReturn}
+\Hypertarget{interfacecom_1_1mycompany_1_1server_1_1_d_a_ousername_a036fdb5a207ee122ac941eef214d1550}\index{com.mycompany.server.DAOusername$<$ T $>$@{com.mycompany.server.DAOusername$<$ T $>$}!insert@{insert}}
+\index{insert@{insert}!com.mycompany.server.DAOusername$<$ T $>$@{com.mycompany.server.DAOusername$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{insert()}{insert()}}
+{\footnotesize\ttfamily \label{interfacecom_1_1mycompany_1_1server_1_1_d_a_ousername_a036fdb5a207ee122ac941eef214d1550} 
+boolean \mbox{\hyperlink{interfacecom_1_1mycompany_1_1server_1_1_d_a_ousername}{com.\+mycompany.\+server.\+DAOusername}}$<$ T $>$.insert (\begin{DoxyParamCaption}\item[{T}]{t}{}\end{DoxyParamCaption})}
+
+Inserisce un nuovo record nel database.
+
+
+\begin{DoxyParams}{Parameters}
+{\em t} & entità da inserire \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+{\ttfamily true} se l\textquotesingle{}inserimento è riuscito, {\ttfamily false} altrimenti 
+\end{DoxyReturn}
+\Hypertarget{interfacecom_1_1mycompany_1_1server_1_1_d_a_ousername_a8cb7f341f046bc8fa109fae4c161efd1}\index{com.mycompany.server.DAOusername$<$ T $>$@{com.mycompany.server.DAOusername$<$ T $>$}!selectAll@{selectAll}}
+\index{selectAll@{selectAll}!com.mycompany.server.DAOusername$<$ T $>$@{com.mycompany.server.DAOusername$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{selectAll()}{selectAll()}}
+{\footnotesize\ttfamily \label{interfacecom_1_1mycompany_1_1server_1_1_d_a_ousername_a8cb7f341f046bc8fa109fae4c161efd1} 
+List$<$ T $>$ \mbox{\hyperlink{interfacecom_1_1mycompany_1_1server_1_1_d_a_ousername}{com.\+mycompany.\+server.\+DAOusername}}$<$ T $>$.select\+All (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+Restituisce tutti i record presenti nella tabella.
+
+\begin{DoxyReturn}{Returns}
+lista (eventualmente vuota) di tutti i record 
+\end{DoxyReturn}
+\Hypertarget{interfacecom_1_1mycompany_1_1server_1_1_d_a_ousername_adaaf8b6bb4618e67a2f5b2291cbe3ed9}\index{com.mycompany.server.DAOusername$<$ T $>$@{com.mycompany.server.DAOusername$<$ T $>$}!selectByUsername@{selectByUsername}}
+\index{selectByUsername@{selectByUsername}!com.mycompany.server.DAOusername$<$ T $>$@{com.mycompany.server.DAOusername$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{selectByUsername()}{selectByUsername()}}
+{\footnotesize\ttfamily \label{interfacecom_1_1mycompany_1_1server_1_1_d_a_ousername_adaaf8b6bb4618e67a2f5b2291cbe3ed9} 
+Optional$<$ T $>$ \mbox{\hyperlink{interfacecom_1_1mycompany_1_1server_1_1_d_a_ousername}{com.\+mycompany.\+server.\+DAOusername}}$<$ T $>$.select\+By\+Username (\begin{DoxyParamCaption}\item[{String}]{username}{}\end{DoxyParamCaption})}
+
+Cerca un record tramite il suo username.
+
+
+\begin{DoxyParams}{Parameters}
+{\em username} & identificatore univoco del record \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+{\ttfamily \doxylink{}{Optional}} contenente il record se trovato, vuoto altrimenti 
+\end{DoxyReturn}
+\Hypertarget{interfacecom_1_1mycompany_1_1server_1_1_d_a_ousername_a6c0ca5716cb21d424216c049b0c0e242}\index{com.mycompany.server.DAOusername$<$ T $>$@{com.mycompany.server.DAOusername$<$ T $>$}!update@{update}}
+\index{update@{update}!com.mycompany.server.DAOusername$<$ T $>$@{com.mycompany.server.DAOusername$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{update()}{update()}}
+{\footnotesize\ttfamily \label{interfacecom_1_1mycompany_1_1server_1_1_d_a_ousername_a6c0ca5716cb21d424216c049b0c0e242} 
+boolean \mbox{\hyperlink{interfacecom_1_1mycompany_1_1server_1_1_d_a_ousername}{com.\+mycompany.\+server.\+DAOusername}}$<$ T $>$.update (\begin{DoxyParamCaption}\item[{T}]{t}{}\end{DoxyParamCaption})}
+
+Aggiorna un record esistente nel database.
+
+
+\begin{DoxyParams}{Parameters}
+{\em t} & entità aggiornata (deve contenere l\textquotesingle{}username del record da modificare) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+{\ttfamily true} se la modifica è riuscita, {\ttfamily false} altrimenti 
+\end{DoxyReturn}
+
+
+The documentation for this interface was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+server/src/main/java/com/mycompany/server/DAOusername.\+java\end{DoxyCompactItemize}

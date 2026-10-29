@@ -4,7 +4,6 @@ import javafx.concurrent.Task;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Task JavaFX che analizza in background uno o più documenti di testo.
@@ -13,10 +12,9 @@ import java.util.Map;
  * separato senza bloccare il thread JavaFX, aggiornando {@code messageProperty}
  * e {@code progressProperty} in tempo reale.
  *
- * Al termine dell'elaborazione imposta le frasi in
- * {@link ClientHandler#setFrasi(List)} per le sfide di gioco,
- * imposta la mappa TF in {@link ClientHandler#setTfMap(Map)} per la scelta
- * della parola, e restituisce una stringa di riepilogo mostrata nel pannello admin.
+ * Al termine dell'elaborazione imposta le analisi in
+ * {@link ClientHandler#setTfDocumenti(tfFrasiDocumenti)}
+ * e restituisce una stringa di riepilogo mostrata nel pannello admin.
  *
  */
 public class AnalysisTask extends Task<String> {
@@ -41,7 +39,7 @@ public class AnalysisTask extends Task<String> {
      *   Calcola la Term Frequency di ogni frase tramite {@link DocumentAnalyzer#analizza(String)}
      *   Accumula i risultati nelle strutture globali
      * 
-     * @return stringa di riepilogo con statistiche per file e top 10 parole più frequenti
+     * @return stringa di riepilogo con statistiche per file
      * @throws Exception se la lettura di uno dei file fallisce
      */
     @Override

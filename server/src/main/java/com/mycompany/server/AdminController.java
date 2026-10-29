@@ -18,7 +18,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -99,7 +98,7 @@ public class AdminController {
         }
         
         // Classifica: colonne
-        // getClassifica() [username, vittorie, sconfitte, pareggi, tempoMedio]
+        // getClassifica() [punteggioGlobale, username, vittorie, sconfitte, pareggi, tempoMedio]
         colPunteggio.setCellValueFactory(data -> 
             new SimpleStringProperty(data.getValue()[0]));
         colNickname.setCellValueFactory(data ->
@@ -114,7 +113,7 @@ public class AdminController {
             new SimpleStringProperty(data.getValue()[5]));
 
         // Storico: colonne
-        // selectAll() RisultatoPartita con getData(), getGiocatore1(), getGiocatore2(), getVincitore(), getTempoRisposta()
+        // selectAll() RisultatoPartita con getData(), getGiocatore1(), getGiocatore2(), getVincitore(), getDurata()
         colData.setCellValueFactory(data ->
             new SimpleStringProperty(data.getValue().getData()));
         colGiocatore1.setCellValueFactory(data -> 
@@ -309,6 +308,13 @@ public class AdminController {
             statoAnalisiLabel.setText("Nessuna analisi da salvare. Avvia prima l'analisi.");
             return;
         }
+        
+        // Controlla se il totale delle frasi estratte da tutti i documenti è 0
+        int totaleFrasi = tf.stream().mapToInt(List::size).sum();
+        if (totaleFrasi == 0) {
+            statoAnalisiLabel.setText("I documenti analizzati sono vuoti (0 frasi valide). Nessun documento salvato.");
+            return;
+        }
 
         try {
             int documentiSalvati = 0;
@@ -316,6 +322,12 @@ public class AdminController {
             for (int i = 0; i < fileSelezionati.size(); i++) {
                 File file = fileSelezionati.get(i);
                 List<AnalisiFrase> frasiDelDocumento = tf.get(i);
+                
+                // Se un singolo documento (caricato insieme ad altri) è vuoto, non salvarlo nel DB
+                if (frasiDelDocumento == null || frasiDelDocumento.isEmpty()) {
+                    continue;
+                }
+                
                 // Inserisce il documento nel DB e lo copia in data/documenti/
                 int idDocumento = documentoDAO.inserisciDocumento(file.getAbsolutePath());
                 

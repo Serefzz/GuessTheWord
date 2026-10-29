@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ClassDiagram name="DAOusername">
+  <ClassDiagramComponents>
+    <Interface name="DAOusername" package="com.mycompany.server" visibility="public" xPosition="20.0" yPosition="20.0">
+      <Methods>
+        <Method name="selectAll" returnType="List&lt;T&gt;" visibility="package"/>
+        <Method name="selectByUsername" returnType="Optional&lt;T&gt;" visibility="package">
+          <Argument type="String" name="username"/>
+        </Method>
+        <Method name="insert" returnType="boolean" visibility="package">
+          <Argument type="T" name="t"/>
+        </Method>
+        <Method name="update" returnType="boolean" visibility="package">
+          <Argument type="T" name="t"/>
+        </Method>
+        <Method name="delete" returnType="boolean" visibility="package">
+          <Argument type="String" name="username"/>
+        </Method>
+      </Methods>
+    </Interface>
+  </ClassDiagramComponents>
+  <ClassDiagramRelations/>
+</ClassDiagram>

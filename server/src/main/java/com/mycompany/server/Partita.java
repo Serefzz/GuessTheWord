@@ -9,6 +9,8 @@ import java.util.Map;
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Rappresenta una partita in corso tra due giocatori.
@@ -232,7 +234,7 @@ public class Partita {
                                 break;
                     }
 
-                    if (valida) {
+                    if (valida && parola.length() > 1) {
                         candidati.add(new String[]{a.getFrase(), parola});
                     }
                 }
@@ -250,7 +252,7 @@ public class Partita {
     }
 
     /**
-     * Sostituisce la prima occorrenza della parola originale nella frase
+     * Sostituisce una singola occorrenza casuale della parola originale nella frase
      * con la versione cifrata.
      *
      * @param frase frase originale
@@ -260,7 +262,31 @@ public class Partita {
      */
     private String costruisciTestoSfida(String frase, String parolaOriginale, int shift) {
         String parolaCifrata = CifrarioCesare.cifra(parolaOriginale, shift);
-        return frase.toUpperCase().replaceFirst("\\b" + parolaOriginale + "\\b", parolaCifrata);
+        String testoOriginale = frase.toUpperCase();
+
+        // Normalizziamo sia la frase che la parola per ignorare gli accenti durante la ricerca
+        String testoNormalizzato = DocumentAnalyzer.rimuoviAccenti(testoOriginale);
+        String parolaPulita = DocumentAnalyzer.rimuoviAccenti(parolaOriginale.toUpperCase());
+
+        // Compiliamo il pattern con il supporto Unicode per i confini di parola \b
+        Pattern pattern = Pattern.compile("\\b" + Pattern.quote(parolaPulita) + "\\b", Pattern.UNICODE_CHARACTER_CLASS);
+        Matcher matcher = pattern.matcher(testoNormalizzato);
+
+        List<int[]> occorrenze = new ArrayList<>();
+        while (matcher.find()) {
+            occorrenze.add(new int[]{matcher.start(), matcher.end()});
+        }
+
+        if (occorrenze.isEmpty()) {
+            return testoOriginale; // Nessuna corrispondenza trovata
+        }
+
+        // Scegliamo un'occorrenza casuale
+        Random r = new Random();
+        int[] scelta = occorrenze.get(r.nextInt(occorrenze.size()));
+
+        // Sostituiamo nel testo originale usando gli indici trovati 
+        return testoOriginale.substring(0, scelta[0]) + parolaCifrata + testoOriginale.substring(scelta[1]);
     }
     
     /**

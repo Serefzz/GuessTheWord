@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ClassDiagram name="Multi-file class diagram">
+  <ClassDiagramComponents>
+    <Class name="Partita" package="com.mycompany.server" visibility="public" xPosition="20.0" yPosition="20.0">
+      <Fields>
+        <Field name="giocatore1" type="ClientHandler" visibility="private" isFinal="true"/>
+        <Field name="giocatore2" type="ClientHandler" visibility="private" isFinal="true"/>
+        <Field name="difficolta" type="int" visibility="private" isFinal="true"/>
+        <Field name="fraseOriginale" type="String" visibility="private" isFinal="true"/>
+        <Field name="parolaOriginale" type="String" visibility="private" isFinal="true"/>
+        <Field name="fraseSfida" type="String" visibility="private" isFinal="true"/>
+        <Field name="parolaSfida" type="String" visibility="private" isFinal="true"/>
+        <Field name="shift" type="int" visibility="private" isFinal="true"/>
+        <Field name="durata" type="int" visibility="private" isFinal="true"/>
+        <Field name="stato" type="StatoPartita" visibility="private"/>
+        <Field name="tempoInizio" type="long" visibility="private"/>
+        <Field name="partitaDAO" type="PartitaDAO" visibility="private" isFinal="true"/>
+        <Field name="utenteDAO" type="UtenteDAO" visibility="private" isFinal="true"/>
+        <Field name="fraseDAO" type="FraseDAO" visibility="private" isFinal="true"/>
+        <Field name="documentoDAO" type="DocumentoDAO" visibility="private" isFinal="true"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="ClientHandler" name="g1"/>
+          <Argument type="ClientHandler" name="g2"/>
+          <Argument type="int" name="difficolta"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="avvia" returnType="void" visibility="public"/>
+        <Method name="verificaRisposta" returnType="void" visibility="public" isSynchronized="true">
+          <Argument type="ClientHandler" name="giocatore"/>
+          <Argument type="String" name="risposta"/>
+        </Method>
+        <Method name="resa" returnType="void" visibility="public" isSynchronized="true">
+          <Argument type="ClientHandler" name="giocatore"/>
+        </Method>
+        <Method name="tempoScaduto" returnType="void" visibility="private" isSynchronized="true"/>
+        <Method name="scegliParolaFrase" returnType="String[]" visibility="private">
+          <Argument type="int" name="difficolta"/>
+        </Method>
+        <Method name="costruisciTestoSfida" returnType="String" visibility="private">
+          <Argument type="String" name="frase"/>
+          <Argument type="String" name="parolaOriginale"/>
+          <Argument type="int" name="shift"/>
+        </Method>
+        <Method name="scegliTempo" returnType="int" visibility="private">
+          <Argument type="int" name="difficolta"/>
+        </Method>
+        <Method name="getStato" returnType="StatoPartita" visibility="public"/>
+        <Method name="getParolaOriginale" returnType="String" visibility="public"/>
+        <Method name="getFraseSfida" returnType="String" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="PartitaDAO" package="com.mycompany.server" visibility="public" xPosition="320.0" yPosition="20.0">
+      <Fields>
+        <Field name="FORMATO_DATA" type="DateTimeFormatter" visibility="private" isStatic="true" isFinal="true"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="selectAll" returnType="List&lt;RisultatoPartita&gt;" visibility="public"/>
+        <Method name="selectById" returnType="Optional&lt;RisultatoPartita&gt;" visibility="public">
+          <Argument type="int" name="id"/>
+        </Method>
+        <Method name="insert" returnType="boolean" visibility="public">
+          <Argument type="RisultatoPartita" name="r"/>
+        </Method>
+        <Method name="update" returnType="boolean" visibility="public">
+          <Argument type="RisultatoPartita" name="r"/>
+        </Method>
+        <Method name="delete" returnType="boolean" visibility="public">
+          <Argument type="int" name="id"/>
+        </Method>
+        <Method name="salva" returnType="void" visibility="public">
+          <Argument type="int" name="frase"/>
+          <Argument type="int" name="documento"/>
+          <Argument type="String" name="giocatore1"/>
+          <Argument type="String" name="giocatore2"/>
+          <Argument type="int" name="vincitore"/>
+          <Argument type="long" name="durata"/>
+        </Method>
+        <Method name="getStorico" returnType="List&lt;String[]&gt;" visibility="public">
+          <Argument type="String" name="username"/>
+        </Method>
+        <Method name="creaRisultato" returnType="RisultatoPartita" visibility="private">
+          <Argument type="ResultSet" name="rs"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="UtenteDAO" package="com.mycompany.server" visibility="public" xPosition="620.0" yPosition="20.0">
+      <Fields>
+        <Field name="URL" type="String" visibility="private" isStatic="true" isFinal="true"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="selectAll" returnType="List&lt;Utente&gt;" visibility="public"/>
+        <Method name="selectByUsername" returnType="Optional&lt;Utente&gt;" visibility="public">
+          <Argument type="String" name="username"/>
+        </Method>
+        <Method name="insert" returnType="boolean" visibility="public">
+          <Argument type="Utente" name="u"/>
+        </Method>
+        <Method name="update" returnType="boolean" visibility="public">
+          <Argument type="Utente" name="u"/>
+        </Method>
+        <Method name="delete" returnType="boolean" visibility="public">
+          <Argument type="String" name="username"/>
+        </Method>
+        <Method name="verificaLogin" returnType="boolean" visibility="public">
+          <Argument type="String" name="username"/>
+          <Argument type="String" name="password"/>
+        </Method>
+        <Method name="registra" returnType="boolean" visibility="public">
+          <Argument type="String" name="username"/>
+          <Argument type="String" name="password"/>
+        </Method>
+        <Method name="aggiornaPunteggio" returnType="boolean" visibility="public">
+          <Argument type="String" name="username"/>
+          <Argument type="int" name="punti"/>
+        </Method>
+        <Method name="getClassifica" returnType="List&lt;String[]&gt;" visibility="public"/>
+        <Method name="isAdmin" returnType="boolean" visibility="public">
+          <Argument type="String" name="username"/>
+        </Method>
+        <Method name="hashPassword" returnType="String" visibility="public" isStatic="true">
+          <Argument type="String" name="password"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="FraseDAO" package="com.mycompany.server" visibility="public" xPosition="920.0" yPosition="20.0">
+      <Fields>
+        <Field name="URL" type="String" visibility="private" isStatic="true" isFinal="true"/>
+        <Field name="CARTELLA_ANALISI" type="Path" visibility="private" isStatic="true" isFinal="true"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="selectAll" returnType="List&lt;String[]&gt;" visibility="public"/>
+        <Method name="selectById" returnType="Optional&lt;String[]&gt;" visibility="public">
+          <Argument type="int" name="id"/>
+        </Method>
+        <Method name="selectByDocumento" returnType="List&lt;String[]&gt;" visibility="public">
+          <Argument type="int" name="docId"/>
+        </Method>
+        <Method name="insert" returnType="boolean" visibility="public">
+          <Argument type="String[]" name="row"/>
+        </Method>
+        <Method name="inserisciFrasi" returnType="void" visibility="public">
+          <Argument type="int" name="documento"/>
+          <Argument type="List&lt;AnalisiFrase&gt;" name="analisiFrasi"/>
+        </Method>
+        <Method name="update" returnType="boolean" visibility="public">
+          <Argument type="String[]" name="row"/>
+        </Method>
+        <Method name="delete" returnType="boolean" visibility="public">
+          <Argument type="int" name="id"/>
+        </Method>
+        <Method name="getFraseRandom" returnType="String[]" visibility="public"/>
+        <Method name="getContenutiFrasi" returnType="List&lt;String&gt;" visibility="public"/>
+        <Method name="salvaAnalisi" returnType="void" visibility="private">
+          <Argument type="String" name="path"/>
+          <Argument type="AnalisiFrase" name="analisi"/>
+        </Method>
+        <Method name="leggiAnalisi" returnType="AnalisiFrase" visibility="public">
+          <Argument type="String" name="pathAnalisi"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="DocumentoDAO" package="com.mycompany.server" visibility="public" xPosition="1220.0" yPosition="20.0">
+      <Fields>
+        <Field name="URL" type="String" visibility="private" isStatic="true" isFinal="true"/>
+        <Field name="CARTELLA_DOCUMENTI" type="Path" visibility="private" isStatic="true" isFinal="true"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="selectAll" returnType="List&lt;String[]&gt;" visibility="public"/>
+        <Method name="selectById" returnType="Optional&lt;String[]&gt;" visibility="public">
+          <Argument type="int" name="id"/>
+        </Method>
+        <Method name="insert" returnType="boolean" visibility="public">
+          <Argument type="String[]" name="row"/>
+        </Method>
+        <Method name="inserisciDocumento" returnType="int" visibility="public">
+          <Argument type="String" name="pathSorgente"/>
+        </Method>
+        <Method name="update" returnType="boolean" visibility="public">
+          <Argument type="String[]" name="row"/>
+        </Method>
+        <Method name="delete" returnType="boolean" visibility="public">
+          <Argument type="int" name="id"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="ClientHandler" package="com.mycompany.server" visibility="public" xPosition="1520.0" yPosition="20.0">
+      <Fields>
+        <Field name="tfDocumenti" type="List&lt;List&lt;AnalisiFrase&gt;&gt;" visibility="private" isStatic="true"/>
+        <Field name="tfFrasi" type="List&lt;AnalisiFrase&gt;" visibility="private" isStatic="true"/>
+        <Field name="socket" type="Socket" visibility="private" isFinal="true"/>
+        <Field name="out" type="BufferedWriter" visibility="private"/>
+        <Field name="in" type="BufferedReader" visibility="private"/>
+        <Field name="username" type="String" visibility="private"/>
+        <Field name="avversario" type="ClientHandler" visibility="private"/>
+        <Field name="partitaCorrente" type="Partita" visibility="private"/>
+        <Field name="connesso" type="boolean" visibility="private"/>
+        <Field name="utenteDAO" type="UtenteDAO" visibility="private" isFinal="true"/>
+        <Field name="partitaDAO" type="PartitaDAO" visibility="private" isFinal="true"/>
+        <Field name="server" type="GameServer" visibility="private" isFinal="true"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="Socket" name="socket"/>
+          <Argument type="GameServer" name="server"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="run" returnType="void" visibility="public"/>
+        <Method name="gestisciMessaggio" returnType="void" visibility="private">
+          <Argument type="Messaggio" name="msg"/>
+        </Method>
+        <Method name="gestisciLogin" returnType="void" visibility="private">
+          <Argument type="String" name="username"/>
+          <Argument type="String" name="password"/>
+        </Method>
+        <Method name="gestisciRegistrazione" returnType="void" visibility="private">
+          <Argument type="String" name="username"/>
+          <Argument type="String" name="password"/>
+        </Method>
+        <Method name="gestisciAvviaPartita" returnType="void" visibility="private">
+          <Argument type="Messaggio" name="msg"/>
+        </Method>
+        <Method name="gestisciStorico" returnType="void" visibility="private"/>
+        <Method name="gestisciClassifica" returnType="void" visibility="private"/>
+        <Method name="invia" returnType="void" visibility="public" isSynchronized="true">
+          <Argument type="Messaggio" name="msg"/>
+        </Method>
+        <Method name="disconnetti" returnType="void" visibility="public" isSynchronized="true"/>
+        <Method name="getUsername" returnType="String" visibility="public"/>
+        <Method name="getTfDocumenti" returnType="List&lt;List&lt;AnalisiFrase&gt;&gt;" visibility="public" isStatic="true"/>
+        <Method name="getTfFrasi" returnType="List&lt;AnalisiFrase&gt;" visibility="public" isStatic="true"/>
+        <Method name="setTfDocumenti" returnType="void" visibility="public" isStatic="true">
+          <Argument type="List&lt;List&lt;AnalisiFrase&gt;&gt;" name="n"/>
+        </Method>
+        <Method name="setTfFrasi" returnType="void" visibility="public" isStatic="true">
+          <Argument type="List&lt;AnalisiFrase&gt;" name="m"/>
+        </Method>
+        <Method name="setAvversario" returnType="void" visibility="public">
+          <Argument type="ClientHandler" name="a"/>
+        </Method>
+        <Method name="unsetAvversario" returnType="void" visibility="public"/>
+        <Method name="setPartita" returnType="void" visibility="public">
+          <Argument type="Partita" name="p"/>
+        </Method>
+      </Methods>
+    </Class>
+  </ClassDiagramComponents>
+  <ClassDiagramRelations>
+    <HasRelation name="partitaCorrente" source="com.mycompany.server.ClientHandler" target="com.mycompany.server.Partita" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="avversario" source="com.mycompany.server.ClientHandler" target="com.mycompany.server.ClientHandler" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="com.mycompany.server.ClientHandler" target="com.mycompany.server.ClientHandler" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="com.mycompany.server.ClientHandler" target="com.mycompany.server.Partita" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="utenteDAO" source="com.mycompany.server.ClientHandler" target="com.mycompany.server.UtenteDAO" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="partitaDAO" source="com.mycompany.server.ClientHandler" target="com.mycompany.server.PartitaDAO" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="documentoDAO" source="com.mycompany.server.Partita" target="com.mycompany.server.DocumentoDAO" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="fraseDAO" source="com.mycompany.server.Partita" target="com.mycompany.server.FraseDAO" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="com.mycompany.server.PartitaDAO" target="com.mycompany.server.Partita" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="com.mycompany.server.Partita" target="com.mycompany.server.Partita" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="utenteDAO" source="com.mycompany.server.Partita" target="com.mycompany.server.UtenteDAO" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="partitaDAO" source="com.mycompany.server.Partita" target="com.mycompany.server.PartitaDAO" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="giocatore2" source="com.mycompany.server.Partita" target="com.mycompany.server.ClientHandler" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="com.mycompany.server.Partita" target="com.mycompany.server.ClientHandler" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="giocatore1" source="com.mycompany.server.Partita" target="com.mycompany.server.ClientHandler" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+  </ClassDiagramRelations>
+</ClassDiagram>
