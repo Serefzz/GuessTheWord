@@ -17,7 +17,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.TextFlow?>
 
-<BorderPane prefHeight="640" prefWidth="880" stylesheets="@css/game.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.client.GameController">
+<BorderPane prefHeight="640" prefWidth="880" stylesheets="@css/game.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.client.GameController">
 
     <top>
         <HBox alignment="CENTER_LEFT" spacing="12" styleClass="navbar">
@@ -64,13 +64,15 @@
                      <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                         <image>
                            <Image url="@images/icona-indietro.png" />
-                        </image></ImageView>
-                  </graphic></Button>
+                        </image>
+                     </ImageView>
+                  </graphic>
+               </Button>
+   
+                   <Label styleClass="section-title" text="SELEZIONA LA DIFFICOLTÀ" />
                 </HBox>
-
-                <Label styleClass="section-title" text="SELEZIONA LA DIFFICOLTÀ" />
                 
-                <VBox alignment="CENTER" maxWidth="260" spacing="12">
+                <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="260" spacing="12" VBox.vgrow="SOMETIMES">
                     <RadioButton fx:id="rbFacile" text="Facile     (90 sec)" />
                     <RadioButton fx:id="rbMedio" text="Medio    (60 sec)" />
                     <RadioButton fx:id="rbDifficile" text="Difficile  (30 sec)" />
@@ -96,7 +98,7 @@
                     <Button fx:id="btnForfait" onAction="#abbandonaPartita" styleClass="btn-forfeit" text="⚐ Forfait" />
                 </HBox>
                 <VBox alignment="CENTER" minHeight="130" spacing="10" styleClass="cipher-box">
-                    <Label styleClass="status-label" text="TESTO / CIFRATURA DA INDOVINARE" />
+                    <Label styleClass="status-label" text="TESTO DA INDOVINARE" />
                     <TextFlow fx:id="textFlowSfida" maxWidth="640" styleClass="cipher-text" textAlignment="CENTER" />
                 </VBox>
                 <VBox spacing="8">
