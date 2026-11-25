@@ -17,7 +17,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.TextFlow?>
 
-<BorderPane prefHeight="640" prefWidth="880" stylesheets="@css/game.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.client.GameController">
+<BorderPane prefHeight="640" prefWidth="880" stylesheets="@css/game.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.client.GameController">
 
     <top>
         <HBox alignment="CENTER_LEFT" spacing="12" styleClass="navbar">

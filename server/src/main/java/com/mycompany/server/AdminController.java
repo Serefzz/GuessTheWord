@@ -366,7 +366,7 @@ public class AdminController {
             e.printStackTrace();
         }
         ClientHandler.setTfFrasi(lista);
-        statoAnalisiLabel.setText("Analisi in memoria caricate");
+        statoAnalisiLabel.setText("Analisi caricate in memoria");
     }
 
     // ------------------------------------------------------------------
