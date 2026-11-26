@@ -1,5 +1,4 @@
-====================================================
-  GuessTheWord — Istruzioni di avvio
+GuessTheWord — Istruzioni di avvio
 ====================================================
 
 REQUISITI
