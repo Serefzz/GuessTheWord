@@ -5,8 +5,7 @@ REQUISITI
 ---------
 - JDK 1.8 (Java 8) installato:
 
-!!Se non presente, scaricare da:
-  https://www.oracle.com/java/technologies/javase/javase8u211-later-archive-downloads.html
+!!Se non presente, scaricare da: https://www.oracle.com/java/technologies/javase/javase8u211-later-archive-downloads.html
 !!Scaricare una versione con ancora integrata la libreria di JavaFX
 
 CREDENZIALI ADMIN
